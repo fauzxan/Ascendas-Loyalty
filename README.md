@@ -6,8 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm install`
-### `npm start`
+`npm install`
+`npm start`
 
 
 The page will reload when you make changes.\
