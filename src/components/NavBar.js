@@ -14,7 +14,7 @@ function NavBar() {
         Contact
       </a>
       <a href="#contact" className="w3-bar-item w3-button w3-right w3-mobile">
-        Submit a claim
+        Login
       </a>
     </div>
   );
