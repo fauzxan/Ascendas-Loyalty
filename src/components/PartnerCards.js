@@ -49,7 +49,7 @@ function PartnerCard() {
             <i className="fa fa-glass"></i> <i className="fa fa-cutlery"></i>
           </p>
           <button className="w3-button w3-block w3-black w3-margin-bottom">
-            Get Rewards now!
+            Get Rewards! this is a change 
           </button>
         </div>
       </div>

@@ -25,7 +25,7 @@ header,
 main,
 menu,
 nav,
-section {
+section { 
   display: block;
 }
 summary {
