@@ -1,14 +1,18 @@
+import React from "react";
+
 import "./App.css";
 import NavBar from "./components/NavBar";
-import PartnerCard from "./components/PartnerCards";
+import CardList from "./components/CardList";
 
 function App() {
-  return (
-    <div>
-      <NavBar />
-      <PartnerCard />
-    </div>
-  );
+	//responsiveness
+
+	return (
+		<div>
+			<NavBar />
+			<CardList />
+		</div>
+	);
 }
 
 export default App;
