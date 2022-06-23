@@ -1,0 +1,9 @@
+﻿result,index,member id,member first name,member last name,transfer date,amount,reference number,partner code
+success,1,123456789a,Alex,Doe,2022/6/22,5600,2022062201,abcde
+success,2,789456123b,Micah,Cole,2022/6/22,12000,2022062202,abcde
+member not found,3,45612378c,Jed,Kuvalis,2022/6/22,200000,2022062203,abcde
+member name mismatch,4,471852369d,Jed,Kuvalis,2022/6/22,1200,2022062204,abcde
+member account closed,5,753951456e,Alessia,Marks,2022/6/22,4560,2022062205,abcde
+member account suspended,6,426875951f,Jared,Spamm,2022/6/22,500000,2022062206,abcde
+member ineligible for accrual,7,253612,Jared,Spamm,2022/6/22,20000,2022062207,abcde
+99,8,78965234m,Jared,Spamm,2022/6/22,5.00E+11,2022062208,abcde

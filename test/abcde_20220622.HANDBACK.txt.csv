@@ -1,0 +1,9 @@
+﻿result,transfer date,amount,reference number,outcome code
+success,2022/6/22,5600,2022062201,0000
+success,2022/6/22,12000,2022062202,0000
+member not found,2022/6/22,200000,2022062203,0001
+member name mismatch,2022/6/22,1200,2022062204,0002
+member account closed,2022/6/22,4560,2022062205,0003
+member account suspended,2022/6/22,500000,2022062206,0004
+member ineligible for accrual,2022/6/22,20000,2022062207,0005
+99,2022/6/22,5.00E+11,2022062208,0099
