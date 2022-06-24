@@ -8,8 +8,10 @@ import About from "./components/About";
 import OurCompanies from "./components/OurCompanies";
 import Contact from "./components/Conctact";
 import Home from "./components/Home";
+
 import { LoginBox } from "./components/loginPage";
 import styled from "styled-components";
+import { loginContext } from "./components/loginPage/context";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -24,14 +26,13 @@ function App() {
 
 	const [isLoggedIn, setLoggedIn] = useState(false);
 
-	const onLoggedIn = ()=>{
-		setLoggedIn(true);
-	}
 	if (!isLoggedIn) {
 		return (
-			<AppContainer>
-				<LoginBox onLoggedIn={onLoggedIn}/>
-			</AppContainer>
+			<loginContext.Provider value ={setLoggedIn}>
+				<AppContainer>
+					<LoginBox />
+				</AppContainer>
+			</loginContext.Provider>
 		);
 	} else {
 		return (

@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import styled from "styled-components";
-// import {useNavigate} from "react-router-dom"
 import { motion } from "framer-motion";
+import { LoginForm } from "./loginForm";
+import { AccountContext } from "./context";
+import { SignupForm } from "./signupForm";
+import { MutedLink } from "./common";
 
 const BoxContainer = styled.div`
   width: 280px;
@@ -33,10 +36,10 @@ const BackDrop = styled(motion.div)`
   transform: rotate(60deg);
   top: -290px;
   left: -70px;
-  background: rgb(0, 0, 0);
+  background: rgb(0, 0, 0, 1);
   background: linear-gradient(
     58deg,
-    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 1) 20%,
     rgba(0, 0, 0, 1) 100%
   );
 `;
@@ -61,7 +64,7 @@ const SmallText = styled.h5`
   color: #fff;
   z-index: 10;
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.24;
 `;
 
@@ -94,9 +97,9 @@ const expandingTransition = {
   stiffness: 30,
 };
 
-export function LoginBox({onLoggedIn}) {
-    // const navigate = useNavigate();
+export function LoginBox(props) {
     const [isExpanded, setExpanded] = useState(false);
+    const [active, setActive] = useState("signin");
 
     const playExpandingEffect = () => {
         setExpanded(true);
@@ -106,29 +109,60 @@ export function LoginBox({onLoggedIn}) {
         }, expandingTransition.duration * 1000 - 1500);
     };
 
-    // const loginHandler = ()=>{
-    //     onLoggedIn();
-    //     navigate("/Home");
-    // }
+    const switchActive = (active) => {
+        setTimeout(() => setActive(active), 400);
+      };
+    
+      const switchToSignup = () => {
+        playExpandingEffect();
+        switchActive("signup");
+      };
+    
+      const switchToSignin = () => {
+        playExpandingEffect();
+        switchActive("signin");
+      };
+    
+      const contextValue = {
+        switchToSignup,
+        switchToSignin,
+        playExpandingEffect,
+      };
 
     return (
-        <BoxContainer>
-          <TopContainer>
-            <BackDrop
-              variants={backdropVariants}
-              transition={expandingTransition}
-              initial={false}
-              animate={isExpanded ? "expanded" : "collapsed"}
-            />
-            <HeaderContainer>
-              <HeaderText>Welcome</HeaderText>
-              <HeaderText>Back</HeaderText>
-            </HeaderContainer>
-            <SmallText>Please Sign In To continue</SmallText>
-          </TopContainer>
-          <InnerContainer>
-            <span onClick={playExpandingEffect}>Sign Up</span>
-          </InnerContainer>
-        </BoxContainer>
-      );
+    <AccountContext.Provider value={contextValue}>
+      <BoxContainer>
+        <TopContainer>
+          <BackDrop
+            variants={backdropVariants}
+            transition={expandingTransition}
+            initial={false}
+            animate={isExpanded ? "expanded" : "collapsed"}
+          />
+          {active === "signin" && (
+            <>
+              <HeaderContainer>
+                <HeaderText>Welcome</HeaderText>
+                <HeaderText>Back</HeaderText>
+              </HeaderContainer>
+              <SmallText>Please sign-in to continue!</SmallText>
+            </>
+          )}
+          {active === "signup" && (
+            <>
+              <HeaderContainer>
+                <HeaderText>Create </HeaderText>
+                <HeaderText>Account</HeaderText>
+              </HeaderContainer>
+              <SmallText>Please sign-up to continue!</SmallText>
+            </>
+          )}
+        </TopContainer>
+        <InnerContainer>
+          {active === "signin" && <LoginForm />}
+          {active === "signup" && <SignupForm />}
+        </InnerContainer>
+      </BoxContainer>
+    </AccountContext.Provider>
+    );
 }
