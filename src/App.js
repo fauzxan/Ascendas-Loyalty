@@ -2,6 +2,8 @@ import React from "react";
 
 import "./App.css";
 import NavBar from "./components/NavBar";
+import NavBarClient from "./components/NavBarClient"
+import ClientRewardsList from "./components/ClientRewardsList";
 import CardList from "./components/CardList";
 
 function App() {
@@ -9,8 +11,8 @@ function App() {
 
 	return (
 		<div>
-			<NavBar />
-			<CardList />
+			<NavBarClient />
+			<ClientRewardsList />
 		</div>
 	);
 }
