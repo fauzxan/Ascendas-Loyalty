@@ -1,91 +1,30 @@
+import React from "react";
+
+import {Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
-import PartnerCard from "./components/PartnerCards";
-import { useState, useEffect } from "react";
-import Axios from "axios";
+
+import About from "./components/About";
+import OurCompanies from "./components/OurCompanies";
+import Contact from "./components/Conctact";
+import Home from "./components/Home";
 
 function App() {
-  const [listOfUsers, setListOfUsers] = useState([]);
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [username, setUsername] = useState("");
 
-  useEffect(() => {
-    Axios.get("http://localhost:3001/getUsers").then((response) => {
-      setListOfUsers(response.data);
-    });
-  }, []);
 
-  const createUser = () => {
-    Axios.post("http://localhost:3001/createUser", {
-      name,
-      age,
-      username,
-    }).then((response) => {
-      setListOfUsers([
-        ...listOfUsers,
-        {
-          name,
-          age,
-          username,
-        },
-      ]);
-    });
-  };
-
-  // return (
-  //   <div>
-  //     <NavBar />
-  //     <PartnerCard />
-  //   </div>
-  // );
-
-  return (
-    <div>
-      <div>
-        <NavBar />
-        <PartnerCard />
-      </div>
-      <div className="App">
-        <div className="usersDisplay">
-          {listOfUsers.map((user) => {
-            return (
-              <div>
-                <h1>Name: {user.name}</h1>
-                <h1>Age: {user.age}</h1>
-                <h1>Username: {user.username}</h1>
-              </div>
-            );
-          })}
-        </div>
-
-        <div>
-          <input
-            type="text"
-            placeholder="Name..."
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
-          <input
-            type="number"
-            placeholder="Age..."
-            onChange={(event) => {
-              setAge(event.target.value);
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Username..."
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-          />
-          <button onClick={createUser}> Create User </button>
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div>
+			<div>
+					<NavBar />
+					<Routes>
+						<Route exact path="/" element={<Home />}/>
+						<Route exact path="/about" element={<About />} />
+						<Route exact path="/companies" element={<OurCompanies />} />
+						<Route exact path="/contact" element={<Contact />}/>
+					</Routes>	
+			</div>
+		</div>
+	);
 }
 
 export default App;

@@ -484,6 +484,7 @@ a {
   display: block;
   outline: 0;
 }
+
 .w3-bar .w3-dropdown-hover,
 .w3-bar .w3-dropdown-click {
   position: static;
@@ -502,6 +503,7 @@ a {
   float: none;
   outline: 0;
 }
+
 .w3-bar-block.w3-center .w3-bar-item {
   text-align: center;
 }
