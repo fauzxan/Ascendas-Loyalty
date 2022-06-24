@@ -6,7 +6,7 @@ import NavBar from "./components/NavBar";
 
 import About from "./components/About";
 import OurCompanies from "./components/OurCompanies";
-import Contact from "./components/Conctact";
+import Contact from "./components/Contact";
 import Home from "./components/Home";
 
 import { LoginBox } from "./components/loginPage";
@@ -25,7 +25,7 @@ const AppContainer = styled.div`
 function App() {
 
 	const [isLoggedIn, setLoggedIn] = useState(false);
-
+	console.log("started")
 	if (!isLoggedIn) {
 		return (
 			<loginContext.Provider value ={setLoggedIn}>
@@ -38,7 +38,9 @@ function App() {
 		return (
 			<div>
 				<div>
-					{isLoggedIn && <NavBar />}
+					<loginContext.Provider value ={setLoggedIn}>
+						{isLoggedIn && <NavBar />}
+					</loginContext.Provider>
 					<Routes>
 						<Route exact path="/Home" element={<Home />}/>
 						<Route exact path="/about" element={<About />} />
