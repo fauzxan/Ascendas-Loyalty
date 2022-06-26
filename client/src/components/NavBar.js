@@ -24,6 +24,9 @@ function NavBar() {
 			<button onClick={()=>navigate("/contact")} className="w3-bar-item w3-button w3-mobile">
 				Contact
 			</button>
+			<button onClick={()=>navigate("/home")} className="w3-bar-item w3-button w3-mobile">
+				Bank of Singapore
+			</button>
 
 			<button onClick={logout} className="w3-bar-item w3-button w3-right w3-mobile">
 				Logout
