@@ -66,6 +66,12 @@ const PartnerCardSingular = (props) => {
                 required: true,
                 message: "Please input your username!",
               },
+              {
+                pattern: new RegExp(
+                  /^(\d{9}|\d{10}|\d{12}|\d{16}|[0-9]{9}[A-Z]{1})$/
+                ),
+                message: "Please input valid membership ID",
+              },
             ]}
           >
             <Input />
@@ -83,6 +89,7 @@ const PartnerCardSingular = (props) => {
           >
             <Input.Password />
           </Form.Item>
+
           <Form.Item
             wrapperCol={{
               offset: 8,
