@@ -1,9 +1,19 @@
-import React from "react";
+import React,  { useContext } from "react";
 import "./styles/clientRewards.scss";
 import Button from '@mui/material/Button';
+import { useNavigate } from "react-router-dom"
+import { loginContext } from "./loginPage/context";
 
-function ClientRewardsCard(props) {
+function HomeBankCard(props) {
 	// all the cards below are sample cards
+
+	const navigate = useNavigate();
+	const setLoggedIn = useContext(loginContext);
+
+	const logout = ()=> {
+		setLoggedIn(false);
+		navigate("/");
+	}
 
 	return (	
 		<div className="card_rewards">
@@ -17,14 +27,16 @@ function ClientRewardsCard(props) {
 					</a>
 				</span>
 					<a className="card_rewards__description">
-						{props.points}
+						{props.desc}
 					</a>
 				<span className="card_rewards__btn">
-					<Button variant="contained" className="card_rewards__button">Transfer Points</Button>
+					<button onClick={()=>navigate("/bank-" + props.id)} variant="contained" className="card_rewards__button">
+						View Available Rewards
+					</button>
 				</span>
 			</div>
 		</div>
 	);
 }
 
-export default ClientRewardsCard;
+export default HomeBankCard;

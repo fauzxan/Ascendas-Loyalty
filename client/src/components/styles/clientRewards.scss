@@ -67,16 +67,7 @@ $radius: 0.2rem;
     color: $clr-primary;
     border-radius: $radius;
     transition: 200ms ease-in, color 100ms ease-in;
-    position: relative;
-    right: 100px;
-  }
-
-  &:hover {
-    transform: scale(1.02);
-  }
-
-  &:hover &__btn {
-    background: $clr-primary;
-    color: white;
+    position: absolute;
+    right: 0px;
   }
 }

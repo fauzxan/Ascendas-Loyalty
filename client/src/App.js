@@ -7,7 +7,8 @@ import NavBar from "./components/NavBar";
 import About from "./components/About";
 import OurCompanies from "./components/OurCompanies";
 import Contact from "./components/Contact";
-import Home from "./components/Home";
+import Home from "./components/HomeList";
+import BankHome from "./components/Home"
 
 import { LoginBox } from "./components/loginPage";
 import styled from "styled-components";
@@ -52,6 +53,7 @@ function App() {
 						<Route exact path="/about" element={<About />} />
 						<Route exact path="/companies" element={<OurCompanies />} />
 						<Route exact path="/contact" element={<Contact />}/>
+						<Route exact path="/bank-1" element={<BankHome />}/>
 					</Routes>	
 				</div>
 			</div>
