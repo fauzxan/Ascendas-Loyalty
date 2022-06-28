@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Marginer } from "./marginer";
 import {
   BoldLink,
@@ -8,18 +8,21 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
-import { AccountContext, loginContext } from "./context";
+import { AccountContext } from "./context";
 import { useNavigate } from "react-router-dom"
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
+  // eslint-disable-next-line
   const navigate = useNavigate();
-  const setLoggedIn = useContext(loginContext);
 
-  const loginHandler = ()=>{
-    setLoggedIn(true);
-    navigate("/Home");
-  }
+  useEffect((navigate)=>{
+    const au = localStorage.getItem('user');
+    if(au) {
+      // eslint-disable-next-line
+      navigate("/Home");
+    }
+  },[])
 
   return (
     <BoxContainer>
@@ -30,7 +33,7 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1.6em" />
-      <SubmitButton type="submit" onClick={loginHandler}>Login</SubmitButton>
+      <SubmitButton type="submit">Login</SubmitButton>
       <Marginer direction="vertical" margin="1em" />
       <MutedLink href="#">
         Dont have an Account?{" "}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Marginer } from "./marginer";
 import {
   BoldLink,
@@ -8,7 +8,7 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
-import { AccountContext, loginContext } from "./context";
+import { AccountContext } from "./context";
 import { useNavigate } from 'react-router-dom';
 
 export function SignupForm(props) {
@@ -17,7 +17,14 @@ export function SignupForm(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const setLoggedIn = useContext(loginContext);
+  useEffect((navigate)=>{
+    const au = localStorage.getItem('user');
+    if(au) {
+      // eslint-disable-next-line
+      navigate("/Home");
+    }
+    
+  },[])
 
   const signup = async()=>{
     console.warn(name, email, password);
@@ -30,8 +37,8 @@ export function SignupForm(props) {
     })
     result = await result.json();
     console.warn(result);
-    setLoggedIn(true);
-    navigate("/Home")
+    localStorage.setItem("user", JSON.stringify(result));
+    navigate("/Home");
   }
 
   return (

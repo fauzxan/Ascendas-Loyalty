@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 
 import {Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -12,7 +12,7 @@ import BankHome from "./components/Home"
 
 import { LoginBox } from "./components/loginPage";
 import styled from "styled-components";
-import { loginContext } from "./components/loginPage/context";
+import { Secret } from './components/loginPage/secret'
 
 const AppContainer = styled.div`
   width: 100%;
@@ -30,35 +30,26 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+	useEffect(()=>{
+		// window.location.reload(false);
+	},[]);
+	const au = localStorage.getItem('user');
 
-	const [isLoggedIn, setLoggedIn] = useState(false);
-	console.log("started")
-	if (!isLoggedIn) {
-		return (
-			<loginContext.Provider value ={setLoggedIn}>
-				<AppContainer>
-					<LoginBox />
-				</AppContainer>
-			</loginContext.Provider>
-		);
-	} else {
-		return (
-			<div>
-				<div>
-					<loginContext.Provider value ={setLoggedIn}>
-						{isLoggedIn && <NavBar />}
-					</loginContext.Provider>
-					<Routes>
-						<Route exact path="/Home" element={<Home />}/>
-						<Route exact path="/about" element={<About />} />
-						<Route exact path="/companies" element={<OurCompanies />} />
-						<Route exact path="/contact" element={<Contact />}/>
-						<Route exact path="/bank-1" element={<BankHome />}/>
-					</Routes>	
-				</div>
-			</div>
-		);
-	}
+	return (
+		<div>
+			{au && <NavBar/>}
+			<Routes forceRefresh={true}>
+				<Route element={<Secret/>}>
+				<Route exact path="/Home" element={<Home />}/>
+				<Route exact path="/about" element={<About />} />
+				<Route exact path="/companies" element={<OurCompanies />} />
+				<Route exact path="/contact" element={<Contact />}/>
+				<Route exact path="/bank-1" element={<BankHome />}/>
+				</Route>
+				<Route exact path="/" element={<AppContainer><LoginBox /></AppContainer>}/>
+			</Routes>	
+		</div>
+	);
 }
 
 export default App;
