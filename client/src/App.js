@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 
-import {Routes, Route } from "react-router-dom";
+import {Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar";
 
@@ -30,9 +30,7 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-	useEffect(()=>{
-		// window.location.reload(false);
-	},[]);
+	const navigate = useNavigate();
 	const au = localStorage.getItem('user');
 
 	return (

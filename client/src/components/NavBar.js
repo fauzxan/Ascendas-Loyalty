@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import "./styles/SPA.css";
 import { useNavigate } from "react-router-dom"
-import { loginContext } from "./loginPage/context";
 
 function NavBar() {
 	const navigate = useNavigate();
-	const setLoggedIn = useContext(loginContext);
 
 	const logout = ()=> {
-		setLoggedIn(false);
-		navigate("/");
+		localStorage.clear();
+		navigate('/')
 	}
 	return (
 		<div className="w3-bar w3-blue w3-large">

@@ -1,19 +1,12 @@
 import React,  { useContext } from "react";
 import "./styles/clientRewards.scss";
-import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom"
-import { loginContext } from "./loginPage/context";
+
 
 function HomeBankCard(props) {
 	// all the cards below are sample cards
 
 	const navigate = useNavigate();
-	const setLoggedIn = useContext(loginContext);
-
-	const logout = ()=> {
-		setLoggedIn(false);
-		navigate("/");
-	}
 
 	return (	
 		<div className="card_rewards">
