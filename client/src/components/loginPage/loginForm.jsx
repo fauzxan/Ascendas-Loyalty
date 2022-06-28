@@ -19,23 +19,24 @@ export function LoginForm(props) {
   // eslint-disable-next-line
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const au = localStorage.getItem('user');
-    if(au) {
+    if (au) {
       // eslint-disable-next-line
       navigate("/Home");
     }
-  },[]);
+  }, []);
 
-  const login = async ()=>{
+  const login = async () => {
     let result = await fetch("http://localhost:5000/login", {
-      method:'post',
-      body:JSON.stringify({email, password}),
-      headers:{
-        'Content-Type':'application/json'
+      method: 'post',
+      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/json'
       }
     })
     result = await result.json();
+    console.warn(JSON.stringify({ email, password }))
     console.warn(result);
     if (result.name) {
       localStorage.setItem('user', JSON.stringify(result));
@@ -44,30 +45,25 @@ export function LoginForm(props) {
       alert("Incorrect credentials")
     }
   }
-  useEffect(() => {
-    const listener = event => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        login()
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  }, []);
+
+  const checke = (event) => {
+    if (event.key === 'Enter') {
+      login();
+    }
+  }
 
   return (
-    <BoxContainer>
-      <FormContainer>
-        <Input type="email" placeholder="Email" 
-        value={email} onChange={(e)=>setEmail(e.target.value)} />
-        <Input type="password" placeholder="Password" 
-        value = {password} onChange={(e)=>setPassword(e.target.value)}/>
+    <BoxContainer >
+      <FormContainer >
+        <Input type="email" placeholder="Email"
+          value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={checke} />
+        <Input type="password" placeholder="Password"
+          value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={checke} />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1.6em" />
-      <SubmitButton type="submit" onSubmit={login}>Login</SubmitButton>
+      <SubmitButton type="submit" onClick={login}>Login</SubmitButton>
       <Marginer direction="vertical" margin="1em" />
       <MutedLink href="#">
         Dont have an Account?{" "}
