@@ -27,7 +27,6 @@ export function SignupForm(props) {
   },[])
 
   const signup = async()=>{
-    console.warn(name, email, password);
     let result = await fetch("http://localhost:5000/register", {
       method:'post',
       body:JSON.stringify({name, email, password}),
@@ -36,7 +35,6 @@ export function SignupForm(props) {
       }
     })
     result = await result.json();
-    console.warn(result);
     localStorage.setItem("user", JSON.stringify(result));
     navigate("/Home");
   }

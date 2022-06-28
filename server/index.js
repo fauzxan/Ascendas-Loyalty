@@ -26,7 +26,6 @@ app.post("/login", async (req, res) => {
   } else {
     res.send({ result: "Not found" });
   }
-
 })
 
 app.listen(5000);

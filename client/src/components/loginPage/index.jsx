@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { LoginForm } from "./loginForm";
 import { AccountContext } from "./context";
 import { SignupForm } from "./signupForm";
+import { useNavigate } from "react-router-dom"
 
 const BoxContainer = styled.div`
   width: 280px;
@@ -101,6 +102,16 @@ const expandingTransition = {
 export function LoginBox(props) {
     const [isExpanded, setExpanded] = useState(false);
     const [active, setActive] = useState("signin");
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+      const au = localStorage.getItem('user');
+      if(au) {
+        // eslint-disable-next-line
+        navigate("/Home");
+      }
+      
+    },[])
 
     const playExpandingAnimation = () => {
         setExpanded(true);
