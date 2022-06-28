@@ -3,6 +3,8 @@ const app = express();
 require("./db/config");
 const User = require("./db/User");
 const cors = require("cors");
+const Jwt = require('jsonwebtoken');
+const jwtKey='loyalty'
 
 app.use(express.json());
 app.use(cors());
@@ -12,14 +14,24 @@ app.post("/register", async (req, res) => {
   let result = await user.save();
   result = result.toObject();
   delete result.password;
-  res.send(result);
+  Jwt.sign({result}, jwtKey, {expiresIn:"2h"},(err,token)=>{
+    if (err) {
+      res.send({result: "Error, please retry again soon"})
+    }
+    res.send({result, au:token})
+  })
 })
 
 app.post("/login", async (req, res) => {
   if (req.body.password && req.body.email) {
     let user = await User.findOne(req.body).select('-password');
     if (user) {
-      res.send(user)
+      Jwt.sign({user}, jwtKey, {expiresIn:"2h"},(err,token)=>{
+        if (err) {
+          res.send({result: "Error, please retry again soon"})
+        }
+        res.send({user, au:token})
+      })
     } else {
       res.send({ result: "Not found" });
     }

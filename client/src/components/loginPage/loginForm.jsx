@@ -36,10 +36,10 @@ export function LoginForm(props) {
       }
     })
     result = await result.json();
-    console.warn(JSON.stringify({ email, password }))
     console.warn(result);
-    if (result.name) {
-      localStorage.setItem('user', JSON.stringify(result));
+    if (result.au) {
+      localStorage.setItem('user', JSON.stringify(result.user));
+      localStorage.setItem('tok', JSON.stringify(result.au))
       navigate("/Home")
     } else {
       alert("Incorrect credentials")

@@ -35,7 +35,8 @@ export function SignupForm(props) {
       }
     })
     result = await result.json();
-    localStorage.setItem("user", JSON.stringify(result));
+    localStorage.setItem("user", JSON.stringify(result.result));
+    localStorage.setItem("tok", JSON.stringify(result.au));
     navigate("/Home");
   }
 
