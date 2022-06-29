@@ -11,23 +11,8 @@ import Home from "./components/HomeList";
 import BankHome from "./components/Home"
 
 import { LoginBox } from "./components/loginPage";
-import styled from "styled-components";
+import { AppContainer } from "./components/loginPage/marginer";
 import { Secret } from './components/loginPage/secret'
-
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top:0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-`;
 
 function App() {
 	const navigate = useNavigate();
@@ -36,7 +21,7 @@ function App() {
 	return (
 		<div>
 			{au && <NavBar/>}
-			<Routes forceRefresh={true}>
+			<Routes>
 				<Route element={<Secret/>}>
 				<Route exact path="/Home" element={<Home />}/>
 				<Route exact path="/about" element={<About />} />

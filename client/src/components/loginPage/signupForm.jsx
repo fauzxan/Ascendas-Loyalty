@@ -27,7 +27,7 @@ export function SignupForm(props) {
   },[])
 
   const signup = async()=>{
-    let result = await fetch("http://localhost:5000/register", {
+    let result = await fetch("https://loyalty-backend.herokuapp.com/register", {
       method:'post',
       body:JSON.stringify({name, email, password}),
       headers:{
