@@ -1,4 +1,3 @@
-/*
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -33,8 +32,9 @@ app.post("/createUser", async (req, res) => {
 
 app.listen(3001, () => {
   console.log("SERVER RUNS PERFECTLY!");
-});\
-*/
+})
+
+/*
 import app from "./server";
 import mongodb from "mongodb";
 import dotenv from "dotenv";
@@ -68,3 +68,4 @@ MongoClient.connect(
 			]);
 		}
 	);
+*/
