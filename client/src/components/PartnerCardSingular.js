@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles/partnerCard.scss";
 import Button from '@mui/material/Button';
+import Popup from "./RewardClickPopup";
 
 function PartnerCard(props) {
 	// all the cards below are sample cards
@@ -10,9 +11,9 @@ function PartnerCard(props) {
 			<div className="card__body">
 				<img src={props.img} className="card__image" alt="company logo" />
 				<h2 className="card__title">{props.title}</h2>
-				<p className="card__description">{props.desc} </p>
+				<p className="card__description"> You have {props.points} points </p>
 			</div>
-			<Button variant="contained" className="card__button">Get Rewards</Button>
+			<Popup />
 		</div>
 	);
 }

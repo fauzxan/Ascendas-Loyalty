@@ -15,5 +15,5 @@ class CardList extends React.Component {
 		);
 	}
 }
-
+// card list will help render partner card where
 export default CardList;
