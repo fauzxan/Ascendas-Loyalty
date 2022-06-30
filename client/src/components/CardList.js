@@ -1,19 +1,17 @@
 import React from "react";
-import PartnerCard from "./PartnerCardSingular";
+import PartnerCardSingular from "./PartnerCardSingular";
 import cardDict from "./cardDict";
 import "./styles/partnerCard.scss";
 
-class CardList extends React.Component {
-	render() {
-		return (
-			<div className="wrapper">
-				{cardDict.map(function (card) {
-                    console.log(card);
-					return <PartnerCard {...card} />;
-				})}
-			</div>
-		);
-	}
-}
+const CardList = () => {
+  return (
+    <div className="wrapper">
+      {cardDict.map(function (card) {
+        console.log(card);
+        return <PartnerCardSingular card={card} />;
+      })}
+    </div>
+  );
+};
 
 export default CardList;
