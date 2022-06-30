@@ -16,7 +16,7 @@ app.post("/register", async (req, res) => {
   delete result.password;
   Jwt.sign({result}, jwtKey, {expiresIn:"2h"},(err,token)=>{
     if (err) {
-      res.send({result: "Error, please retry again soon"})
+      res.send({result: "Error, please try again later."})
     }
     res.send({result, au:token})
   })
@@ -28,7 +28,7 @@ app.post("/login", async (req, res) => {
     if (user) {
       Jwt.sign({user}, jwtKey, {expiresIn:"2h"},(err,token)=>{
         if (err) {
-          res.send({result: "Error, please retry again soon"})
+          res.send({result: "Error, please try again later."})
         }
         res.send({user, au:token})
       })
@@ -42,30 +42,3 @@ app.post("/login", async (req, res) => {
 
 app.listen(5000);
 
-
-
-// mongoose.connect(
-//   "mongodb+srv://Anthony:C4G7ESC@cluster0.tltj1.mongodb.net/test_database?retryWrites=true&w=majority"
-// );
-
-// app.get("/getUsers", (req, res) => {
-//   UserModel.find({}, (err, result) => {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       res.json(result);
-//     }
-//   });
-// });
-
-// app.post("/createUser", async (req, res) => {
-//   const user = req.body;
-//   const newUser = new UserModel(user);
-//   await newUser.save();
-
-//   res.json(user);
-// });
-
-// app.listen(3001, () => {
-//   console.log("SERVER RUNS PERFECTLY!");
-// });
