@@ -1,27 +1,27 @@
 //image imports
-import sands from "./images/sands.png"
-import star from "./images/star.png"
-import sia from "./images/sia.png"
+import dbs from "./images/dbs.png";
+import ocbc from "./images/ocbc.png";
+import bankofchina from "./images/bankofchina.png";
 
 const bankDict = [
-	{
-		id: 1,
-		img: sands,
-		title: "DBS Bank",
-		desc: "Description",
-	},
-	{
-		id: 2,
-		img: star,
-		title: "OCBC Bank",
-		desc: "Description",
-	},
-	{
-		id: 3,
-		img: sia,
-		title: "Bank of China",
-		desc: "Description",
-	},
+  {
+    id: 1,
+    img: dbs,
+    title: "DBS Bank",
+    desc: "Description",
+  },
+  {
+    id: 2,
+    img: ocbc,
+    title: "OCBC Bank",
+    desc: "Description",
+  },
+  {
+    id: 3,
+    img: bankofchina,
+    title: "Bank of China",
+    desc: "Description",
+  },
 ];
 
 export default bankDict;
