@@ -5,13 +5,15 @@ const app = express();
 const TcModel = require("./models/Ascendas_transfer_connect");
 
 const cors = require("cors");
-const login = require('./routes/login')
-const register = require('./routes/register')
+const login = require('./routes/login');
+const register = require('./routes/register');
+const creditreq = require('./routes/creditReq');
 
 app.use(express.json());
 app.use(cors());
 app.use('/login', login);
 app.use('/register', register);
+app.use('/submitcreditreq', creditreq);
 
 // get requests help retrieve data from the specified resource
 // the first argument is a route that tells you where the get request should get from
