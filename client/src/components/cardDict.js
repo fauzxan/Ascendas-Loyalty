@@ -8,19 +8,19 @@ const cardDict = [
 		id: 1,
 		img: sands,
 		title: "Sands Group",
-		desc: "You have X points",
+		points: "You have X",
 	},
 	{
 		id: 2,
 		img: star,
 		title: "Star Alliance",
-		desc: "You have X points",
+		points: "You have X",
 	},
 	{
 		id: 3,
 		img: sia,
 		title: "SIA",
-		desc: "You have X points",
+		points: "You have X",
 	},
 ];
 
