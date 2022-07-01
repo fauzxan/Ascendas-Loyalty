@@ -1,23 +1,18 @@
 // import statements
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const UserModel = require("./models/Users");
+
 const TcModel = require("./models/Ascendas_transfer_connect");
 
-const cors = require("cors"); // this allows our api to connect with our react frontend
+require("./db/config");
+const User = require("./db/User");
+const cors = require("cors");
+const Jwt = require('jsonwebtoken');
+const jwtKey='loyalty'
+
 
 app.use(express.json());
 app.use(cors());
-
-mongoose.connect(
-	"mongodb+srv://fauzaan:1vSrKEDpr45wErCM@cluster0.nt1bu1m.mongodb.net/Ascendas_handback_file?retryWrites=true&w=majority",
-	{ useUnifiedTopology: true, useNewUrlParser: true },
-	(req, res) => {
-		console.log("connected to database");
-	}
-); // connect to the database using mongoose. This is the url retrieved after
-// clicking "connect to application" on mongodb
 
 // get requests help retrieve data from the specified resource
 // the first argument is a route that tells you where the get request should get from
@@ -36,67 +31,38 @@ app.get("/getData", (req, res) => {
 	});
 });
 
-app.listen(8999, () => {
-	console.log("SERVER RUNS PERFECTLY!");
-});
-
 /*
 
-app.get("/getUsers", (req, res) => {
-  UserModel.find({}, (err, result) => {
+app.post("/register", async (req, res) => {
+  let user = new User(req.body);
+  let result = await user.save();
+  result = result.toObject();
+  delete result.password;
+  Jwt.sign({result}, jwtKey, {expiresIn:"2h"},(err,token)=>{
     if (err) {
-      res.json(err);
-    } else {
-      res.json(result);
+      res.send({result: "Error, please try again later."})
     }
-  });
-});
-
-app.post("/createUser", async (req, res) => {
-  const user = req.body;
-  const newUser = new UserModel(user);
-  await newUser.save();
-
-  res.json(user);
-});
-
-app.listen(3001, () => {
-  console.log("SERVER RUNS PERFECTLY!");
+    res.send({result, au:token})
+  })
 })
-*/
 
-/*
-import app from "./server";
-import mongodb from "mongodb";
-import dotenv from "dotenv";
+app.post("/login", async (req, res) => {
+  if (req.body.password && req.body.email) {
+    let user = await User.findOne(req.body).select('-password');
+    if (user) {
+      Jwt.sign({user}, jwtKey, {expiresIn:"2h"},(err,token)=>{
+        if (err) {
+          res.send({result: "Error, please try again later."})
+        }
+        res.send({user, au:token})
+      })
+    } else {
+      res.send({ result: "Not found" });
+    }
+  } else {
+    res.send({ result: "Not found" });
+  }
+})
 
-dotenv.config(); // this is to load in the environment variables
-const MongoClient = mongodb.MongoClient; // mongo client access
+app.listen(5000);
 
-const port = process.env.PORT || 8000; // we will try to access the port defined in the .env file. If unaccessible
-// then the application will try to connect with the port 8000
-
-MongoClient.connect(
-	process.env.RESTREVIEWS_DB_URI, // access the uri defined in the .env folder
-	{
-		maxPoolSize: 50, // setting the max number of connections at any given point in time (only 50 open connections possible )
-		wtimeoutMS: 2500, // the connection will timeout in 2500 milliseconds
-		useNewUrlParser: true, // this helps parse the url, as the new mongodb url format is very large
-	}
-)
-	.catch((err) => {
-		// catch any errors that may pop up during the connection setup
-		console.log(err.stack); // log the error
-		process.exit(1); // exit the process
-	})
-	.then(
-		// this will load the db uri then carry out an asynchronous process
-		async (client) => {
-			// the async porcess will help connect to the server port
-			app.listen(port, () => [
-				// this is how we tell the application to listen to the port
-				console.log(`listening to port ${port}`),
-			]);
-		}
-	);
-*/
