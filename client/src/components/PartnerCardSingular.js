@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles/partnerCard.scss";
 import { useState } from "react";
+import submitcrq  from './loginPage/submitcrq'
 import { Button, Modal, Form, Input, InputNumber } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
@@ -10,6 +11,9 @@ const PartnerCardSingular = (props) => {
   // all the cards below are sample cards
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [amt, setAmt] = useState(0);
+  const [cc, setCc] = useState("");
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -24,7 +28,20 @@ const PartnerCardSingular = (props) => {
   };
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    let date = new Date();
+
+    let today = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+    let fullname = JSON.parse(localStorage.getItem('user')).name
+    let partnercode = "Daddy's bank"
+    let memid = values.membership_number
+    let amt = values.amount
+
+    submitcrq(today, fullname, partnercode, memid, amt).then((cc)=>{
+      setCc(cc);
+    });
+    handleOk();
+    setSuccess(true);
+    setAmt(amt);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -41,6 +58,7 @@ const PartnerCardSingular = (props) => {
       <Button type="primary" onClick={showModal}>
         Claim rewards
       </Button>
+      
       <Modal
         title={props.card.title}
         visible={isModalVisible}
@@ -62,7 +80,7 @@ const PartnerCardSingular = (props) => {
         >
           <Form.Item
             label="Membership number"
-            name="membership number"
+            name="membership_number"
             rules={[
               {
                 required: true,
@@ -104,6 +122,7 @@ const PartnerCardSingular = (props) => {
           </Form.Item>
         </Form>
       </Modal>
+      {success && <Popup success={setSuccess} amt={amt} cc={cc}/>}
     </div>
   );
 };

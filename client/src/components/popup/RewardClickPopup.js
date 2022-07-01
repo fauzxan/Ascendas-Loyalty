@@ -51,7 +51,7 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function Popup(props) {
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = React.useState(true);
 	const [listData, setListData] = React.useState([]);
 	React.useEffect(() => {
         Axios.get('http://localhost:8999/getData').then((response) => {
@@ -64,18 +64,11 @@ export default function Popup(props) {
 		setOpen(true);
 	};
 	const handleClose = () => {
-		setOpen(false);
+		props.success(false);
 	};
 
 	return (
-		<div>
-			<Button
-				variant="contained"
-				className="card__button"
-				onClick={handleClickOpen}
-			>
-				Get Rewards
-			</Button>
+		<div style={{position:"absolute"}}>
 			<BootstrapDialog
 				onClose={handleClose}
 				aria-labelledby="customized-dialog-title"
@@ -90,13 +83,13 @@ export default function Popup(props) {
 				</BootstrapDialogTitle>
 				<DialogContent dividers>
 					<Typography gutterBottom>
-						Your {props.pointsSelected} are on their way to your account
+						Your {props.amt} points are on their way to your account
 					</Typography>
 					<Typography gutterBottom>
 						You'll recieve an email regarding this in a few days
 					</Typography>
 					<Typography gutterBottom>
-						Your confirmation code is as follows: {props.confirmCode}
+						Your confirmation code is as follows: {props.cc}
 					</Typography>
 				</DialogContent>
 				<DialogActions>
