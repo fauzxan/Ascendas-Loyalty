@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/partnerCard.scss";
 import Button from '@mui/material/Button';
-import Popup from "./RewardClickPopup";
+import Popup from "./popup/RewardClickPopup";
 
 function PartnerCard(props) {
 	// all the cards below are sample cards

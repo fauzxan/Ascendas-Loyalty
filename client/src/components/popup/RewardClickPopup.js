@@ -9,7 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
-import "./styles/partnerCard.scss";
+import "../styles/partnerCard.scss";
 import Axios from "axios";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
