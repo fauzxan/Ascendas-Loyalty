@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles/partnerCard.scss";
 import { useState } from "react";
+import submitcrq  from './loginPage/submitcrq'
 import { Button, Modal, Form, Input, InputNumber } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
@@ -24,7 +25,15 @@ const PartnerCardSingular = (props) => {
   };
 
   const onFinish = (values) => {
-    console.log("Success:", values);
+    let date = new Date();
+
+    let today = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+    let fullname = JSON.parse(localStorage.getItem('user')).name
+    let partnercode = "Daddy's bank"
+    let memid = values.membership_number
+    let amt = values.amount
+
+    submitcrq(today, fullname, partnercode, memid, amt);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -62,7 +71,7 @@ const PartnerCardSingular = (props) => {
         >
           <Form.Item
             label="Membership number"
-            name="membership number"
+            name="membership_number"
             rules={[
               {
                 required: true,
