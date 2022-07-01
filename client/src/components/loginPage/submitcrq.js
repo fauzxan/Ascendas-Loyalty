@@ -1,5 +1,3 @@
-import React from 'react';
-
 const submitcrq = async (date, fullname, partnercode, memberid, amount)=>{
     let result = await fetch("https://loyalty-backend.herokuapp.com/submitcreditreq", {
       method: 'post',

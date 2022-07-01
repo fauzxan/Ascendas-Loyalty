@@ -11,6 +11,7 @@ const PartnerCardSingular = (props) => {
   // all the cards below are sample cards
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -34,6 +35,8 @@ const PartnerCardSingular = (props) => {
     let amt = values.amount
 
     submitcrq(today, fullname, partnercode, memid, amt);
+    handleOk();
+    setSuccess(true);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -50,6 +53,7 @@ const PartnerCardSingular = (props) => {
       <Button type="primary" onClick={showModal}>
         Claim rewards
       </Button>
+      
       <Modal
         title={props.card.title}
         visible={isModalVisible}
@@ -113,6 +117,7 @@ const PartnerCardSingular = (props) => {
           </Form.Item>
         </Form>
       </Modal>
+      {success && <Popup />}
     </div>
   );
 };

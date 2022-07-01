@@ -51,7 +51,7 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function Popup(props) {
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = React.useState(true);
 	const [listData, setListData] = React.useState([]);
 	React.useEffect(() => {
         Axios.get('http://localhost:8999/getData').then((response) => {
@@ -68,14 +68,7 @@ export default function Popup(props) {
 	};
 
 	return (
-		<div>
-			<Button
-				variant="contained"
-				className="card__button"
-				onClick={handleClickOpen}
-			>
-				Get Rewards
-			</Button>
+		<div style={{position:"absolute"}}>
 			<BootstrapDialog
 				onClose={handleClose}
 				aria-labelledby="customized-dialog-title"
