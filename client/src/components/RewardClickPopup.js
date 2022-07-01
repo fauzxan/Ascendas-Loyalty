@@ -110,20 +110,23 @@ export default function Popup(props) {
 }
 /*
  How to display the data on the frontend side:
- 1. the points information must be entered into the popup window
+ 1. the points information must be entered into the popup window, via a POST request. 
     This includes information like 
     i. bank ID (either entered here or is automatically sent to the LP via user account)
     ii. points redeemed - this must not exceed the total number of points available for THAT user on THAT account
     iii. etc.
-
+	This information remains on the database until the transaction goes through. 
+	SO once the transaction is successful and you recieve the handback file, the details can be displayed on the 
+	client side. 
  2. the points information must be validated on the client side (this part is done already by Anthony)
  
  3. the points information must be sent to the loyalty program API- the indicator of the 
-    the successful sending of the accrual file must be handled by someone
+    the successful sending of the accrual file must be handled by someone using a Pop-up dialog with the success message. 
  
  4. the successful sending of the API request must be shown as a popup dialogue  
     (half done by Fauzaan-need information from the accrual file system and the validation system as well.)
     The popup dialog must contain a verification code that the user must enter (need to discuss what this is for)
+	The verification code is for making transaction enquiries later if needed by the user. 
  
  5. Once the data has been validated by the loyalty program API, the updated data needs to be reflected on the 
     client side on the partnerCards.js
