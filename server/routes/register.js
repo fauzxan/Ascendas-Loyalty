@@ -12,9 +12,9 @@ router.post("/", async (req, res) => {
     delete result.password;
     Jwt.sign({result}, jwtKey, {expiresIn:"2h"},(err,token)=>{
       if (err) {
-        res.send({result: "Error, please try again later."})
+        res.status(500).send({result: "Error, please try again later."})
       }
-      res.send({result, au:token})
+      res.status(200).send({result, au:token})
     })
   });
 

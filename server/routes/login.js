@@ -11,15 +11,15 @@ router.post("/", async (req, res) => {
       if (user) {
         Jwt.sign({user}, jwtKey, {expiresIn:"2h"},(err,token)=>{
           if (err) {
-            res.send({result: "Error, please try again later."})
+            res.status(500).send({result: "Error, please try again later."})
           }
-          res.send({user, au:token})
+          res.status(200).send({user, au:token})
         })
       } else {
-        res.send({ result: "Not found" });
+        res.status(404).send({ result: "Not found" });
       }
     } else {
-      res.send({ result: "Not found" });
+      res.status(404).send({ result: "Not found" });
     }
   });
 
