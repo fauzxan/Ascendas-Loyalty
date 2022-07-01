@@ -64,7 +64,7 @@ export default function Popup(props) {
 		setOpen(true);
 	};
 	const handleClose = () => {
-		setOpen(false);
+		props.success(false);
 	};
 
 	return (
@@ -83,13 +83,13 @@ export default function Popup(props) {
 				</BootstrapDialogTitle>
 				<DialogContent dividers>
 					<Typography gutterBottom>
-						Your {props.pointsSelected} are on their way to your account
+						Your {props.amt} points are on their way to your account
 					</Typography>
 					<Typography gutterBottom>
 						You'll recieve an email regarding this in a few days
 					</Typography>
 					<Typography gutterBottom>
-						Your confirmation code is as follows: {props.confirmCode}
+						Your confirmation code is as follows: {props.cc}
 					</Typography>
 				</DialogContent>
 				<DialogActions>

@@ -7,7 +7,7 @@ const submitcrq = async (date, fullname, partnercode, memberid, amount)=>{
       }
     })
     result = await result.json();
-    console.warn(result);
+    return result._id;
 }
 
 export default submitcrq;

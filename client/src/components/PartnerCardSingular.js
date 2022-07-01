@@ -12,6 +12,8 @@ const PartnerCardSingular = (props) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [amt, setAmt] = useState(0);
+  const [cc, setCc] = useState("");
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -34,9 +36,12 @@ const PartnerCardSingular = (props) => {
     let memid = values.membership_number
     let amt = values.amount
 
-    submitcrq(today, fullname, partnercode, memid, amt);
+    submitcrq(today, fullname, partnercode, memid, amt).then((cc)=>{
+      setCc(cc);
+    });
     handleOk();
     setSuccess(true);
+    setAmt(amt);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -117,7 +122,7 @@ const PartnerCardSingular = (props) => {
           </Form.Item>
         </Form>
       </Modal>
-      {success && <Popup />}
+      {success && <Popup success={setSuccess} amt={amt} cc={cc}/>}
     </div>
   );
 };
