@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
 
 /*   color variables */
-$clr-primary: #d50000;
+$clr-primary: #869ec3;
 $clr-primary-hover: #29e6a7;
 $clr-primary-dark: #039d69;
 $clr-gray100: #f9fbff;
 $clr-gray150: #f4f6fb;
 $clr-gray200: #eef1f6;
-$clr-gray300: #e1e5ee;
+$clr-gray300: #aab0af;
 $clr-gray400: #767b91;
 $clr-gray500: #4f546c;
 $clr-gray600: #2a324b;
@@ -80,6 +80,6 @@ $radius: 0.2rem;
 
   &:hover &__btn {
     background: $clr-primary;
-    color: white;
+    color: rgb(255, 255, 255);
   }
 }
