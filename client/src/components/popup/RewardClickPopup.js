@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import "../styles/partnerCard.scss";
-import Axios from "axios";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	"& .MuiDialogContent-root": {
@@ -52,23 +51,16 @@ BootstrapDialogTitle.propTypes = {
 
 export default function Popup(props) {
 	const [open, setOpen] = React.useState(true);
-	const [listData, setListData] = React.useState([]);
-	React.useEffect(() => {
-        Axios.get('http://localhost:8999/getData').then((response) => {
-            // the response variable catches whatever data you get from the backend.
-            setListData(response.data);
-        })
-    }, []);
-
+	//eslint-disable-next-line
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
 	const handleClose = () => {
 		props.success(false);
 	};
-
+	//console.log(listData);
 	return (
-		<div style={{position:"absolute"}}>
+		<div style={{ position: "absolute" }}>
 			<BootstrapDialog
 				onClose={handleClose}
 				aria-labelledby="customized-dialog-title"
@@ -125,4 +117,4 @@ export default function Popup(props) {
     client side on the partnerCards.js
     i. the updated data includes points information
    
-*/ 
+*/
