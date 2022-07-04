@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles/partnerCard.scss";
 import { useState } from "react";
-import submitcrq from "./loginPage/submitcrq";
 import { Button, Modal, Form, Input, InputNumber } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
@@ -31,26 +30,33 @@ const PartnerCardSingular = (props) => {
 	const onFinish = (values) => {
 		let date = new Date();
 
-		var today = `${date.getDate()}/${
+		let today = `${date.getDate()}/${
 			date.getMonth() + 1
 		}/${date.getFullYear()}`;
 		let fullname = JSON.parse(localStorage.getItem("user")).name;
 		let partnercode = "Daddy's bank";
 		let memid = values.membership_number;
-		var amt = values.amount;
-
-		submitcrq(today, fullname, partnercode, memid, amt).then((cc) => {
-			setCc(cc);
-		});
-
+		let amt = values.amount;
+		let lpro = props.card.title;
+		Axios.post("https://loyalty-backend.herokuapp.com/submitcreditreq", {
+			memberid: memid,
+			fullname: fullname,
+			amount: amt,
+			date: today,
+			partnercode: partnercode,
+			loyaltyprogramme: lpro
+		}).then((response)=>{
+			setCc(response.data._id);
+		}).catch((err)=>{
+			console.warn(err);
+		})
 		handleOk();
-
 		setSuccess(true);
 		setAmt(amt);
-		Axios.post("http://localhost:5000/createhandback", {
+		Axios.post("https://loyalty-backend.herokuapp.com/createhandback", {
 			date: today,
 			amount: amt,
-			referencenumber: cc,
+			referencenumber: Number("0x".concat(cc)),
 			outcomecode: "0000",
 		})
 			.then((response) => {
