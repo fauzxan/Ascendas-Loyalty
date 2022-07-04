@@ -27,6 +27,11 @@ const PartnerCardSingular = (props) => {
 		setIsModalVisible(false);
 	};
 
+	function popup() {
+		var pop = document.getElementById("progresspop");
+		pop.classList.toggle("show");
+  	}
+
 	const onFinish = (values) => {
 		let date = new Date();
 
@@ -80,6 +85,11 @@ const PartnerCardSingular = (props) => {
 			<Button type="primary" onClick={showModal}>
 				Claim rewards
 			</Button>
+			<Button type="default" onClick={popup()}>
+				View progress
+				<span className="popover" id="progresspop" src="RewardClickPopup.js"></span>
+			</Button>
+
 
 			<Modal
 				title={props.card.title}
@@ -146,6 +156,8 @@ const PartnerCardSingular = (props) => {
 			</Modal>
 			{success && <Popup success={setSuccess} amt={amt} cc={cc} />}
 		</div>
+
+
 	);
 };
 export default PartnerCardSingular;
