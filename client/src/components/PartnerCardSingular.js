@@ -47,10 +47,10 @@ const PartnerCardSingular = (props) => {
 
 		setSuccess(true);
 		setAmt(amt);
-		Axios.post("http://localhost:5000/createhandback",  {
-			"date": today,
-			"amount": amt,
-			"referencenumber": cc,
+		Axios.post("http://localhost:5000/createhandback", {
+			date: today,
+			amount: amt,
+			referencenumber: cc,
 			outcomecode: "0000",
 		})
 			.then((response) => {
