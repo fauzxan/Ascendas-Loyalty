@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/routing/NavBar";
 
-import About from "./components/About";
-import OurCompanies from "./components/OurCompanies";
-import Contact from "./components/Contact";
+import About from "./components/routing/About";
+import OurCompanies from "./components/routing/OurCompanies";
+import Contact from "./components/routing/Contact";
 import HomeList from "./components/HomeList";
 import PartnersCardList from "./components/PartnersCardList";
 
