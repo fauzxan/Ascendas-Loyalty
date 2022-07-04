@@ -1,9 +1,9 @@
-const submitcrq = async (date, fullname, partnercode, memberid, amount) => {
+const submitcrq = async (date, fullname, partnercode, memberid, amount, loyaltyprogramme) => {
 	let result = await fetch(
 		"https://loyalty-backend.herokuapp.com/submitcreditreq",
 		{
 			method: "post",
-			body: JSON.stringify({ memberid, fullname, date, amount, partnercode }),
+			body: JSON.stringify({ memberid, fullname, date, amount, partnercode, loyaltyprogramme }),
 			headers: {
 				"Content-Type": "application/json",
 			},

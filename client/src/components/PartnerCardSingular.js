@@ -31,15 +31,16 @@ const PartnerCardSingular = (props) => {
 	const onFinish = (values) => {
 		let date = new Date();
 
-		var today = `${date.getDate()}/${
+		let today = `${date.getDate()}/${
 			date.getMonth() + 1
 		}/${date.getFullYear()}`;
 		let fullname = JSON.parse(localStorage.getItem("user")).name;
 		let partnercode = "Daddy's bank";
 		let memid = values.membership_number;
-		var amt = values.amount;
+		let amt = values.amount;
+		let lpro = props.card.title;
 
-		submitcrq(today, fullname, partnercode, memid, amt).then((cc) => {
+		submitcrq(today, fullname, partnercode, memid, amt, lpro).then((cc) => {
 			setCc(cc);
 		});
 

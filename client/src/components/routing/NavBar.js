@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./styles/SPA.css";
+import "../styles/SPA.css";
 import { useNavigate } from "react-router-dom"
 
 function NavBar() {
