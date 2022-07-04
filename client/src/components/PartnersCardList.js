@@ -3,7 +3,7 @@ import PartnerCardSingular from "./PartnerCardSingular";
 import cardDict from "./cardDict";
 import "./styles/partnerCard.scss";
 
-const CardList = () => {
+const PartnersCardList = () => {
   return (
     <div className="wrapper">
       {cardDict.map(function (card) {
@@ -14,4 +14,4 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export default PartnersCardList;

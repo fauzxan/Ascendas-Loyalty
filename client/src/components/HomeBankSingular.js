@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import "./styles/clientRewards.scss";
 import { useNavigate } from "react-router-dom";
 import { Button } from 'antd';
-import Stack from '@mui/material/Stack';
 
 function HomeBankSingular(props) {
   // all the cards below are sample cards
