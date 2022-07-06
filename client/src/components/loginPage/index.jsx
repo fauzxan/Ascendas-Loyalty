@@ -83,6 +83,7 @@ const backdropVariants = {
     width: "233%",
     height: "1050px",
     borderRadius: "20%",
+    zIndex: 2,
     transform: "rotate(60deg)",
   },
   collapsed: {
