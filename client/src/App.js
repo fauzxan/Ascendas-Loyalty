@@ -9,6 +9,7 @@ import OurCompanies from "./components/routing/OurCompanies";
 import Contact from "./components/routing/Contact";
 import HomeList from "./components/HomeList";
 import PartnersCardList from "./components/PartnersCardList";
+import Enquiry from "./components/routing/Enquiry";
 
 import { LoginBox } from "./components/loginPage";
 import { AppContainer } from "./components/loginPage/marginer";
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/companies" element={<OurCompanies />} />
           <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/enquire" element={<Enquiry />} />
           <Route exact path="/bank-1" element={<PartnersCardList />} />
         </Route>
         <Route
