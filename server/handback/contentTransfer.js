@@ -31,7 +31,7 @@ mongodb.connect(
 				fastcsv
 					.write(data, { headers: true })
 					.on("finish", function () {
-						console.log("Write to bezkoder_mongodb_fastcsv.csv successfully!");
+						console.log("written succesfully");
 					})
 					.pipe(writeStream);
 				client.close();
