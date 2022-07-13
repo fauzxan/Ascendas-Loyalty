@@ -40,50 +40,6 @@ mongodb.connect(
 	}
 );
 */
-var fs = require("fs"),
-	client = require("ssh2").Client; // creating the ssh2 connection variable 
+'use strict';
+const Client = require('ssh2-sftp-client');
 
-upoladFile({
-	localFolder:
-		"C:\\Users\\fauza\\Desktop\\School stuff\\Elements of Software Construction\\Ascendas-Loyalty\\server\\rwStream\\",
-	localFile: "accrual.csv",
-	remoteFolder: "\\DriveHQShare\\melvrickgoh\\sutd_2022_c4g7\\",
-	remoteFile: "accrual.csv",
-	host: "proFTP.drivehq.com",
-	port: 22,
-	username: "sutd_2022_c4g7",
-	password: "rxh3qpj7man0qwz_CNZ",
-});
-
-function upoladFile(p) {
-	var conn = new client();
-	conn
-		.on("ready", function () {
-			conn.sftp(function (err, sftp) {
-				if (err) throw err;
-				sftp.readdir(p.remoteFolder, function (err, list) {
-					if (err) throw err;
-					console.dir(list);
-					var readStream = fs.createReadStream(p.localFolder + p.localFile);
-					var writeStream = sftp.createWriteStream(
-						p.remoteFolder + p.remoteFile,
-						{ mode: 0100664 }
-					);
-					writeStream.on("close", function () {
-						sftp.readdir(p.remoteFolder, function (err, list) {
-							if (err) throw err;
-							console.dir(list);
-							conn.end();
-						});
-					});
-					readStream.pipe(writeStream);
-				});
-			});
-		})
-		.connect({
-			host: p.host,
-			port: p.port,
-			username: p.username,
-			password: p.password,
-		});
-}
