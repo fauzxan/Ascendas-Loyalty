@@ -3,6 +3,8 @@
 // 3. generate randomized outcome code
 // 4. import the randomized outcome code into the handback document inside mongodb, such that it overwrites the existing content with fresh content
 
+const { slotShouldForwardProp } = require("@mui/material/styles/styled");
+
 //1.
 /*
 const mongodb = require("mongodb").MongoClient;
@@ -40,6 +42,34 @@ mongodb.connect(
 	}
 );
 */
-'use strict';
-const Client = require('ssh2-sftp-client');
+var client = require ('ssh2').Client;
+var m_ssh2Credentials = {
+	host: config.ftpHostName,
+	port: config.ftpPort,
+	username: config.ftpUser,
+	password: config.ftpPassword,
+	readyTimeout: 20000,
+	algotithms: { cipher: ["3des-cbc", "aes256-cbc", "aes192-cbc","aes128-cbc"]}
+};
 
+var conn = new Client();
+var datalength = 0;
+conn.on('ready', () => { // on is an event listener. "ready" is the event
+	conn.sftp((err, sftp) => {
+		if (err){
+			writeToErrorLog("Failed to open SFTP connection.");
+		}
+		else{
+			writeToLog("Opened SFTP connection!");
+		}
+
+		var streamErr = "";
+		var datalength = 0;
+
+		var stream = 
+
+
+
+
+	})
+})
