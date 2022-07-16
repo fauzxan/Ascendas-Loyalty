@@ -1,12 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const creditReq = new mongoose.Schema({
-    memberid: String,
-    fullname: String,
-    date: Date,
-    amount: Number,
-    partnercode: String,
-    loyaltyprogramme: String
-})
+  memberid: String,
+  fullname: String,
+  date: String,
+  amount: Number,
+  partnercode: String,
+  loyaltyprogramme: String,
+  refcode: Number,
+});
 
-module.exports = mongoose.model("creditreqs", creditReq)
+module.exports = mongoose.model("creditreqs", creditReq);

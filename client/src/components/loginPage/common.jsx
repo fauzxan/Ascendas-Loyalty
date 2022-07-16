@@ -8,18 +8,18 @@ export const BoxContainer = styled.div`
   margin-top: 10px;
 `;
 
-export const FormContainer = styled.form`
+export const FormContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
 `;
 
-export const MutedLink = styled.a`
+export const MutedLink = styled.span`
   color: rgba(200, 200, 200, 0.8);
   font-size: 11px;
   font-weight: 500;
   text-decoration: none;
+  margin: 15px 10px;
 `;
 
 export const BoldLink = styled.a`
@@ -27,7 +27,7 @@ export const BoldLink = styled.a`
   font-weight: 500;
   font-size: 11px;
   text-decoration: none;
-  margin: 0 4px;
+  margin: 4px 4px;
 `;
 
 export const Input = styled.input`
