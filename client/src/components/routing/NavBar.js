@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../styles/SPA.css";
 import { useNavigate } from "react-router-dom";
+import { caaaa } from "../loginPage/wist";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -44,6 +45,9 @@ function NavBar() {
         className="w3-bar-item w3-button w3-mobile"
       >
         Bank of Singapore
+      </button>
+      <button onClick={caaaa} className="w3-bar-item w3-button w3-mobile">
+        Create accrual file
       </button>
 
       <button
