@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { LoginForm } from "./loginForm";
 import { AccountContext } from "./context";
 import { SignupForm } from "./signupForm";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const BoxContainer = styled.div`
   width: 280px;
@@ -101,44 +101,43 @@ const expandingTransition = {
 };
 
 export function LoginBox(props) {
-    const [isExpanded, setExpanded] = useState(false);
-    const [active, setActive] = useState("signin");
-    const navigate = useNavigate();
+  const [isExpanded, setExpanded] = useState(false);
+  const [active, setActive] = useState("signin");
+  const navigate = useNavigate();
 
-    useEffect(()=>{
-      const au = localStorage.getItem('user');
-      if(au) {
-        // eslint-disable-next-line
-        navigate("/Home");
-      }
-      
-    },[])
+  useEffect(() => {
+    const au = localStorage.getItem("user");
+    if (au) {
+      // eslint-disable-next-line
+      navigate("/Home");
+    }
+  }, []);
 
-    const playExpandingAnimation = () => {
-        setExpanded(true);
+  const playExpandingAnimation = () => {
+    setExpanded(true);
 
-        setTimeout(() => {
-          setExpanded(false);
-        }, expandingTransition.duration * 1000 - 1500);
-    };
-    
-      const switchToSignup = () => {
-        playExpandingAnimation();
-        setTimeout(() => {
-          setActive("signup");
-        }, 400);
-      };
-    
-      const switchToSignin = () => {
-        playExpandingAnimation();
-        setTimeout(() => {
-          setActive("signin");
-        }, 400);
-      };
-    
-    const contextValue = { switchToSignup, switchToSignin };
+    setTimeout(() => {
+      setExpanded(false);
+    }, expandingTransition.duration * 1000 - 1500);
+  };
 
-    return (
+  const switchToSignup = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signup");
+    }, 400);
+  };
+
+  const switchToSignin = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signin");
+    }, 400);
+  };
+
+  const contextValue = { switchToSignup, switchToSignin };
+
+  return (
     <AccountContext.Provider value={contextValue}>
       <BoxContainer>
         <TopContainer>
@@ -168,5 +167,5 @@ export function LoginBox(props) {
         </InnerContainer>
       </BoxContainer>
     </AccountContext.Provider>
-    );
+  );
 }

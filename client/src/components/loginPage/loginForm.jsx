@@ -1,79 +1,68 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Marginer } from "./marginer";
 import {
   BoldLink,
   BoxContainer,
   FormContainer,
-  Input,
   MutedLink,
   SubmitButton,
 } from "./common";
 import { AccountContext } from "./context";
 import { useNavigate } from "react-router-dom";
 import { Lform } from "./lform";
+import { Form } from "antd";
+import Axios from "axios";
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  // eslint-disable-next-line
+  const [form] = Form.useForm();
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const au = localStorage.getItem("user");
     if (au) {
-      // eslint-disable-next-line
       navigate("/Home");
     }
   }, []);
 
-  const login = async () => {
-    let result = await fetch("https://loyalty-backend.herokuapp.com/login", {
-      method: "post",
-      body: JSON.stringify({ email, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    result = await result.json();
-    console.warn(result);
-    if (result.au) {
-      localStorage.setItem("user", JSON.stringify(result.user));
-      localStorage.setItem("tok", JSON.stringify(result.au));
-      navigate("/Home");
-    } else {
-      alert("Incorrect credentials");
+  const login = async (values) => {
+    const email = values.email;
+    const password = values.password;
+    if (!email || !password) {
+      alert("Please key in credentials");
+      return;
     }
-  };
-
-  const checke = (event) => {
-    if (event.key === "Enter") {
-      login();
-    }
+    Axios.post("https://loyalty-backend.herokuapp.com/login", {
+      email: email,
+      password: password,
+    })
+      .then((result) => {
+        if (result.data.au) {
+          localStorage.setItem("user", result.data.user);
+          localStorage.setItem("tok", result.data.au);
+          navigate("/Home");
+        } else {
+          alert("Incorrect credentials");
+        }
+      })
+      .catch((err) => {
+        alert("Incorrect credentials");
+      });
   };
 
   return (
     <BoxContainer>
-      <FormContainer>
-        {<Lform />}
-        {/* <Input type="email" placeholder="Email"
-          value={email} onChange={(e) => setEmail(e.target.value)} onKeyDown={checke} />
-        <Input type="password" placeholder="Password"
-          value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={checke} /> */}
-      </FormContainer>
-      <Marginer direction="vertical" margin={0} />
-      <MutedLink href="#">Forget your password?</MutedLink>
+      <FormContainer>{<Lform form={form} onFinish={login} />}</FormContainer>
       <Marginer direction="vertical" margin="1.6em" />
-      <SubmitButton type="submit" onClick={login}>
+      <SubmitButton type="submit" onClick={() => form.submit()}>
         Login
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="#">
+      <MutedLink>
         Dont have an Account?{" "}
-        <BoldLink href="#" onClick={switchToSignup}>
-          Sign up
-        </BoldLink>
+        <BoldLink onClick={switchToSignup}>Sign up</BoldLink>
       </MutedLink>
     </BoxContainer>
   );

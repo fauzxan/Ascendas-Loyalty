@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Space,
-} from "antd";
+import React from "react";
+import { Form, Input, Space } from "antd";
 
 export function Lform(props) {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
   const formItemLayout = {
     labelCol: {
       xs: {
@@ -29,7 +22,17 @@ export function Lform(props) {
   };
 
   return (
-    <Form name="login" onFinish={onFinish} style={{zIndex:0, position: "relative"}}>
+    <Form
+      name="login"
+      form={props.form}
+      onFinish={props.onFinish}
+      style={{ zIndex: 0, position: "relative" }}
+      onKeyPress={(e) => {
+        if (e.key === "Enter") {
+          props.form.submit();
+        }
+      }}
+    >
       <Space
         direction="vertical"
         size={0}
@@ -37,7 +40,7 @@ export function Lform(props) {
           display: "flex",
         }}
       >
-        <Form.Item style={{zIndex:0, position:"relative"}}
+        <Form.Item
           name="email"
           rules={[
             {
@@ -46,7 +49,7 @@ export function Lform(props) {
             },
           ]}
         >
-          <Input placeholder="Email" style={{zIndex:0, position:"relative"}}/>
+          <Input placeholder="Email" />
         </Form.Item>
 
         <Form.Item name="password">
