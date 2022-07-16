@@ -76,7 +76,7 @@ export function Sform(props) {
             }),
           ]}
         >
-          <Input.Password placeholder=" Confirm Password"/>
+          <Input.Password placeholder=" Confirm Password" />
         </Form.Item>
       </Space>
     </Form>

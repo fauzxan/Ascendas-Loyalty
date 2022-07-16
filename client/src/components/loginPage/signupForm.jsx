@@ -29,17 +29,23 @@ export function SignupForm(props) {
     const name = values.fullname;
     const email = values.email;
     const password = values.password;
-    let result = await fetch("https://loyalty-backend.herokuapp.com/register", {
-      method: "post",
-      body: JSON.stringify({ name, email, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    result = await result.json();
-    localStorage.setItem("user", JSON.stringify(result.result));
-    localStorage.setItem("tok", JSON.stringify(result.au));
-    navigate("/Home");
+    if (!name || !email || !password) {
+      alert("Please complete all fields.");
+      return;
+    }
+    Axios.post("https://loyalty-backend.herokuapp.com/register", {
+      name: name,
+      email: email,
+      password: password,
+    })
+      .then((result) => {
+        localStorage.setItem("user", result.data.result);
+        localStorage.setItem("tok", result.data.au);
+        navigate("/Home");
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
   };
 
   return (
@@ -52,7 +58,7 @@ export function SignupForm(props) {
       <Marginer direction="vertical" margin="0em" />
       <MutedLink>
         Already have an account?
-        <BoldLink onClick={switchToSignin}>sign in</BoldLink>
+        <BoldLink onClick={switchToSignin}>Sign in</BoldLink>
       </MutedLink>
     </BoxContainer>
   );
