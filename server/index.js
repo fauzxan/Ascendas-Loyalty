@@ -1,6 +1,6 @@
 // import statements
 require("./db/config");
-const {makeAccural} = require('./Dailies/accural')
+const { makeAccural } = require("./Dailies/accural");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -40,5 +40,3 @@ app.get("/getcreditreq", (req, res) => {
     }
   });
 });
-
-

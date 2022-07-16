@@ -15,9 +15,13 @@ const makeAccural = async () => {
   ];
   const opts = { fields };
   const all = await creditReq.find({});
+  const today = new Date();
   try {
     const csv = parse(all, opts);
-    writeTo("happy.csv", csv);
+    writeTo(
+      `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}.csv`,
+      csv
+    );
   } catch (err) {
     console.error(err);
   }
