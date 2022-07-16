@@ -40,7 +40,6 @@ export function LoginForm(props) {
     })
       .then((result) => {
         if (result.data.au) {
-          console.log(result.data.user.name);
           localStorage.setItem("user", result.data.user.name);
           localStorage.setItem("tok", result.data.au);
           navigate("/Home");
