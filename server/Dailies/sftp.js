@@ -14,8 +14,13 @@ const writeTo = async (fname, data) => {
       return sftp.cwd();
     })
     .then((p) => {
-      sftp.createWriteStream(p + fname).write(data);
-      return sftp.end();
+      const w = sftp.createWriteStream(p + fname);
+      w.write(data);
+      w.end();
+      w.on("close", () => {
+        console.log("Accrual file successfully created");
+        return sftp.end();
+      });
     })
     .catch((err) => {
       console.log(`Error: ${err.message}`);
@@ -23,4 +28,3 @@ const writeTo = async (fname, data) => {
 };
 
 module.exports = { writeTo };
-writeTo("eff.txt", "stop looking at me");
