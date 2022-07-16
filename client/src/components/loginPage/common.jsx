@@ -19,6 +19,7 @@ export const MutedLink = styled.span`
   font-size: 11px;
   font-weight: 500;
   text-decoration: none;
+  margin: 15px 10px;
 `;
 
 export const BoldLink = styled.a`
@@ -26,7 +27,7 @@ export const BoldLink = styled.a`
   font-weight: 500;
   font-size: 11px;
   text-decoration: none;
-  margin: 0 4px;
+  margin: 4px 4px;
 `;
 
 export const Input = styled.input`

@@ -1,64 +1,58 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Marginer } from "./marginer";
 import {
   BoldLink,
   BoxContainer,
   FormContainer,
-  Input,
   MutedLink,
   SubmitButton,
 } from "./common";
 import { AccountContext } from "./context";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { Sform } from "./suform";
+import { Form } from "antd";
+import Axios from "axios";
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  useEffect((navigate)=>{
-    const au = localStorage.getItem('user');
-    if(au) {
+  const [form] = Form.useForm();
+  useEffect((navigate) => {
+    const au = localStorage.getItem("user");
+    if (au) {
       // eslint-disable-next-line
       navigate("/Home");
     }
-    
-  },[])
+  }, []);
 
-  const signup = async()=>{
+  const signup = async (values) => {
+    const name = values.fullname;
+    const email = values.email;
+    const password = values.password;
     let result = await fetch("https://loyalty-backend.herokuapp.com/register", {
-      method:'post',
-      body:JSON.stringify({name, email, password}),
-      headers:{
-        'Content-Type':'application/json'
-      }
-    })
+      method: "post",
+      body: JSON.stringify({ name, email, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     result = await result.json();
     localStorage.setItem("user", JSON.stringify(result.result));
     localStorage.setItem("tok", JSON.stringify(result.au));
     navigate("/Home");
-  }
+  };
 
   return (
     <BoxContainer>
-      <FormContainer>
-        <Input type="text" placeholder="Full Name" 
-        value={name} onChange={(e)=>setName(e.target.value)}/>
-        <Input type="email" placeholder="Email" 
-        value={email} onChange={(e)=>setEmail(e.target.value)}/>
-        <Input type="password" placeholder="Password" 
-        value={password} onChange={(e)=>setPassword(e.target.value)}/>
-        <Input type="password" placeholder="Confirm Password" />
-      </FormContainer>
-      <Marginer direction="vertical" margin={10} />
-      <SubmitButton type="submit" onClick={signup}>Signup</SubmitButton>
-      <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="#">
+      <FormContainer>{<Sform form={form} onFinish={signup} />}</FormContainer>
+      <Marginer direction="vertical" margin={1} />
+      <SubmitButton type="submit" onClick={() => form.submit()}>
+        Signup
+      </SubmitButton>
+      <Marginer direction="vertical" margin="0em" />
+      <MutedLink>
         Already have an account?
-        <BoldLink href="#" onClick={switchToSignin}>
-          sign in
-        </BoldLink>
+        <BoldLink onClick={switchToSignin}>sign in</BoldLink>
       </MutedLink>
     </BoxContainer>
   );
