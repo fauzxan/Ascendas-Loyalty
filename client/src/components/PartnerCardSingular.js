@@ -33,7 +33,6 @@ const PartnerCardSingular = (props) => {
 		let today = `${date.getDate()}/${
 			date.getMonth() + 1
 		}/${date.getFullYear()}`;
-		console.log(typeof localStorage.getItem("user"));
 		let fullname = localStorage.getItem("user");
 		let partnercode = "Daddy's bank";
 		let memid = values.membership_number;
@@ -47,7 +46,7 @@ const PartnerCardSingular = (props) => {
 			partnercode: partnercode,
 			loyaltyprogramme: lpro
 		}).then((response)=>{
-			setCc(response.data._id);
+			setCc(response.data.refcode);
 		}).catch((err)=>{
 			console.warn(err);
 		})
