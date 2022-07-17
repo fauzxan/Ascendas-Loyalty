@@ -39,7 +39,7 @@ export function SignupForm(props) {
       password: password,
     })
       .then((result) => {
-        localStorage.setItem("user", result.data.result);
+        localStorage.setItem("user", result.data.result.name);
         localStorage.setItem("tok", result.data.au);
         navigate("/Home");
       })
