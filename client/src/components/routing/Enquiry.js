@@ -7,13 +7,46 @@ import TransactionFailure from "../popup/TransactionFailure";
 const Enquiry = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [transaction, setTransactions] = useState({});
-  const transactions = { 2020080101: "0000", 2020080102: "0001" };
+  const [message, setMessage] = useState("Pending");
+  const transactions = {
+    2020080101: "0000",
+    2020080102: "0001",
+    2020080103: "0002",
+    2020080104: "0003",
+    2020080105: "0004",
+    2020080106: "0005",
+    2020080107: "0099",
+  };
+  console.log(message);
 
   const onFinish = (values) => {
     let check = values.reference;
-    if (check in transactions && transactions[check] === "0000") {
-      setSuccess((success) => !success);
+    if (check in transactions) {
+      switch (transactions[check]) {
+        case "0000":
+          setSuccess((success) => !success);
+          break;
+        case "0001":
+          setMessage("Member not found");
+          break;
+        case "0002":
+          setMessage("Member name mismatch");
+          break;
+        case "0003":
+          setMessage("Member account closed");
+          break;
+        case "0004":
+          setMessage("Member account suspended");
+          break;
+        case "0005":
+          setMessage("Member ineligible for accrual");
+          break;
+        case "0099":
+          setMessage(
+            "Unable to process, please contact support for more information"
+          );
+          break;
+      }
     }
     console.log("Success:", values);
   };
@@ -23,14 +56,13 @@ const Enquiry = () => {
   };
 
   const showModal = () => {
-    // let name = JSON.parse(localStorage.getItem("user")).name;
-    // console.log(name);
     setIsModalVisible(true);
   };
 
   const handleCancel = () => {
     setSuccess(false);
     setIsModalVisible(false);
+    setMessage("Pending");
   };
 
   return (
@@ -54,7 +86,7 @@ const Enquiry = () => {
         autoComplete="off"
       >
         <Form.Item
-          label="reference"
+          label="Reference"
           name="reference"
           rules={[
             {
@@ -80,7 +112,11 @@ const Enquiry = () => {
             onCancel={handleCancel}
             footer={null}
           >
-            {success ? <TransactionSuccess /> : <TransactionFailure />}
+            {success ? (
+              <TransactionSuccess />
+            ) : (
+              <TransactionFailure message={message} />
+            )}
           </Modal>
         </Form.Item>
       </Form>
