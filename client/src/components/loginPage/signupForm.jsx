@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Marginer } from "./marginer";
 import {
   BoldLink,
@@ -12,9 +12,11 @@ import { useNavigate } from "react-router-dom";
 import { Sform } from "./suform";
 import { Form } from "antd";
 import Axios from "axios";
+import { Ldots } from "./dots";
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [form] = Form.useForm();
   useEffect((navigate) => {
@@ -26,11 +28,13 @@ export function SignupForm(props) {
   }, []);
 
   const signup = async (values) => {
+    setLoading(true);
     const name = values.fullname;
     const email = values.email;
     const password = values.password;
     if (!name || !email || !password) {
       alert("Please complete all fields.");
+      setLoading(false);
       return;
     }
     Axios.post("https://loyalty-backend.herokuapp.com/register", {
@@ -46,11 +50,13 @@ export function SignupForm(props) {
           navigate("/Home");
         } else {
           alert("Account with email already exists");
+          setLoading(false);
         }
       })
       .catch((err) => {
         if (err.response.status==403) {
           alert("Account with email already exists");
+          setLoading(false);
         }
         console.warn(err);
       });
@@ -60,9 +66,10 @@ export function SignupForm(props) {
     <BoxContainer>
       <FormContainer>{<Sform form={form} onFinish={signup} />}</FormContainer>
       <Marginer direction="vertical" margin={1} />
-      <SubmitButton type="submit" onClick={() => form.submit()}>
+      {!loading && <SubmitButton type="submit" onClick={() => form.submit()}>
         Signup
-      </SubmitButton>
+      </SubmitButton>}
+      {loading && <Ldots></Ldots>}
       <Marginer direction="vertical" margin="0em" />
       <MutedLink>
         Already have an account?
