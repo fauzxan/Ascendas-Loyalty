@@ -7,7 +7,10 @@ const jwtKey = "loyalty";
 
 router.post("/", async (req, res) => {
   if (req.body.password && req.body.email) {
-    let user = await User.findOne({'email': "fod"}).exec(function (e, u) {
+    let user = await User.findOne({ email: req.body.email }).exec(function (
+      e,
+      u
+    ) {
       if (e) {
         console.warn({ error: true });
       } else if (!u) {
@@ -27,7 +30,6 @@ router.post("/", async (req, res) => {
               }
               u = u.toObject();
               delete u.password;
-              console.log(u)
               res.status(200).send({ u, au: token });
             });
           }
