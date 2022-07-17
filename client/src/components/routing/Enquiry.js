@@ -7,11 +7,12 @@ import TransactionFailure from "../popup/TransactionFailure";
 const Enquiry = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [transaction, setTransactions] = useState({});
+  const transactions = { 2020080101: "0000", 2020080102: "0001" };
 
   const onFinish = (values) => {
-    let transactions = JSON.parse(localStorage.getItem("transactions"));
     let check = values.reference;
-    if (check in transactions && transactions[check] === "69") {
+    if (check in transactions && transactions[check] === "0000") {
       setSuccess((success) => !success);
     }
     console.log("Success:", values);
@@ -22,6 +23,8 @@ const Enquiry = () => {
   };
 
   const showModal = () => {
+    // let name = JSON.parse(localStorage.getItem("user")).name;
+    // console.log(name);
     setIsModalVisible(true);
   };
 

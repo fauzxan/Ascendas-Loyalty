@@ -42,7 +42,6 @@ export function LoginForm(props) {
         if (result.data.au) {
           localStorage.setItem("user", result.data.user.name);
           localStorage.setItem("email", result.data.user.email);
-          localStorage.setItem("transactions", JSON.stringify(result.data.user.transactions));
           localStorage.setItem("tok", result.data.au);
           navigate("/Home");
         } else {
