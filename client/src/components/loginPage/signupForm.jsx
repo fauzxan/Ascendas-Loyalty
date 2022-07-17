@@ -49,6 +49,9 @@ export function SignupForm(props) {
         }
       })
       .catch((err) => {
+        if (err.response.status==403) {
+          alert("Account with email already exists");
+        }
         console.warn(err);
       });
   };
