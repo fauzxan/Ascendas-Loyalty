@@ -33,7 +33,8 @@ const PartnerCardSingular = (props) => {
 		let today = `${date.getDate()}/${
 			date.getMonth() + 1
 		}/${date.getFullYear()}`;
-		let fullname = JSON.parse(localStorage.getItem("user")).name;
+		console.log(typeof localStorage.getItem("user"));
+		let fullname = localStorage.getItem("user");
 		let partnercode = "Daddy's bank";
 		let memid = values.membership_number;
 		let amt = values.amount;
