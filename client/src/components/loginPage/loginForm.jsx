@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Marginer } from "./marginer";
 import {
   BoldLink,
@@ -12,9 +12,11 @@ import { useNavigate } from "react-router-dom";
 import { Lform } from "./lform";
 import { Form } from "antd";
 import Axios from "axios";
+import { Ldots } from "./dots";
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
+  const [loading, setLoading] = useState(false);
 
   const [form] = Form.useForm();
 
@@ -28,10 +30,12 @@ export function LoginForm(props) {
   }, []);
 
   const login = async (values) => {
+    setLoading(true);
     const email = values.email;
     const password = values.password;
     if (!email || !password) {
       alert("Please key in credentials");
+      setLoading(false);
       return;
     }
     Axios.post("https://loyalty-backend.herokuapp.com/login", {
@@ -47,19 +51,23 @@ export function LoginForm(props) {
         } else {
           alert("Incorrect credentials");
         }
+        setLoading(false)
       })
       .catch((err) => {
         alert("Incorrect credentials");
+        setLoading(false)
       });
+      
   };
 
   return (
     <BoxContainer>
       <FormContainer>{<Lform form={form} onFinish={login} />}</FormContainer>
       <Marginer direction="vertical" margin="1.6em" />
-      <SubmitButton type="submit" onClick={() => form.submit()}>
+      {!loading && <SubmitButton type="submit" onClick={() => form.submit()}>
         Login
-      </SubmitButton>
+      </SubmitButton>}
+      {loading && <Ldots></Ldots>}
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
         Dont have an Account?{" "}
