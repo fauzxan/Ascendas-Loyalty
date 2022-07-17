@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const { use } = require("../routes/login");
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -31,5 +32,15 @@ userSchema.pre("save", function (n) {
     return n();
   }
 });
+
+userSchema.methods.cp = function(p, c) {
+    bcrypt.compare(p, this.password, function(e, im) {
+      if (e) {
+        return c(e)
+      } else {
+        c(null, im)
+      }
+    })
+  }
 
 module.exports = mongoose.model("users", userSchema);
