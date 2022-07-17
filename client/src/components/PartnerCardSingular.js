@@ -144,7 +144,7 @@ const PartnerCardSingular = (props) => {
 					</Form.Item>
 				</Form>
 			</Modal>
-			{success && <Popup success={setSuccess} amt={amt} cc={cc} />}
+			{success && <Popup success={setSuccess} amt={amt} cc={cc} setcc={setCc} />}
 		</div>
 	);
 };
