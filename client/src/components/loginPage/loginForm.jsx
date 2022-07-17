@@ -51,22 +51,23 @@ export function LoginForm(props) {
         } else {
           alert("Incorrect credentials");
         }
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
         alert("Incorrect credentials");
-        setLoading(false)
+        setLoading(false);
       });
-      
   };
 
   return (
     <BoxContainer>
       <FormContainer>{<Lform form={form} onFinish={login} />}</FormContainer>
       <Marginer direction="vertical" margin="1.6em" />
-      {!loading && <SubmitButton type="submit" onClick={() => form.submit()}>
-        Login
-      </SubmitButton>}
+      {!loading && (
+        <SubmitButton type="submit" onClick={() => form.submit()}>
+          Login
+        </SubmitButton>
+      )}
       {loading && <Ldots></Ldots>}
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
