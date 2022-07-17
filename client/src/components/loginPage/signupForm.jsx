@@ -39,12 +39,19 @@ export function SignupForm(props) {
       password: password,
     })
       .then((result) => {
-        localStorage.setItem("user", result.data.result.name);
-        localStorage.setItem("email", result.data.result.email);
-        localStorage.setItem("tok", result.data.au);
-        navigate("/Home");
+        if (result.data.au) {
+          localStorage.setItem("user", result.data.result.name);
+          localStorage.setItem("email", result.data.result.email);
+          localStorage.setItem("tok", result.data.au);
+          navigate("/Home");
+        } else {
+          alert("Account with email already exists");
+        }
       })
       .catch((err) => {
+        if (err.response.status==403) {
+          alert("Account with email already exists");
+        }
         console.warn(err);
       });
   };
