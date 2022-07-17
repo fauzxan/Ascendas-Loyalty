@@ -6,12 +6,19 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const today = new Date();
-  console.log(req.body.email)
-  await User.findOneAndUpdate({email: req.body.email}, {
-    $set: {
-      [`transactions.${req.body.refcode}`]: "69",
+  console.log(req.body.email);
+  await User.findOneAndUpdate(
+    { email: req.body.email },
+    {
+      $set: {
+        [`transactions.${parseInt(
+          `${today.getFullYear()}${
+            today.getMonth() + 1
+          }${today.getDate()}${curr}`
+        )}`]: "69",
+      },
     }
-  });
+  );
   req.body["refcode"] = parseInt(
     `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}`
   );
