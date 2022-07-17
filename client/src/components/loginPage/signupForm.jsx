@@ -40,6 +40,7 @@ export function SignupForm(props) {
     })
       .then((result) => {
         localStorage.setItem("user", result.data.result.name);
+        localStorage.setItem("email", result.data.result.email);
         localStorage.setItem("tok", result.data.au);
         navigate("/Home");
       })

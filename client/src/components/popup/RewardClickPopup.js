@@ -56,6 +56,7 @@ export default function Popup(props) {
 		setOpen(true);
 	};
 	const handleClose = () => {
+		props.setcc("");
 		props.success(false);
 	};
 	//console.log(listData);

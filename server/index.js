@@ -1,6 +1,6 @@
 // import statements
 require("./db/config");
-const { makeAccural } = require("./Dailies/accural");
+const { reset } = require("./Dailies/reset");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -25,6 +25,8 @@ app.use("/login", login);
 app.use("/register", register);
 app.use("/submitcreditreq", creditreq);
 app.use("/createhandback", handback);
+
+setInterval(reset, 86400000);
 
 app.listen(5000, () => {
   console.log("Server is listening");
