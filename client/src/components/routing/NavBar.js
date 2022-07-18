@@ -11,7 +11,7 @@ function NavBar() {
     navigate("/");
   };
   return (
-    <div className="w3-bar w3-blue w3-large">
+    <div className="w3-bar w3-black w3-large">
       <button
         onClick={() => navigate("/companies")}
         className="w3-bar-item w3-button w3-mobile"

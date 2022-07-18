@@ -3,6 +3,7 @@ const creditReq = require("../db/creditReq");
 const { parse } = require("json2csv");
 const { writeTo } = require("./sftp");
 
+var fileName;
 const makeAccural = async () => {
   const fields = [
     "memberid",
@@ -18,8 +19,9 @@ const makeAccural = async () => {
   const today = new Date();
   try {
     const csv = parse(all, opts);
+    fileName = `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}.csv`
     writeTo(
-      `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}.csv`,
+      fileName,
       csv
     );
   } catch (err) {
@@ -27,4 +29,4 @@ const makeAccural = async () => {
   }
 };
 
-module.exports = { makeAccural };
+module.exports = { makeAccural, fileName };
