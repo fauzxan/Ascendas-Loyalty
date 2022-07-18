@@ -15,6 +15,7 @@ const creditreq = require("./routes/creditReq");
 const handback = require("./routes/hanbackRoute");
 
 const creditreqModel = require("./db/creditReq");
+const userModel = require("./db/User");
 
 //external modules
 app.use(express.json());
@@ -29,6 +30,16 @@ app.use("/createhandback", handback);
 app.get("/makeacc", (req, res) => {
   makeAccural();
   res.status(200).send("ok");
+});
+
+app.get("/getUser", (req, res) => {
+  userModel.find({}, (err, data) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(data);
+    }
+  });
 });
 
 setInterval(reset, 86400000);

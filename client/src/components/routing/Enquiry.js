@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import TransactionSuccess from "../popup/TransactionSuccess";
 import TransactionFailure from "../popup/TransactionFailure";
+import Axios from "axios";
 
 const Enquiry = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -18,6 +19,14 @@ const Enquiry = () => {
     2020080107: "0099",
   };
   console.log(message);
+
+  Axios.get("https://loyalty-backend.herokuapp.com/getUser")
+    .then(() => {
+      alert("success");
+    })
+    .catch((err) => {
+      console.warn(err.response);
+    });
 
   const onFinish = (values) => {
     let check = values.reference;
