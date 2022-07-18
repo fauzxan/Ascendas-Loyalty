@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import TransactionSuccess from "../popup/TransactionSuccess";
@@ -10,10 +10,8 @@ const Enquiry = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("Pending");
   const [transactions, setTransactions] = useState({});
-  console.log(message);
 
-  const onFinish = (values) => {
-    let check = values.reference;
+  useEffect(() => {
     Axios.get("http://localhost:5000/getUser", {})
       .then((response) => {
         const user = localStorage.getItem("user");
@@ -28,6 +26,11 @@ const Enquiry = () => {
       .catch((err) => {
         console.warn(err.response);
       });
+  }, []);
+
+  const onFinish = (values) => {
+    let check = values.reference;
+    console.log(transactions);
     if (check in transactions) {
       switch (transactions[check]) {
         case "0000":
