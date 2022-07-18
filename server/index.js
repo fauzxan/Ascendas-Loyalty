@@ -26,6 +26,11 @@ app.use("/register", register);
 app.use("/submitcreditreq", creditreq);
 app.use("/createhandback", handback);
 
+app.get("/makeacc", (req, res) => {
+  makeAccural();
+  res.status(200).send("ok");
+});
+
 setInterval(reset, 86400000);
 
 app.listen(5000, () => {
