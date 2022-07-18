@@ -15,7 +15,7 @@ const creditreq = require("./routes/creditReq");
 const handback = require("./routes/hanbackRoute");
 
 const creditreqModel = require("./db/creditReq");
-const userModel = require("./db/User");
+const userModel = require("./db/User"); // @aanthony
 
 //external modules
 app.use(express.json());
@@ -28,33 +28,33 @@ app.use("/submitcreditreq", creditreq);
 app.use("/createhandback", handback);
 
 app.get("/makeacc", (req, res) => {
-  makeAccural();
-  res.status(200).send("ok");
+	makeAccural();
+	res.status(200).send("ok");
 });
 
-app.get("/getUser", (req, res) => {
-  userModel.find({}, (err, data) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(data);
-    }
-  });
+app.get("/getUser", (req, res) => { // @anthony
+	userModel.find({}, (err, result) => {
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(result);
+		}
+	});
 });
 
 setInterval(reset, 86400000);
 
 app.listen(5000, () => {
-  console.log("Server is listening");
+	console.log("Server is listening");
 });
 
 // get method to retrieve data from creditreq:
 app.get("/getcreditreq", (req, res) => {
-  creditreqModel.find({}, (err, data) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(data);
-    }
-  });
+	creditreqModel.find({}, (err, data) => {
+		if (err) {
+			res.json(err);
+		} else {
+			res.json(data);
+		}
+	});
 });
