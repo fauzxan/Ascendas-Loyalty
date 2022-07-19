@@ -12,7 +12,7 @@ const Enquiry = () => {
   const [transactions, setTransactions] = useState({});
 
   useEffect(() => {
-    Axios.get("http://localhost:5000/getUser", {})
+    Axios.get("https://loyalty-backend.herokuapp.com/getUser", {})
       .then((response) => {
         const user = localStorage.getItem("user");
         const result = response.data;

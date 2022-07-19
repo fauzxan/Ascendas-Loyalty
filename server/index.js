@@ -13,6 +13,7 @@ const login = require("./routes/login");
 const register = require("./routes/register");
 const creditreq = require("./routes/creditReq");
 const handback = require("./routes/hanbackRoute");
+const getUser = require("./routes/getUser");
 
 const creditreqModel = require("./db/creditReq");
 const userModel = require("./db/User");
@@ -26,20 +27,11 @@ app.use("/login", login);
 app.use("/register", register);
 app.use("/submitcreditreq", creditreq);
 app.use("/createhandback", handback);
+app.use("/getUser", getUser);
 
 app.get("/makeacc", (req, res) => {
   makeAccural();
   res.status(200).send("ok");
-});
-
-app.get("/getUser", (req, res) => {
-  userModel.find({}, (err, result) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(result);
-    }
-  });
 });
 
 setInterval(reset, 86400000);
@@ -47,4 +39,3 @@ setInterval(reset, 86400000);
 app.listen(5000, () => {
   console.log("Server is listening");
 });
-

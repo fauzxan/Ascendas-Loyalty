@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
           `${today.getFullYear()}${
             today.getMonth() + 1
           }${today.getDate()}${curr}`
-        )}`]: "69",
+        )}`]: "69420",
       },
     }
   );
