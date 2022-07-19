@@ -60,8 +60,7 @@ const PartnerCardSingular = (props) => {
     Axios.post("https://loyalty-backend.herokuapp.com/createhandback", {
       date: today,
       amount: amt,
-      referencenumber: Number("0x".concat(cc)),
-      outcomecode: "0000",
+      outcomecode: "42069",
     })
       .then((response) => {
         console.log("Data sent to the buffer handback file");
