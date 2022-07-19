@@ -48,13 +48,3 @@ app.listen(5000, () => {
   console.log("Server is listening");
 });
 
-// get method to retrieve data from creditreq:
-app.get("/getcreditreq", (req, res) => {
-  creditreqModel.find({}, (err, data) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(data);
-    }
-  });
-});
