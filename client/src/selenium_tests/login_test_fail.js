@@ -23,6 +23,7 @@ async function login_test_fail() {
       });
 
     await driver.quit();
+    await driver.close();
 }
 
 login_test_fail();

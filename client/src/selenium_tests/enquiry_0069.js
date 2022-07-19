@@ -2,32 +2,46 @@ const {Builder, By, Key, WebDriver,  WebElement, until, DELAY, wait, ofSeconds} 
 const assert = require ("assert");
 const { SeleniumServer } = require("selenium-webdriver/remote");
 
-
 const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
 
-//click on first bank in home page
-async function homepage_test_bank1() {
+//correct return
+
+async function enquiry_0069(){
     let driver = await new Builder().forBrowser("chrome").build();
 
-    await driver.get("http://localhost:3000/Ascendas-Loyalty#");
+    await driver.get("http://localhost:3000/Ascendas-Loyalty#/");
 
-    //login
     await driver.findElement(By.id("login_email")).sendKeys("test1@test.com");
     await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
 
     await sleep(5000);
 
-    await driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/span[3]/button/span")).click();
+    await driver.findElement(By.xpath("/html/body/div/div/div[1]/button[4]")).click();
 
     await sleep(5000);
+
+    await driver.findElement(By.xpath("/html/body/div/div/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys("20220100",Key.RETURN);
+
+    await sleep(5000);
+
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);
-        assert.strictEqual("http://localhost:3000/Ascendas-Loyalty#/bank-3", textValue);
+        assert.strictEqual("http://localhost:3000/Ascendas-Loyalty#/enquire", textValue);
       });
 
     await driver.quit();
+
 }
 
-homepage_test_bank1();
+enquiry_0069();
+
+/*20220000
+20220001
+20220002
+20220003
+20220004
+20220005
+20220099
+20220100*/
