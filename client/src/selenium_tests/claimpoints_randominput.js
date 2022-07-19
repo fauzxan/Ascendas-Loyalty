@@ -7,16 +7,24 @@ const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+function makeRandom(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var numbers = '0123456789';
+  var charactersLength = characters.length;
+  var numbers = numbers.length;
+  for ( var i = 0; i < length; i++ ) {
+    if (i == length - 1) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    result += numbers.charAt(Math.floor(Math.random() * numbersLength));
+  }
+  return result;
 }
 
-function slowTyping(driver, text) {
-  for (let i = 0; i < text.length; i++) {
-    driver.send_keys(text[i]);
-    sleep(500);
-  }
-}
+//compile cases for lengths of random input
+//amount not a number
+//exception in node and react
 
 //click on first bank in home page
 async function claimpoints_randominput() {
@@ -38,8 +46,8 @@ async function claimpoints_randominput() {
 
     await sleep(5000);
 
-    await driver.findElement(By.id("basic_membership_number")).sendKeys(getRandomInt(10000000000));
-    await driver.findElement(By.id("basic_amount")).sendKeys(getRandomInt(1000000));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9));
+    await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(9));
     await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
 
     await sleep(5000);
