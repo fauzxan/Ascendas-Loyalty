@@ -18,12 +18,15 @@ const makeAccural = async () => {
   const all = await creditReq.find({});
   const today = new Date();
   try {
-    const csv = parse(all, opts);
-    fileName = `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}.csv`
+    const csv = parse(all, opts); // parses the data in mongodb as csv
+    fileName = `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}.csv`
+    console.log("accrual file name: ", fileName);
+    console.log("Writing to accrual file...")
     writeTo(
       fileName,
       csv
     );
+    console.log("Accrual written!")
   } catch (err) {
     console.error(err);
   }

@@ -2,9 +2,18 @@ import React, { useContext } from "react";
 import "../styles/SPA.css";
 import { useNavigate } from "react-router-dom";
 import { caaaa } from "../loginPage/wist";
+import Axios from "axios";
 
 function NavBar() {
   const navigate = useNavigate();
+
+  const createhb = () =>{
+    Axios.get("http://localhost:5000/makehb").then( () => {
+      alert("Handback file has been created successfully. Refresh SFTP server to see result")
+    }).catch((err) => {
+      console.warn(err);
+    })
+  } 
 
   const logout = () => {
     localStorage.clear();
@@ -48,6 +57,9 @@ function NavBar() {
       </button>
       <button onClick={caaaa} className="w3-bar-item w3-button w3-mobile">
         Create accrual file
+      </button>
+      <button onClick={createhb} className="w3-bar-item w3-button w3-mobile">
+        Create handback file
       </button>
 
       <button

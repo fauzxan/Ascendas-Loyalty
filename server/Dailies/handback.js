@@ -1,37 +1,102 @@
-const {fileName} = require('./accural');
+// 
+/*
+**********************************************************************************************
+DOCUMENTATION:
+Dailies/handback.js helps retrieve data from the SFTP server and send it to mongodb.
+This is meant to serve as part of a testing routine, in which randomized outcome codes are 
+generated and stored in mongodb. 
+When the user queries the transaction in the frontend, a valid outcome code is generated. 
+**********************************************************************************************
 
-let Client =  require('ssh2-sftp-client');
+*/
+
+require("../db/config");
+
+let Client = require("ssh2-sftp-client");
 let sftp = new Client();
+const fs = require("fs");
+const csv = require("csv-parser");
+const csvToJson = require('csvtojson');
 
-const config = {
-    host: "66.220.9.51",
-	username: "sutd_2022_c4g7",
-	password: "rxh3qpj7man0qwz_CNZ"
-}
+const express = require("express");
+const handbackModel = require("../db/handbackModel");
+const router = express.Router();
 
-function filterItems(val){
-    return val.name == "20227171.csv"
-} 
+const outcomeCodes = ["0000", "0001", "0002", "0003", "0004", "0005", "0099"];
 
-sftp
-.connect(config)
-.then(() => {
-    return sftp.get("/20227171.csv", "./destination/handback.csv")
-}).then ( data => {
-    console.log("outputting data\n", data)
-    // you need to createReadStream here, then read the content of one of the files.
-}).then(() => {
-    sftp.end();
-})
-.catch(err =>{
-    console.log(err)
-});
+const makeHandback = async () => {
+	// this part is required to make a connection to the correct sftp server
+	const config = {
+		host: "66.220.9.51",
+		username: "sutd_2022_c4g7",
+		password: "rxh3qpj7man0qwz_CNZ",
+	};
 
-// TODO: July 19th 2020:
-//       Create a fs of the data being read. Not sure if you can read it directly
-//       Explore the options
+	// For the file name of the day
+	var today = new Date();
+	console.log(today);
 
-// when the user presses the create accrual file, a handback file containing the same details as the accrual file must be generated. 
-// the handback file generated must contain randomized outcome codes. 
-// the handback file generated must be pushed to the mongodb serevr on the local host
+	let fileName = `${today.getFullYear()}${
+		today.getMonth() + 1
+	}${today.getDate()}.csv`;
 
+	console.log("filename to be opened: " + fileName);
+
+	sftp
+		.connect(config)
+		.then(() => {
+			return sftp.list("/");
+		})
+		.then(() => {
+			console.log("Writing to HANDBACK now...");
+			/*
+            ************************************************************************
+            // ABSTRACT: this is how you pipe the data back into the SFTP server 
+            // according to the documentation, as well as stackoverflow posts
+            // ERROR ENCOUNTERED: The file written back to SFTP server is 0 bytes wide
+            // TODO: need to explore the 'options' parameter
+            // SOLUTION: (code below)
+            sftp.get(fileName).then((stream)=> {
+                stream.pipe(sftp.createWriteStream(`HANDBACK${fileName}`))
+            })
+            ************************************************************************
+            */
+			// INTERMEDIATE SOLUTION: (code below)
+			return sftp.get(fileName, `./destination/HANDBACK${fileName}`);
+		})
+		.then(() => {
+			console.log("done writing!");
+			sftp.end();
+		})
+		.catch((err) => {
+			console.log("There is an error ", err);
+		});
+	try {
+        // json variable parses the incoming values from the csv file and puts it in object form
+		const json = await csvToJson().fromFile(`./destination/HANDBACK${fileName}`)
+        for (let i = 0; i < json.length; i++) {
+			delete json[i]["loyaltyprogramme"];
+			delete json[i]["partnercode"];
+			delete json[i]["memberid"];
+			delete json[i]["fullname"];
+			json[i]["outcomecode"] =
+				outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
+			//console.log(json[i]);
+		}
+		console.log(json);
+		let newHandbackModel = new handbackModel(json);
+		await newHandbackModel.save();
+	} catch (err) {
+		console.log("Ignore this error");
+	}
+};
+
+module.exports = { makeHandback };
+
+/*
+    FORMAT: (of the handback file for reference)
+    date: String,
+	amount: Number,
+	referencenumber: Number,
+    outcomecode: String 
+*/
