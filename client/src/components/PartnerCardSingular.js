@@ -57,7 +57,7 @@ const PartnerCardSingular = (props) => {
     handleOk();
     setSuccess(true);
     setAmt(amt);
-    Axios.post("https://loyalty-backend.herokuapp.com/createhandback", {
+    Axios.post("http://localhost:5000/createhandback", {
       date: today,
       amount: amt,
       referencenumber: Number("0x".concat(cc)),

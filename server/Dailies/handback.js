@@ -17,9 +17,11 @@ let sftp = new Client();
 const fs = require("fs");
 const csv = require("csv-parser");
 const csvToJson = require('csvtojson');
+const mongodb = require('mongodb');
 
 const express = require("express");
 const handbackModel = require("../db/handbackModel");
+const { ObjectID } = require("bson");
 const router = express.Router();
 
 const outcomeCodes = ["0000", "0001", "0002", "0003", "0004", "0005", "0099"];
@@ -74,6 +76,7 @@ const makeHandback = async () => {
 	try {
         // json variable parses the incoming values from the csv file and puts it in object form
 		const json = await csvToJson().fromFile(`./destination/HANDBACK${fileName}`)
+        console.log("reaches here")
         for (let i = 0; i < json.length; i++) {
 			delete json[i]["loyaltyprogramme"];
 			delete json[i]["partnercode"];
@@ -81,11 +84,17 @@ const makeHandback = async () => {
 			delete json[i]["fullname"];
 			json[i]["outcomecode"] =
 				outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
-			//console.log(json[i]);
+            json[i]["_id"] = new ObjectID();
+            //console.log(json[i]);
 		}
 		console.log(json);
-		let newHandbackModel = new handbackModel(json);
-		await newHandbackModel.save();
+        try{
+            await handbackModel.insertMany(json);
+        }catch(err){
+            console.log(err);
+        }
+
+	
 	} catch (err) {
 		console.log("Ignore this error");
 	}
