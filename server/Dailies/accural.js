@@ -19,7 +19,7 @@ const makeAccural = async () => {
   try {
     const csv = parse(all, opts);
     writeTo(
-      `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}.csv`,
+      `accrual.csv`,
       csv
     );
   } catch (err) {
