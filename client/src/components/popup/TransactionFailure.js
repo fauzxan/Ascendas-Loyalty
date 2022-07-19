@@ -5,7 +5,7 @@ const TransactionFailure = (props) => (
   <Result
     status="error"
     title="There are some problems with your transaction"
-    subTitle={`Error is: ${props.message}`}
+    subTitle={`The error is: ${props.message}`}
   />
 );
 

@@ -1,26 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import TransactionSuccess from "../popup/TransactionSuccess";
 import TransactionFailure from "../popup/TransactionFailure";
+import Axios from "axios";
 
 const Enquiry = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("Pending");
-  const transactions = {
-    2020080101: "0000",
-    2020080102: "0001",
-    2020080103: "0002",
-    2020080104: "0003",
-    2020080105: "0004",
-    2020080106: "0005",
-    2020080107: "0099",
-  };
-  console.log(message);
+  const [transactions, setTransactions] = useState({});
+
+  useEffect(() => {
+    Axios.get("http://localhost:5000/getUser", {})
+      .then((response) => {
+        const user = localStorage.getItem("user");
+        const result = response.data;
+        for (let i = 0; i < result.length; i++) {
+          if (result[i].name === user) {
+            setTransactions(result[i].transactions);
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.warn(err.response);
+      });
+  }, []);
 
   const onFinish = (values) => {
     let check = values.reference;
+    console.log(transactions);
     if (check in transactions) {
       switch (transactions[check]) {
         case "0000":
@@ -47,6 +57,8 @@ const Enquiry = () => {
           );
           break;
       }
+    } else {
+      setMessage("You did not make this transaction");
     }
     console.log("Success:", values);
   };
