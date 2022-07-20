@@ -21,5 +21,6 @@
     "nodemon": "^2.0.18",
     "ssh2-sftp-client": "^9.0.2"
   },
+  "devDependencies": {},
   "description": ""
 }
