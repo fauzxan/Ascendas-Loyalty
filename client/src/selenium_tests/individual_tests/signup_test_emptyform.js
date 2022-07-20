@@ -6,18 +6,15 @@ const sleep = (milliseconds) => {
 }
 
 //incorrect user signup
-async function signup_test_bug() {
+async function signup_test_emptyform() {
     let driver = await new Builder().forBrowser("chrome").build();
 
     await driver.get("http://localhost:3000/Ascendas-Loyalty#/");
 
-    await driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div/span[3]/a")).click();
-
-    await sleep(500);
-
-    await driver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/div/button")).click();
-
-    await sleep(5000);
+    await driver.findElement(By.id("signup_button")).click();
+    await sleep(2000);
+    await driver.switchTo().alert().then((alert) => alert.dismiss()); 
+    await sleep(2000);
     
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);
@@ -27,4 +24,4 @@ async function signup_test_bug() {
     await driver.quit();
 }
 
-signup_test_bug();
+signup_test_emptyform();

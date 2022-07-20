@@ -7,15 +7,22 @@ const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
-function slowTyping(driver, text) {
-  for (let i = 0; i < text.length; i++) {
-    driver.send_keys(text[i]);
-    sleep(500);
+function makeRandom(length, endingLetter) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var numbers = '0123456789';
+  var charactersLength = characters.length;
+  var numbersLength = numbers.length;
+  for ( var i = 0; i < length; i++ ) {
+    if (i == length - 1 && length ==9 && endingLetter == true) {
+      result += numbers.charAt(Math.floor(Math.random() * numbersLength));
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    else {
+      result += numbers.charAt(Math.floor(Math.random() * numbersLength));
+    }
   }
+  return result;
 }
 
 //click on first bank in home page
@@ -23,26 +30,135 @@ async function claimpoints_randominput() {
     let driver = await new Builder().forBrowser("chrome").build();
 
     await driver.get("http://localhost:3000/Ascendas-Loyalty#");
+    driver.manage().window().maximize();
 
-    //login
+    //login and navigating to partner card page
     await driver.findElement(By.id("login_email")).sendKeys("test1@test.com");
     await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
-
     await sleep(5000);
-
     await driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/span[3]/button/span")).click();
-
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/button/span")).click();
     await sleep(5000);
 
-    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/button")).click();
-
-    await sleep(5000);
-
-    await driver.findElement(By.id("basic_membership_number")).sendKeys(getRandomInt(10000000000));
-    await driver.findElement(By.id("basic_amount")).sendKeys(getRandomInt(1000000));
+    //incorrect length with 1st card
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(5, false));
+    await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(5));
     await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
-
     await sleep(5000);
+
+    await console.log("done with incorrect length test");
+
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(5000);
+
+    //amount 0 test
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.id("basic_amount")).sendKeys("0");
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+
+    await console.log("done with amount 0 test");
+
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(5000);
+
+    //amount negative test
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys("-" + makeRandom(9, false));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+
+    await console.log("done with negative amount test");
+
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(5000);
+
+    //empty membership field
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+
+    await console.log("empty membership field test");
+
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(5000);
+
+    //empty amount field
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+
+    await console.log("empty amount field test");
+
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(5000);
+
+    //with length 9 with one letter with 1st card
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[3]/div[3]/div/div[2]/button")).click();
+    await sleep(5000);
+
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(5000);
+
+    //with length 9 with 1st card
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[3]/div[3]/div/div[2]/button")).click();
+    await sleep(5000);
+
+    await console.log("done with length 9 tests");
+
+    //with length 10 with 2nd card
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[2]/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(10, false));
+    await driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(10, false));
+    await driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("//html/body/div[4]/div[3]/div/div[2]/button")).click();
+    await sleep(10000);
+
+    await console.log("done with length 10 test");
+
+    //with length 12 with 3rd card
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[3]/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(12, false));
+    await driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(12, false));
+    await driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[5]/div[3]/div/div[2]/button")).click();
+    await sleep(5000);
+
+    await console.log("done with length 12 test");
+
+    //with length 16 with 1st card
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[1]/button/span")).click();
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(5000);
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(16, false));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(16, false));
+    await driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div/div[2]/div[2]/form/div[3]/div/div/div/button/span")).click();
+    await sleep(5000);
+
+    await console.log("done with length 16 test");
 
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);

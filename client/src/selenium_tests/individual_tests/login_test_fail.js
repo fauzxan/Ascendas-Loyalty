@@ -15,7 +15,7 @@ async function login_test_fail() {
     await driver.findElement(By.id("login_email")).sendKeys("test2@test.com");
     await driver.findElement(By.id("login_password")).sendKeys("test2", Key.RETURN);
 
-    await sleep(5000);
+    await sleep(3000);
     
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);

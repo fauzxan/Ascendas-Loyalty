@@ -66,7 +66,7 @@ export function LoginForm(props) {
       <FormContainer>{<Lform form={form} onFinish={login} />}</FormContainer>
       <Marginer direction="vertical" margin="1.6em" />
       {!loading && (
-        <SubmitButton type="submit" onClick={() => form.submit()}>
+        <SubmitButton id="login_button" type="submit" onClick={() => form.submit()}>
           Login
         </SubmitButton>
       )}
@@ -74,7 +74,7 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin="1em" />
       <MutedLink>
         Dont have an Account?{" "}
-        <BoldLink onClick={switchToSignup}>Sign up</BoldLink>
+        <BoldLink id="login_to_signup" onClick={switchToSignup}>Sign up</BoldLink>
       </MutedLink>
     </BoxContainer>
   );
