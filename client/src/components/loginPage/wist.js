@@ -1,7 +1,8 @@
 import Axios from "axios";
+import { host } from "../config";
 
 export const caaaa = () => {
-  Axios.get("https://loyalty-backend.herokuapp.com/makeacc")
+  Axios.get(host + "/makeacc")
     .then(() => {
       alert("success");
     })

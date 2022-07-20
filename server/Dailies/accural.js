@@ -19,12 +19,13 @@ const makeAccural = async () => {
   try {
     const csv = parse(all, opts);
     writeTo(
-      `accrual.csv`,
+      `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}.csv`,
       csv
     );
   } catch (err) {
     console.error(err);
   }
+  await creditReq.deleteMany({})
 };
 
 module.exports = { makeAccural };
