@@ -66,6 +66,9 @@ const makeHandback = async () => {
 			// INTERMEDIATE SOLUTION: (code below)
 			return sftp.get(fileName, `./destination/HANDBACK${fileName}`);
 		})
+        .then(() => {
+            return sftp.put(`./destination/HANDBACK${fileName}`, `HANDBACK${fileName}`)
+        })
 		.then(() => {
 			console.log("done writing!");
 			sftp.end();
