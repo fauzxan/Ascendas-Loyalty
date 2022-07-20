@@ -28,6 +28,7 @@ export function LoginForm(props) {
     if (au) {
       navigate("/Home");
     }
+    // eslint-disable-next-line
   }, []);
 
   const login = async (values) => {

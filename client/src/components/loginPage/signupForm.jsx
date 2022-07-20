@@ -55,6 +55,7 @@ export function SignupForm(props) {
         }
       })
       .catch((err) => {
+        // eslint-disable-next-line
         if (err.response.status == 403) {
           alert("Account with email already exists");
           setLoading(false);
