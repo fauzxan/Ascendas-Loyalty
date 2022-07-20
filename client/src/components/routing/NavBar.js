@@ -63,6 +63,7 @@ function NavBar() {
       </button>
 
       <button
+        id="logout_button"
         onClick={logout}
         className="w3-bar-item w3-button w3-right w3-mobile"
       >

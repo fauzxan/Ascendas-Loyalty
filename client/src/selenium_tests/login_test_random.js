@@ -23,16 +23,17 @@ async function login_test_random(times) {
     let driver = await new Builder().forBrowser("chrome").build();
 
     await driver.get("http://localhost:3000/Ascendas-Loyalty#/");
+    driver.manage().window().maximize();
 
     //login
     for (i = 0; i < times; i++) {
       await driver.findElement(By.id("login_email")).sendKeys(makeRandom(9) + '@test.com');
       await driver.findElement(By.id("login_password")).sendKeys(makeRandom(9), Key.RETURN);
 
-      await sleep(5000);
+      await sleep(3000);
       await driver.switchTo().alert().then((alert) => alert.dismiss()); 
 
-      await sleep(7000);
+      await sleep(3000);
       await driver.findElement(By.id("login_email")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
       await driver.findElement(By.id("login_password")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
       await sleep(3000);
@@ -40,7 +41,7 @@ async function login_test_random(times) {
     
     await driver.findElement(By.id("login_email")).sendKeys("test1@test.com");
     await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
-    await sleep(5000);
+    await sleep(3000);
     
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);
