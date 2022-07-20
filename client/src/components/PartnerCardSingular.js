@@ -5,6 +5,7 @@ import { Button, Modal, Form, Input, InputNumber } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
 import Axios from "axios";
+import { host } from "./config";
 
 const PartnerCardSingular = (props) => {
   //console.log(props);
@@ -39,7 +40,7 @@ const PartnerCardSingular = (props) => {
     let memid = values.membership_number;
     let amt = values.amount;
     let lpro = props.card.title;
-    Axios.post("https://loyalty-backend.herokuapp.com/submitcreditreq", {
+    Axios.post(host + "/submitcreditreq", {
       memberid: memid,
       fullname: fullname,
       amount: amt,
@@ -57,7 +58,7 @@ const PartnerCardSingular = (props) => {
     handleOk();
     setSuccess(true);
     setAmt(amt);
-    Axios.post("https://loyalty-backend.herokuapp.com/createhandback", {
+    Axios.post(host + "/createhandback", {
       date: today,
       amount: amt,
       outcomecode: "42069",
