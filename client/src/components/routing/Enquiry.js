@@ -11,6 +11,7 @@ const Enquiry = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("Pending");
   const [transactions, setTransactions] = useState({});
+  const [code, setCode] = useState("");
 
   useEffect(() => {
     Axios.get(host + "/getUser", {})
@@ -32,6 +33,8 @@ const Enquiry = () => {
   const onFinish = (values) => {
     let check = values.reference;
     console.log(transactions);
+    setCode(check);
+    console.log(check);
     if (check in transactions) {
       switch (transactions[check]) {
         case "0000":
@@ -76,6 +79,7 @@ const Enquiry = () => {
     setSuccess(false);
     setIsModalVisible(false);
     setMessage("Pending");
+    setCode("");
   };
 
   return (
@@ -126,9 +130,9 @@ const Enquiry = () => {
             footer={null}
           >
             {success ? (
-              <TransactionSuccess />
+              <TransactionSuccess code={code} />
             ) : (
-              <TransactionFailure message={message} />
+              <TransactionFailure message={message} code={code} />
             )}
           </Modal>
         </Form.Item>
