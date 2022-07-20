@@ -120,7 +120,7 @@ const Enquiry = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit" onClick={showModal}>
+          <Button id="enquiry_submit_button" type="primary" htmlType="submit" onClick={showModal}>
             Submit
           </Button>
           <Modal

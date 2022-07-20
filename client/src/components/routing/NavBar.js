@@ -22,6 +22,7 @@ function NavBar() {
   return (
     <div className="w3-bar w3-black w3-large">
       <button
+        id="companies_button"
         onClick={() => navigate("/companies")}
         className="w3-bar-item w3-button w3-mobile"
       >
@@ -29,6 +30,7 @@ function NavBar() {
       </button>
 
       <button
+        id="about_button"
         onClick={() => navigate("/about")}
         className="w3-bar-item w3-button w3-mobile"
       >
@@ -36,6 +38,7 @@ function NavBar() {
       </button>
 
       <button
+        id="contact_button"
         onClick={() => navigate("/contact")}
         className="w3-bar-item w3-button w3-mobile"
       >
@@ -43,6 +46,7 @@ function NavBar() {
       </button>
 
       <button
+        id="enquire_button"
         onClick={() => navigate("/enquire")}
         className="w3-bar-item w3-button w3-mobile"
       >
@@ -50,15 +54,16 @@ function NavBar() {
       </button>
 
       <button
+        id="BoS_button"
         onClick={() => navigate("/home")}
         className="w3-bar-item w3-button w3-mobile"
       >
         Bank of Singapore
       </button>
-      <button onClick={caaaa} className="w3-bar-item w3-button w3-mobile">
+      <button id="create_accrual_button" onClick={caaaa} className="w3-bar-item w3-button w3-mobile">
         Create accrual file
       </button>
-      <button onClick={createhb} className="w3-bar-item w3-button w3-mobile">
+      <button id="create_handback_button" onClick={createhb} className="w3-bar-item w3-button w3-mobile">
         Create handback file
       </button>
 

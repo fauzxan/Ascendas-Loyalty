@@ -8,23 +8,22 @@ const sleep = (milliseconds) => {
 
 //correct return
 
-async function enquiry_0001(){
+async function enquiry_0003(){
     let driver = await new Builder().forBrowser("chrome").build();
 
-    await driver.get("http://localhost:3000/Ascendas-Loyalty#/");
+    await driver.get("http://localhost:3000/Ascendas-Loyalty#/");    
+    driver.manage().window().maximize();
 
     await driver.findElement(By.id("login_email")).sendKeys("test1@test.com");
     await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
+    await sleep(2000);
+    await driver.findElement(By.id("enquire_button")).click();
+    await sleep(2000);
 
-    await sleep(5000);
-
-    await driver.findElement(By.xpath("/html/body/div/div/div[1]/button[4]")).click();
-
-    await sleep(5000);
-
-    await driver.findElement(By.xpath("/html/body/div/div/div[2]/form/div[1]/div[2]/div/div/input")).sendKeys("20220001",Key.RETURN);
-
-    await sleep(5000);
+    await driver.findElement(By.id("basic_reference")).sendKeys("20220003");
+    await sleep(2000);
+    await driver.findElement(By.id("enquiry_submit_button")).click();
+    await sleep(2000);
 
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);
@@ -35,7 +34,7 @@ async function enquiry_0001(){
 
 }
 
-enquiry_0001();
+enquiry_0003();
 
 /*20220000
 20220001

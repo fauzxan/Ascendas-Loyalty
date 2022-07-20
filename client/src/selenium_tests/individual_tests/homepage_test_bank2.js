@@ -7,27 +7,27 @@ const sleep = (milliseconds) => {
 }
 
 //click on first bank in home page
-async function homepage_test_bank3() {
+async function homepage_test_bank2() {
     let driver = await new Builder().forBrowser("chrome").build();
 
     await driver.get("http://localhost:3000/Ascendas-Loyalty#");
+    driver.manage().window().maximize();
 
     //login
     await driver.findElement(By.id("login_email")).sendKeys("test1@test.com");
     await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
 
-    await sleep(5000);
+    await sleep(2000);
 
-    await driver.findElement(By.xpath("/html/body/div/div/div[2]/div[3]/div/span[3]/button/span")).click();
-
-    await sleep(5000);
+    await driver.findElement(By.id("bank-2")).click();
+    await sleep(2000);
     
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);
-        assert.strictEqual("http://localhost:3000/Ascendas-Loyalty#/bank-3", textValue);
+        assert.strictEqual("http://localhost:3000/Ascendas-Loyalty#/bank-2", textValue);
       });
 
     await driver.quit();
 }
 
-homepage_test_bank3();
+homepage_test_bank2();
