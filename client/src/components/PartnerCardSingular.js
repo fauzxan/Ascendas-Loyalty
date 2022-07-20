@@ -1,10 +1,11 @@
 import React from "react";
 import "./styles/partnerCard.scss";
 import { useState } from "react";
-import { Button, Modal, Form, Input, InputNumber } from "antd";
+import { Button, Modal, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
 import Axios from "axios";
+import { host } from "./config";
 
 const PartnerCardSingular = (props) => {
   //console.log(props);
@@ -39,7 +40,7 @@ const PartnerCardSingular = (props) => {
     let memid = values.membership_number;
     let amt = values.amount;
     let lpro = props.card.title;
-    Axios.post("https://loyalty-backend.herokuapp.com/submitcreditreq", {
+    Axios.post(host + "/submitcreditreq", {
       memberid: memid,
       fullname: fullname,
       amount: amt,
@@ -57,11 +58,10 @@ const PartnerCardSingular = (props) => {
     handleOk();
     setSuccess(true);
     setAmt(amt);
-    Axios.post("https://loyalty-backend.herokuapp.com/createhandback", {
+    Axios.post(host + "/createhandback", {
       date: today,
       amount: amt,
-      referencenumber: Number("0x".concat(cc)),
-      outcomecode: "0000",
+      outcomecode: "42069",
     })
       .then((response) => {
         console.log("Data sent to the buffer handback file");
@@ -124,7 +124,7 @@ const PartnerCardSingular = (props) => {
           </Form.Item>
 
           <Form.Item
-            label="Amount"
+            label="Amount (Min is 1)"
             name="amount"
             rules={[
               {
@@ -133,7 +133,12 @@ const PartnerCardSingular = (props) => {
               },
             ]}
           >
-            <InputNumber min={1} />
+            <Input
+              type="number"
+              name="test_name"
+              min="1"
+              oninput="validity.valid||(value='');"
+            />
           </Form.Item>
 
           <Form.Item

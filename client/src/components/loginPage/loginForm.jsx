@@ -13,6 +13,7 @@ import { Lform } from "./lform";
 import { Form } from "antd";
 import Axios from "axios";
 import { Ldots } from "./dots";
+import { host } from "../config";
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
@@ -27,6 +28,7 @@ export function LoginForm(props) {
     if (au) {
       navigate("/Home");
     }
+    // eslint-disable-next-line
   }, []);
 
   const login = async (values) => {
@@ -38,7 +40,7 @@ export function LoginForm(props) {
       setLoading(false);
       return;
     }
-    Axios.post("https://loyalty-backend.herokuapp.com/login", {
+    Axios.post(host + "/login", {
       email: email,
       password: password,
     })
