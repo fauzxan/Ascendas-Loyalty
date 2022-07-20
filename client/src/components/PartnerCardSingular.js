@@ -15,6 +15,8 @@ const PartnerCardSingular = (props) => {
   const [success, setSuccess] = useState(false);
   const [amt, setAmt] = useState(0);
   const [cc, setCc] = useState("");
+  let claim_submit_id = "claim_submit-" + props.name + "_button";
+  let claim_rewards_id = "claim_rewards-" + props.title + "_button";
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -81,7 +83,7 @@ const PartnerCardSingular = (props) => {
         <h2 className="card__title">{props.card.title}</h2>
         <p className="card__description">{props.card.desc} </p>
       </div>
-      <Button type="primary" onClick={showModal}>
+      <Button id={"claim_rewards-" + props.card.id + "_button"} type="primary" onClick={showModal}>
         Claim rewards
       </Button>
 
@@ -106,7 +108,7 @@ const PartnerCardSingular = (props) => {
         >
           <Form.Item
             label="Membership number"
-            name="membership_number"
+            name={"mem_number_" + props.card.id}
             rules={[
               {
                 required: true,
@@ -125,7 +127,7 @@ const PartnerCardSingular = (props) => {
 
           <Form.Item
             label="Amount (Min is 1)"
-            name="amount"
+            name={"amount_" + props.card.id}
             rules={[
               {
                 required: true,
@@ -147,7 +149,7 @@ const PartnerCardSingular = (props) => {
               span: 16,
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button id={"claim_submit-" + props.card.id + "_button"} type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

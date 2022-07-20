@@ -86,7 +86,7 @@ export default function Popup(props) {
 					</Typography>
 				</DialogContent>
 				<DialogActions>
-					<Button autoFocus onClick={handleClose}>
+					<Button id="claim_rewards_ok" autoFocus onClick={handleClose}>
 						Ok
 					</Button>
 				</DialogActions>
