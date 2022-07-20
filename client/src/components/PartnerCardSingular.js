@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/partnerCard.scss";
 import { useState } from "react";
-import { Button, Modal, Form, Input, InputNumber } from "antd";
+import { Button, Modal, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
 import Axios from "axios";
@@ -123,7 +123,7 @@ const PartnerCardSingular = (props) => {
           </Form.Item>
 
           <Form.Item
-            label="Amount"
+            label="Amount (Min is 1)"
             name="amount"
             rules={[
               {
@@ -132,7 +132,12 @@ const PartnerCardSingular = (props) => {
               },
             ]}
           >
-            <InputNumber min={1} />
+            <Input
+              type="number"
+              name="test_name"
+              min="1"
+              oninput="validity.valid||(value='');"
+            />
           </Form.Item>
 
           <Form.Item
