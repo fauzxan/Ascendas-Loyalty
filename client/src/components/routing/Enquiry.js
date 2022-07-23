@@ -41,7 +41,7 @@ const Enquiry = () => {
     values[i] == "0000" ? (State = "success") : (State = "fail");
     data.push({
       ReferenceCode: keys[i],
-      OutcomeCode: values[i],
+      OutcomeCode: [values[i]],
       State: [State],
     });
   }
@@ -195,10 +195,39 @@ const Enquiry = () => {
     },
     {
       title: "Reason",
-      dataIndex: "",
-      key: "x",
+      dataIndex: "OutcomeCode",
+      key: "OutcomeCode",
       width: "40%",
-      ...getColumnSearchProps("OutcomeCode"),
+      render: (_, { OutcomeCode }) => (
+        <>
+          {OutcomeCode.map((code) => {
+            switch (code) {
+              case "0000":
+                return "Success!";
+              case "0001":
+                return "Member not found";
+              case "0002":
+                return "Member name mismatch";
+              case "0003":
+                return "Member account closed";
+              case "0004":
+                return "Member account suspended";
+              case "0005":
+                return "Member ineligible for accrual";
+              case "0099":
+                return "Unable to process, please contact support for more information";
+              default:
+                return "Pending";
+            }
+          })}
+        </>
+      ),
+    },
+    {
+      title: "Reference Code",
+      dataIndex: "ReferenceCode",
+      key: "ReferenceCode",
+      width: "30%",
       render: () => (
         <>
           <Button
