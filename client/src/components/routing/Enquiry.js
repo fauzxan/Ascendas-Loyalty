@@ -51,6 +51,17 @@ const Enquiry = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setSuccess(false);
+    setIsModalVisible(false);
+    setMessage("Pending");
+    setCode("");
+  };
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -189,14 +200,28 @@ const Enquiry = () => {
       width: "40%",
       ...getColumnSearchProps("OutcomeCode"),
       render: () => (
-        <Button
-          id="enquiry_submit_button"
-          type="primary"
-          htmlType="submit"
-          //onClick={showModal}
-        >
-          Submit
-        </Button>
+        <>
+          <Button
+            id="enquiry_submit_button"
+            type="primary"
+            htmlType="submit"
+            onClick={showModal}
+          >
+            Submit
+          </Button>
+          <Modal
+            title="Transaction Outcome"
+            visible={isModalVisible}
+            onCancel={handleCancel}
+            footer={null}
+          >
+            {success ? (
+              <TransactionSuccess code={code} />
+            ) : (
+              <TransactionFailure message={message} code={code} />
+            )}
+          </Modal>
+        </>
       ),
     },
   ];
