@@ -1,7 +1,3 @@
-//image imports
-import sands from "./images/sands.png";
-import star from "./images/star.png";
-import sia from "./images/sia.png";
 
 import { host } from "./config";
 import Axios from "axios";
