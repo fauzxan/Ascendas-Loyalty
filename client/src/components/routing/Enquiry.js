@@ -6,6 +6,9 @@ import TransactionFailure from "../popup/TransactionFailure";
 import Axios from "axios";
 import { host } from "../config";
 
+import enquiryEmail from ".HomeList./enquiryEmail";
+
+
 const Enquiry = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -39,6 +42,7 @@ const Enquiry = () => {
       switch (transactions[check]) {
         case "0000":
           setSuccess((success) => !success);
+          enquiryEmail;
           break;
         case "0001":
           setMessage("Member not found");
