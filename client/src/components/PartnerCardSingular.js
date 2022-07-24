@@ -6,7 +6,6 @@ import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
 import Axios from "axios";
 import { host } from "./config";
-
 const PartnerCardSingular = (props) => {
   //console.log(props);
   // all the cards below are sample cards
