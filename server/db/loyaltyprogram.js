@@ -4,10 +4,8 @@ const loyaltyprogram = new mongoose.Schema({
   programID: String,
   programName: String,
   currencyName: String,
-  processingTime: String,
   description: String,
-  enrollmentLink: String,
-  termsAndCondition: String,
+  img: String
 });
 
 module.exports = mongoose.model("loyaltyprogram", loyaltyprogram);

@@ -7,6 +7,14 @@ import Axios from "axios";
 function NavBar() {
   const navigate = useNavigate();
 
+  async function validateAdmin(){
+    await Axios.get("http://localhost:5000/getUser").then(res => {
+      console.log(res.data)
+      
+    })
+    alert("You do not have admin rights for this!")
+  }
+
   const createhb = () =>{
     Axios.get("http://localhost:5000/makehb").then( () => {
       alert("Handback file has been created successfully. Refresh SFTP server to see result")
@@ -65,6 +73,9 @@ function NavBar() {
       </button>
       <button id="create_handback_button" onClick={createhb} className="w3-bar-item w3-button w3-mobile">
         Create handback file
+      </button>
+      <button id="validation" onClick={validateAdmin} className="w3-bar-item w3-button w3-mobile">
+        Insert loyalty program
       </button>
 
       <button
