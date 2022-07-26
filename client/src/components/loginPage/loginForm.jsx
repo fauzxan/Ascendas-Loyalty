@@ -14,7 +14,6 @@ import { Form } from "antd";
 import Axios from "axios";
 import { Ldots } from "./dots";
 import { host } from "../config";
-
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const [loading, setLoading] = useState(false);
@@ -79,3 +78,4 @@ export function LoginForm(props) {
     </BoxContainer>
   );
 }
+
