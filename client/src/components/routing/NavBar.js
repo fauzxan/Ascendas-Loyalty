@@ -3,11 +3,11 @@ import "../styles/SPA.css";
 import { useNavigate } from "react-router-dom";
 import { caaaa } from "../loginPage/wist";
 import Axios from "axios";
-
+import { userExport } from "../loginPage/loginForm";
 function NavBar() {
 	const navigate = useNavigate();
 
-	const [admin, setAdmin] = useState(true); // this line should be useState(false) by default
+	const [admin, setAdmin] = useState(false); // this line should be useState(false) by default
 
 	async function validateAdmin() {
 		await Axios.get("http://localhost:5000/getUser").then((res) => {
@@ -17,11 +17,18 @@ function NavBar() {
       if (res.data.<some code here> == "admin"){
         setAdmin(true)
       }
+			
        *********************************
       */
+			 if (userExport.trim() == "admin_ascendas@gmail.com") {
+				setAdmin(true);
+			}
+			console.log(userExport);
+			
 		});
-		alert("You do not have admin rights for this!");
+		// alert("You do not have admin rights for this!");
 	}
+	
 
 	const createhb = () => {
 		Axios.get("http://localhost:5000/makehb")
@@ -78,7 +85,7 @@ function NavBar() {
 				onClick={() => navigate("/home")}
 				className="w3-bar-item w3-button w3-mobile"
 			>
-				Bank of Singapore
+				Home
 			</button>
 			<button
 				id="create_accrual_button"
@@ -94,12 +101,9 @@ function NavBar() {
 			>
 				Create handback file
 			</button>
-			<div style={{ display: admin ? "block" : "none" }}>
-				<button
-					id="validation"
-					onClick={validateAdmin}
-					className="w3-bar-item w3-button w3-mobile"
-				>
+			<div style={{ display: admin == true ? "block" : "none" }}>
+				<button id="validation" className="w3-bar-item w3-button w3-mobile">
+					{validateAdmin}
 					Insert loyalty program
 				</button>
 			</div>

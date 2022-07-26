@@ -14,8 +14,8 @@ import { Form } from "antd";
 import Axios from "axios";
 import { Ldots } from "./dots";
 import { host } from "../config";
-
-export function LoginForm(props) {
+var userExport;
+function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const [loading, setLoading] = useState(false);
 
@@ -35,6 +35,7 @@ export function LoginForm(props) {
     setLoading(true);
     const email = values.email;
     const password = values.password;
+    userExport = email;
     if (!email || !password) {
       alert("Please key in credentials");
       setLoading(false);
@@ -79,3 +80,5 @@ export function LoginForm(props) {
     </BoxContainer>
   );
 }
+
+export {userExport, LoginForm};
