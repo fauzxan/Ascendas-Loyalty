@@ -55,6 +55,7 @@ $radius: 0.2rem;
 
   &__title {
     padding: 1rem;
+    font-size: 2rem;
   }
 
   &__description {
@@ -67,9 +68,8 @@ $radius: 0.2rem;
     font-weight: bold;
     font-size: 1rem;
     margin: 1rem;
-    border: 2px solid $clr-primary;
-    background: transparent;
-    color: $clr-primary;
+    color: $clr-gray700;
+    border: 2px solid $clr-gray700;
     border-radius: $radius;
     transition: 200ms ease-in, color 200ms ease-in;
   }
@@ -79,7 +79,7 @@ $radius: 0.2rem;
   }
 
   &:hover &__btn {
-    background: $clr-primary;
+    background: $clr-primary-dark;
     color: rgb(255, 255, 255);
   }
 }

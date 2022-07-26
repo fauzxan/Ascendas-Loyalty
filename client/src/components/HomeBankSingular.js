@@ -28,7 +28,7 @@ function HomeBankSingular(props) {
             id={button_id}
             onClick={() => navigate("/bank-" + props.id)}
             type="primary"
-            className="card_rewards__button"
+            className="card_rewards__btn hover"
           >
             View Available Rewards
           </Button>

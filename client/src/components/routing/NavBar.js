@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "../styles/SPA.css";
+import "../styles/navbar2.css";
 import { useNavigate } from "react-router-dom";
 import { caaaa } from "../loginPage/wist";
 import Axios from "axios";
@@ -40,77 +40,73 @@ function NavBar() {
 		navigate("/");
 	};
 	return (
-		<div className="w3-bar w3-black w3-large">
-			<button
-				id="companies_button"
-				onClick={() => navigate("/companies")}
-				className="w3-bar-item w3-button w3-mobile"
-			>
-				Our Companies
-			</button>
-
-			<button
-				id="about_button"
-				onClick={() => navigate("/about")}
-				className="w3-bar-item w3-button w3-mobile"
-			>
-				About
-			</button>
-
-			<button
-				id="contact_button"
-				onClick={() => navigate("/contact")}
-				className="w3-bar-item w3-button w3-mobile"
-			>
-				Contact
-			</button>
-
-			<button
-				id="enquire_button"
-				onClick={() => navigate("/enquire")}
-				className="w3-bar-item w3-button w3-mobile"
-			>
-				Enquire Status
-			</button>
-
-			<button
-				id="BoS_button"
-				onClick={() => navigate("/home")}
-				className="w3-bar-item w3-button w3-mobile"
-			>
-				Bank of Singapore
-			</button>
-			<button
-				id="create_accrual_button"
-				onClick={caaaa}
-				className="w3-bar-item w3-button w3-mobile"
-			>
-				Create accrual file
-			</button>
-			<button
-				id="create_handback_button"
-				onClick={createhb}
-				className="w3-bar-item w3-button w3-mobile"
-			>
-				Create handback file
-			</button>
-			<div style={{ display: admin ? "block" : "none" }}>
-				<button
-					id="validation"
-					onClick={validateAdmin}
-					className="w3-bar-item w3-button w3-mobile"
-				>
-					Insert loyalty program
-				</button>
-			</div>
-			<button
-				id="logout_button"
-				onClick={logout}
-				className="w3-bar-item w3-button w3-right w3-mobile"
-			>
-				Logout
-			</button>
+		<div>
+			<head>
+				<meta charset="UTF-8"/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<link rel="preconnect" href="https://fonts.googleapis.com"/>
+					
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+				<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"/>
+			</head>
+			<body>
+				<nav class="navbar bg-dark">
+				<div class="logo fs-500">Bank of Singapore</div>
+					<ul class="nav-links">
+						<input type="checkbox" id="checkbox_toggle" />
+						<label for="checkbox_toggle" class="hamburger">&#9776;</label>
+						<div class="menu">
+							<li>
+								<a id="BoS_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={() => navigate("/home")}>
+									Home
+								</a>
+							</li>
+							<li>
+								<a id="about_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={() => navigate("/about")}>
+									About
+								</a>
+							</li>
+							<li>
+								<a id="contact_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={() => navigate("/contact")}>
+									Contact
+								</a>
+							</li>
+							<li>
+								<a id="companies_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={() => navigate("/companies")}>
+									Our Companies
+								</a>
+							</li>
+							<li>
+								<a id="enquire_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={() => navigate("/enquire")}>
+									Enquire Status
+								</a>
+							</li>
+							<li>
+								<a id="create_accrual_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={caaaa}>
+									Create Accrual File
+								</a>
+							</li>
+							<li>
+								<a id="create_handback_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={createhb}>
+									Create Handback File
+								</a>
+							</li>
+							<li>
+								<a id="validation" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={validateAdmin}>
+									Insert Loyalty Program
+								</a>
+							</li>
+							<li>
+								<a id="logout_button" class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300" onClick={logout}>
+									Logout
+								</a>
+							</li>
+						</div>
+					</ul>
+				</nav>
+			</body>
 		</div>
+
 	);
 }
 export default NavBar;

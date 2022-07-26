@@ -102,13 +102,14 @@ const PartnerCardSingular = (props) => {
 				<h2 className="card__title">{props.card.programName}</h2>
 				<p className="card__description">{props.card.description} </p>
 			</div>
-			<Button
+			<button
 				id={"claim_rewards-" + props.card.id + "_button"}
 				type="primary"
 				onClick={showModal}
+				className="card__btn hover hover__btn"
 			>
 				Claim rewards
-			</Button>
+			</button>
 
 			<Modal
 				title={props.card.title}

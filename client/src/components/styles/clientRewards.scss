@@ -41,17 +41,19 @@ $radius: 0.2rem;
   cursor: pointer;
   transition: transform 200ms ease-in;
   margin-top: 2rem;
+  display: flex;
 
   &__image {
+    margin-left: 0.2rem;
     height: 10rem;
     width: 30%;
     object-fit: contain;
   }
 
   &__title {
-    padding: 1rem;
+    padding: 2rem;
     font-weight: bold;
-    font-size: larger;
+    font-size: 1.5rem;
   }
 
   &__description {
@@ -63,12 +65,18 @@ $radius: 0.2rem;
     font-family: inherit;
     font-weight: bold;
     font-size: 1rem;
-    margin: 1rem;
-    background: transparent;
-    color: $clr-primary;
+    margin-right: 0rem;
+    margin-top: 1.25rem;
+    color: $clr-gray700;
     border-radius: $radius;
     transition: 200ms ease-in, color 100ms ease-in;
     position: absolute;
     right: 0px;
+    color: $clr-gray700;
+    align-items: left;
+  }
+
+  &:hover {
+    transform: scale(1.02);
   }
 }
