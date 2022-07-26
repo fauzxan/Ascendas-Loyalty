@@ -4,31 +4,22 @@ import { useNavigate } from "react-router-dom";
 import { caaaa } from "../loginPage/wist";
 import Axios from "axios";
 import { userExport } from "../loginPage/loginForm";
+
+const localStorage = window.localStorage;
 function NavBar() {
 	const navigate = useNavigate();
 
-	const [admin, setAdmin] = useState(false); // this line should be useState(false) by default
 
 	async function validateAdmin() {
-		await Axios.get("http://localhost:5000/getUser").then((res) => {
-			console.log(res.data);
-			/********************************
-       TODO: Insert code to validate that the account under use is an admin account. If yes, then render the button on the navbar
-      if (res.data.<some code here> == "admin"){
-        setAdmin(true)
-      }
-			
-       *********************************
-      */
-			 if (userExport.trim() == "admin_ascendas@gmail.com") {
-				setAdmin(true);
-			}
-			console.log(userExport);
-			
-		});
-		// alert("You do not have admin rights for this!");
+		const userEmail = localStorage.getItem("email");
+		console.log(userEmail);
+		if (userEmail === "admin_ascendas@gmail.com"){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-	
 
 	const createhb = () => {
 		Axios.get("http://localhost:5000/makehb")
@@ -101,9 +92,8 @@ function NavBar() {
 			>
 				Create handback file
 			</button>
-			<div style={{ display: admin == true ? "block" : "none" }}>
+			<div style={{ display: validateAdmin() == true ? "block" : "none" }}>
 				<button id="validation" className="w3-bar-item w3-button w3-mobile">
-					{validateAdmin}
 					Insert loyalty program
 				</button>
 			</div>
