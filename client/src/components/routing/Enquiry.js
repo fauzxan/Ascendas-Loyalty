@@ -38,7 +38,13 @@ const Enquiry = () => {
   const data = [];
   for (let i = 0; i < keys.length; i++) {
     let State = null;
-    values[i] == "0000" ? (State = "success") : (State = "fail");
+    if (values[i] == "0000") {
+      State = "success";
+    } else if (values[i] == "69420") {
+      State = "pending";
+    } else {
+      State = "fail";
+    }
     data.push({
       ReferenceCode: keys[i],
       OutcomeCode: [values[i]],
@@ -181,7 +187,14 @@ const Enquiry = () => {
       render: (_, { State }) => (
         <>
           {State.map((state) => {
-            let color = state === "success" ? "green" : "volcano";
+            let color = null;
+            if (state === "success") {
+              color = "green";
+            } else if (state === "pending") {
+              color = "yellow";
+            } else {
+              color = "volcano";
+            }
             return (
               <Tag color={color} key={state}>
                 {state.toUpperCase()}
@@ -223,38 +236,45 @@ const Enquiry = () => {
         </>
       ),
     },
-    {
-      title: "Reference Code",
-      dataIndex: "ReferenceCode",
-      key: "ReferenceCode",
-      width: "30%",
-      render: () => (
-        <>
-          <Button
-            id="enquiry_submit_button"
-            type="primary"
-            htmlType="submit"
-            onClick={showModal}
-          >
-            Submit
-          </Button>
-          <Modal
-            title="Transaction Outcome"
-            visible={isModalVisible}
-            onCancel={handleCancel}
-            footer={null}
-          >
-            {success ? (
-              <TransactionSuccess code={code} />
-            ) : (
-              <TransactionFailure message={message} code={code} />
-            )}
-          </Modal>
-        </>
-      ),
-    },
+    // {
+    //   title: "Reference Code",
+    //   dataIndex: "ReferenceCode",
+    //   key: "ReferenceCode",
+    //   width: "30%",
+    //   render: () => (
+    //     <>
+    //       <Button
+    //         id="enquiry_submit_button"
+    //         type="primary"
+    //         htmlType="submit"
+    //         onClick={showModal}
+    //       >
+    //         Submit
+    //       </Button>
+    //       <Modal
+    //         title="Transaction Outcome"
+    //         visible={isModalVisible}
+    //         onCancel={handleCancel}
+    //         footer={null}
+    //       >
+    //         {success ? (
+    //           <TransactionSuccess code={code} />
+    //         ) : (
+    //           <TransactionFailure message={message} code={code} />
+    //         )}
+    //       </Modal>
+    //     </>
+    //   ),
+    // },
   ];
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <>
+      <h1 style={{ display: "flex", justifyContent: "center" }}>
+        Enquire your transaction status here
+      </h1>
+      <Table columns={columns} dataSource={data} pagination={{ pageSize: 8 }} />
+    </>
+  );
 
   // const onFinish = (values) => {
   //   let check = values.reference;
