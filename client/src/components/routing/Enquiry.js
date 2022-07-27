@@ -18,12 +18,25 @@ const Enquiry = () => {
   useEffect(() => {
     Axios.get(host + "/getUser", {})
       .then((response) => {
-        const user = localStorage.getItem("user");
+        const user = localStorage.getItem("email");
         const result = response.data;
-        for (let i = 0; i < result.length; i++) {
-          if (result[i].name === user) {
-            setTransactions(result[i].transactions);
-            break;
+        console.log(result);
+        if (user == "admin_ascendas@gmail.com") {
+          console.log("here");
+          let output = {};
+          for (let i = 0; i < result.length; i++) {
+            for (const property in result[i].transactions) {
+              output[property] = result[i].transactions[property];
+            }
+          }
+          // console.log(Object.keys(output).length);
+          setTransactions(output);
+        } else {
+          for (let i = 0; i < result.length; i++) {
+            if (result[i].email === user) {
+              setTransactions(result[i].transactions);
+              break;
+            }
           }
         }
       })
@@ -32,7 +45,7 @@ const Enquiry = () => {
       });
   }, []);
 
-  console.log(transactions);
+  //console.log(transactions);
   const keys = Object.keys(transactions);
   const values = Object.values(transactions);
   const data = [];
