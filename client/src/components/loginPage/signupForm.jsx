@@ -69,7 +69,11 @@ export function SignupForm(props) {
       <FormContainer>{<Sform form={form} onFinish={signup} />}</FormContainer>
       <Marginer direction="vertical" margin={1} />
       {!loading && (
-        <SubmitButton id="signup_button" type="submit" onClick={() => form.submit()}>
+        <SubmitButton
+          id="signup_button"
+          type="submit"
+          onClick={() => form.submit()}
+        >
           Signup
         </SubmitButton>
       )}
@@ -77,7 +81,9 @@ export function SignupForm(props) {
       <Marginer direction="vertical" margin="0em" />
       <MutedLink>
         Already have an account?
-        <BoldLink id="signup_to_login" onClick={switchToSignin}>Sign in</BoldLink>
+        <BoldLink id="signup_to_login" onClick={switchToSignin}>
+          Sign in
+        </BoldLink>
       </MutedLink>
     </BoxContainer>
   );
