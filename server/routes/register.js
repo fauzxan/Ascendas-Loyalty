@@ -22,7 +22,9 @@ router.post(
   async (re, rs) => {
     if (rs.locals.c) {
       let p = Math.floor(Math.random() * (100000 + 1));
+      let t = Math.floor(Math.random() * 5 + 1);
       re.body["points"] = p;
+      re.body["tier"] = t;
       let u = new User(re.body);
       let r = await u.save();
       r = r.toObject();
