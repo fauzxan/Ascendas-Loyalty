@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const { use } = require("../routes/login");
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -8,8 +7,10 @@ const userSchema = new mongoose.Schema({
   password: String,
   transactions: {
     type: Map,
-    default: {}
-  }
+    default: {},
+  },
+  points: Number,
+  tier: Number,
 });
 
 userSchema.pre("save", function (n) {
@@ -33,14 +34,14 @@ userSchema.pre("save", function (n) {
   }
 });
 
-userSchema.methods.cp = function(p, c) {
-    bcrypt.compare(p, this.password, function(e, im) {
-      if (e) {
-        return c(e)
-      } else {
-        c(null, im)
-      }
-    })
-  }
+userSchema.methods.cp = function (p, c) {
+  bcrypt.compare(p, this.password, function (e, im) {
+    if (e) {
+      return c(e);
+    } else {
+      c(null, im);
+    }
+  });
+};
 
 module.exports = mongoose.model("users", userSchema);
