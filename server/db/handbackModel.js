@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const handbackSchema = new mongoose.Schema({
 	date: String,
 	amount: String,
-	refcode: String,
+	referenceNumber: String,
 	outcomecode: String,
 });
 

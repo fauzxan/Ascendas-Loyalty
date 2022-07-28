@@ -27,6 +27,5 @@
     "ssh2-sftp-client": "^9.0.2",
     "stream-to-mongo-db": "^1.6.0"
   },
-  "devDependencies": {},
   "description": ""
 }

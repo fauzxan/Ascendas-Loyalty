@@ -38,7 +38,7 @@ router.post(
           },
         }
       );
-      re.body["refcode"] = parseInt(
+      re.body["referenceNumber"] = parseInt(
         `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}`
       );
       let rt = new creditReq(re.body);

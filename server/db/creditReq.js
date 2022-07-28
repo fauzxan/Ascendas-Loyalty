@@ -7,7 +7,7 @@ const creditReq = new mongoose.Schema({
   amount: Number,
   partnercode: String,
   loyaltyprogramme: String,
-  refcode: Number,
+  referenceNumber: Number,
 });
 
 module.exports = mongoose.model("creditreqs", creditReq);

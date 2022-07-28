@@ -6,7 +6,6 @@ const app = express();
 const mongoose = require("mongoose");
 global.curr = 0;
 
-const TcModel = require("./models/Ascendas_transfer_connect");
 
 const cors = require("cors"); // allows us to connect to the react frontend
 const login = require("./routes/login");
@@ -30,7 +29,7 @@ app.use(cors());
 app.use("/login", login);
 app.use("/register", register);
 app.use("/submitcreditreq", creditreq);
-app.use("/createhandback", handback);
+//app.use("/createhandback", handback); 
 app.use("/getUser", getUser);
 app.use("/resetpts", resetpts);
 app.use("/getloyaltyprogram", LoyaltyProgram);

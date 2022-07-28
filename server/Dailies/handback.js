@@ -14,11 +14,15 @@ let Client = require("ssh2-sftp-client");
 let sftp = new Client();
 const fs = require("fs");
 const csv = require("csv-parser");
-const csvToJson = require('csvtojson');
-const mongodb = require('mongodb');
+const csvToJson = require("csvtojson");
+const { parse } = require("json2csv");
+const User = require("../db/User");
+const mongodb = require("mongodb");
+const { Readable } = require("stream");
 
 const express = require("express");
 const handbackModel = require("../db/handbackModel");
+const intermediaryhandback = require("../db/intermediateHandback");
 const { ObjectID } = require("bson");
 const router = express.Router();
 
@@ -42,7 +46,7 @@ const makeHandback = async () => {
 
 	console.log("filename to be opened: " + fileName);
 
-	sftp
+	await sftp
 		.connect(config)
 		.then(() => {
 			return sftp.list("/");
@@ -64,9 +68,25 @@ const makeHandback = async () => {
 			// INTERMEDIATE SOLUTION: (code below)
 			return sftp.get(fileName, `./destination/HANDBACK`);
 		})
-        .then(() => {
-            return sftp.put(`./destination/HANDBACK`, `HANDBACK${fileName}`)
-        })
+		.then(async () => {
+			const json = await csvToJson().fromFile("./destination/HANDBACK");
+			for (let i = 0; i < json.length; i++) {
+				delete json[i]["loyaltyprogramme"];
+				delete json[i]["partnercode"];
+				delete json[i]["memberid"];
+				delete json[i]["fullname"];
+				json[i]["outcomecode"] =
+					outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
+				json[i]["_id"] = new ObjectID();
+			}
+			// code to convert json to csv as a file stream
+			console.log("json:", json);
+			const csvFormat = convertToCSV(json);
+			//console.log(csvFormat);
+			const readable = Readable.from([csvFormat]);
+
+			return sftp.put(readable, `HANDBACK${fileName}`);
+		})
 		.then(() => {
 			console.log("done writing!");
 			sftp.end();
@@ -75,31 +95,111 @@ const makeHandback = async () => {
 			console.log("There is an error ", err);
 		});
 	try {
-        // json variable parses the incoming values from the csv file and puts it in object form
-		const json = await csvToJson().fromFile(`./destination/HANDBACK${fileName}`)
-        console.log("reaches here")
-        for (let i = 0; i < json.length; i++) {
+		// json variable parses the incoming values from the csv file and puts it in object form
+		const json = await csvToJson().fromFile(`./destination/HANDBACK`);
+		var json_copy = JSON.parse(JSON.stringify(Array.from(json)));
+		// deepcopy of a shallow copy. Please dont ask me why I did this in the morning. This is the only way it works
+		// Array.from(json) makes the json_copy changeable without changing json. JSON.parse(JSON.stringify()) makes a deep copy of the parameter passed.
+		// fkn stackoverflow was down so I had to figure this one out on my own
+
+		console.log("reaches here");
+
+		for (let i = 0; i < json.length; i++) {
 			delete json[i]["loyaltyprogramme"];
 			delete json[i]["partnercode"];
 			delete json[i]["memberid"];
 			delete json[i]["fullname"];
-			json[i]["outcomecode"] =
+			let outcomeCodeCopy =
 				outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
-            json[i]["_id"] = new ObjectID();
-            //console.log(json[i]);
+			json[i]["outcomecode"] = outcomeCodeCopy;
+			json[i]["_id"] = new ObjectID();
+			//console.log(json[i]);
+			json_copy[i]["outcomecode"] = outcomeCodeCopy;
 		}
-		console.log(json);
-        try{
-            await handbackModel.insertMany(json);
-        }catch(err){
-            console.log(err);
-        }
+		console.log("json_copy", json_copy);
+		await intermediaryhandback.deleteMany({});
+		await intermediaryhandback.insertMany(json_copy);
 
-	
+		try {
+			await handbackModel.deleteMany({});
+			await handbackModel.insertMany(json);
+			var userHashMap = [];
+			
+			// Alphonsus
+			for (let i = 0; i < json_copy.length; i++) {
+				if ((userHashMap.includes(json_copy[i].fullname)) == false) { 
+					// need to debug why this part is not working. It is only supposed to update if the name does not exist in the hash map
+					console.log(json_copy[i].fullname);
+					let transactionsprep = [];
+					json_copy.map((value, index, arr) => {
+						if (value.fullname == json_copy[i].fullname) {
+							const referenceNumbercopy = json_copy[index].referenceNumber;
+							const outcomeCopy = json_copy[index].outcomecode;
+							const obj = { [`${referenceNumbercopy}`]: outcomeCopy };
+							transactionsprep.push(obj);
+						}
+					});
+					console.log("transactions", transactionsprep);
+
+					User.findOneAndUpdate(
+						{ name: `${json_copy[i].fullname}` },
+						{
+							$set: {
+								transactions: transactionsprep[0],
+							},
+						}
+					);
+					userHashMap.push(json_copy[i].username);
+				}
+
+				/*
+				const username = json_copy[i]["username"]
+				const referenceNumber = json_copy[i]["referenceNumber"]
+				const outcomecodetemp = json_copy[i]["outcomecode"]
+
+				if (username in userHashMap) {
+					// if the users transaction already exists
+					userHashMap.username.referenceNumber.push(
+						outcomecodetemp
+					);
+				} else {
+					// otherwise just create 
+					userHashMap.username = {}
+					userHashMap.username.referenceNumber = new Array();
+					// and push
+					userHashMap.username.referenceNumber.push(
+						outcomecodetemp
+					);
+				}
+*/
+			}
+			console.log(userHashMap);
+			//await User.updateAll
+			console.log("writing to handback file in mongoDB");
+		} catch (err) {
+			console.log(err);
+		}
 	} catch (err) {
-		console.log("Ignore this error");
+		console.log("Ignore this error", err);
 	}
+	console.log("handback update process done!");
 };
+
+function convertToCSV(arr) {
+	var arrconv = '"date","amount","referenceNumber","outcomecode"\r\n';
+	for (let i = 0; i < arr.length; i++) {
+		arrconv +=
+			arr[i]["date"] +
+			"," +
+			arr[i]["amount"] +
+			"," +
+			arr[i]["referenceNumber"] +
+			"," +
+			arr[i]["outcomecode"] +
+			"\r\n";
+	}
+	return arrconv;
+}
 
 module.exports = { makeHandback };
 
