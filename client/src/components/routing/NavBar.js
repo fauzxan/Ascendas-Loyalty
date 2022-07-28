@@ -1,16 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, Component } from "react";
 import "../styles/navbar2.css";
 import { useNavigate } from "react-router-dom";
 import { caaaa } from "../loginPage/wist";
 import Axios from "axios";
 import { userExport } from "../loginPage/loginForm";
+import LoyaltyPopup from "../popup/LoayltyProgramAdd";
+import { Modal } from "antd";
 
 const localStorage = window.localStorage;
 function NavBar() {
 	const navigate = useNavigate();
 
 	const [admin, setAdmin] = useState(false);
-	const [adminSFTP, setAdminSFTP] = useState(false);
+	const [loyaltyPopup, setLoyaltyPopup] = useState(false);
 	async function validateAdmin() {
 		const userEmail = localStorage.getItem("email");
 		console.log(userEmail);
@@ -19,8 +21,14 @@ function NavBar() {
 		}
 	}
 
-	const createhb = () => {
-		Axios.get("http://localhost:5000/makehb")
+	async function createLoyalty() {
+		setLoyaltyPopup(true);
+		console.log(loyaltyPopup)
+		
+	}
+
+	const createhb = async() => {
+		await Axios.get("http://localhost:5000/makehb")
 			.then(() => {
 				alert(
 					"Handback file has been created successfully. Refresh SFTP server to see result"
@@ -28,7 +36,7 @@ function NavBar() {
 			})
 			.catch((err) => {
 				console.warn(err);
-			});
+			});	
 	};
 
 	const logout = () => {
@@ -49,18 +57,18 @@ function NavBar() {
 				/>
 			</head>
 			<body>
-				<nav class="navbar bg-dark">
-					<div class="logo fs-500">Ascendas Loyalty</div>
-					<ul class="nav-links">
+				<nav className="navbar bg-dark">
+					<div className="logo fs-500">Ascendas Loyalty</div>
+					<ul className="nav-links">
 						<input type="checkbox" id="checkbox_toggle" />
-						<label for="checkbox_toggle" class="hamburger">
+						<label for="checkbox_toggle" className="hamburger">
 							&#9776;
 						</label>
-						<div class="menu">
+						<div className="menu">
 							<li>
 								<a
 									id="BoS_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={() => navigate("/home")}
 								>
 									Home
@@ -69,7 +77,7 @@ function NavBar() {
 							<li>
 								<a
 									id="about_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={() => navigate("/about")}
 								>
 									About
@@ -78,7 +86,7 @@ function NavBar() {
 							<li>
 								<a
 									id="contact_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={() => navigate("/contact")}
 								>
 									Contact
@@ -87,7 +95,7 @@ function NavBar() {
 							<li>
 								<a
 									id="companies_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={() => navigate("/companies")}
 								>
 									Our Companies
@@ -96,7 +104,7 @@ function NavBar() {
 							<li>
 								<a
 									id="enquire_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={() => navigate("/enquire")}
 								>
 									Enquire Status
@@ -105,7 +113,7 @@ function NavBar() {
 							<li style={{ display: admin == true ? "block" : "none" }}>
 								<a
 									id="create_accrual_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={caaaa}
 								>
 									Create Accrual File
@@ -114,7 +122,7 @@ function NavBar() {
 							<li style={{ display: admin == true ? "block" : "none" }}>
 								<a
 									id="create_handback_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={createhb}
 								>
 									Create Handback File
@@ -123,7 +131,8 @@ function NavBar() {
 							<li style={{ display: admin == true ? "block" : "none" }}>
 								<a
 									id="validation"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									onClick={createLoyalty}
 								>
 									Insert Loyalty Program
 								</a>
@@ -131,7 +140,7 @@ function NavBar() {
 							<li>
 								<a
 									id="logout_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+									className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
 									onClick={logout}
 								>
 									Logout
@@ -140,6 +149,13 @@ function NavBar() {
 						</div>
 					</ul>
 				</nav>
+				<Modal 
+					visible = {loyaltyPopup}
+					onCancel = {() => {setLoyaltyPopup(false)}}
+					onOk = {() => setLoyaltyPopup(false)}
+				>
+					<LoyaltyPopup />
+				</Modal>
 			</body>
 		</div>
 	);

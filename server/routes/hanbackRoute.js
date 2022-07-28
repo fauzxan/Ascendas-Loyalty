@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   const today = new Date();
   req.body["referencenumber"] = parseInt(
-    `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}`
+    `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`
   );
   let request = new handbackModel(req.body);
   let result = await request.save();

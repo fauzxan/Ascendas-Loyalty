@@ -1,4 +1,3 @@
-// 
 /*
 **********************************************************************************************
 DOCUMENTATION:
@@ -7,7 +6,6 @@ This is meant to serve as part of a testing routine, in which randomized outcome
 generated and stored in mongodb. 
 When the user queries the transaction in the frontend, a valid outcome code is generated. 
 **********************************************************************************************
-
 */
 
 require("../db/config");
@@ -64,10 +62,10 @@ const makeHandback = async () => {
             ************************************************************************
             */
 			// INTERMEDIATE SOLUTION: (code below)
-			return sftp.get(fileName, `./destination/HANDBACK${fileName}`);
+			return sftp.get(fileName, `./destination/HANDBACK`);
 		})
         .then(() => {
-            return sftp.put(`./destination/HANDBACK${fileName}`, `HANDBACK${fileName}`)
+            return sftp.put(`./destination/HANDBACK`, `HANDBACK${fileName}`)
         })
 		.then(() => {
 			console.log("done writing!");

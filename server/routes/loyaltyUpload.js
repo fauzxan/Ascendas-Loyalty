@@ -3,14 +3,10 @@ const express = require("express");
 const loyaltyprogram = require("../db/loyaltyprogram");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  loyaltyprogram.find({}, (err, result) => {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(result);
-    }
+router.post("/", async (req, res) => {
+    let request = new loyaltyprogram(req.body);
+    let result = await request.save();
+    res.send(result);
   });
-});
-
+  
 module.exports = router;

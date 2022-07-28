@@ -14,7 +14,8 @@ const register = require("./routes/register");
 const creditreq = require("./routes/creditReq");
 const handback = require("./routes/hanbackRoute");
 const getUser = require("./routes/getUser");
-const getLoyaltyProgram = require("./routes/getloyaltyprogram");
+const LoyaltyProgram = require("./routes/loyaltyprogram");
+const LoyaltyUpload = require("./routes/loyaltyUpload")
 
 const creditreqModel = require("./db/creditReq");
 const { makeHandback } = require("./Dailies/handback");
@@ -30,7 +31,8 @@ app.use("/register", register);
 app.use("/submitcreditreq", creditreq);
 app.use("/createhandback", handback);
 app.use("/getUser", getUser);
-app.use("/getloyaltyprogram", getLoyaltyProgram);
+app.use("/getloyaltyprogram", LoyaltyProgram);
+app.use("/loyaltyupload", LoyaltyUpload)
 
 app.get("/makeacc", (req, res) => {
   makeAccural();
