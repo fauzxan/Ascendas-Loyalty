@@ -10,3 +10,13 @@ export const caaaa = () => {
       console.warn(err);
     });
 };
+
+export const seed = () => {
+  Axios.post(host + "/resetpts", { email: localStorage.getItem("email") })
+    .then(() => {
+      alert("success");
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+};
