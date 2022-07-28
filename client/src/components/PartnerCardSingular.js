@@ -33,9 +33,7 @@ const PartnerCardSingular = (props) => {
   };
 
   const onFinish = (values) => {
-    console.log(values);
     let date = new Date();
-
     let today = `${date.getDate()}/${
       date.getMonth() + 1
     }/${date.getFullYear()}`;
@@ -59,17 +57,6 @@ const PartnerCardSingular = (props) => {
         handleOk();
         setSuccess(true);
         setAmt(amt);
-        Axios.post(host + "/createhandback", {
-          date: today,
-          amount: amt,
-          outcomecode: "42069",
-        })
-          .then((response) => {
-            console.log("Data sent to the buffer handback file");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
       })
       .catch((err) => {
         if (err.response.status == 403) {

@@ -10,7 +10,6 @@ router.post("/", async (req, res) => {
   );
   let request = new handbackModel(req.body);
   let result = await request.save();
-  curr += 1;
   res.send(result);
 });
 

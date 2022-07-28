@@ -43,6 +43,7 @@ router.post(
       );
       let rt = new creditReq(re.body);
       let rl = await rt.save();
+      curr += 1;
       rs.send(rl);
     } else {
       console.log("Insufficient points");
