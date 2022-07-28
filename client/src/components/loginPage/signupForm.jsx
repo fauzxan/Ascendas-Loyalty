@@ -45,8 +45,8 @@ export function SignupForm(props) {
     })
       .then((result) => {
         if (result.data.au) {
-          localStorage.setItem("user", result.data.result.name);
-          localStorage.setItem("email", result.data.result.email);
+          localStorage.setItem("user", result.data.r.name);
+          localStorage.setItem("email", result.data.r.email);
           localStorage.setItem("tok", result.data.au);
           navigate("/Home");
         } else {
