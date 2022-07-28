@@ -14,6 +14,7 @@ const register = require("./routes/register");
 const creditreq = require("./routes/creditReq");
 const handback = require("./routes/hanbackRoute");
 const getUser = require("./routes/getUser");
+const resetpts = require("./routes/resetPts");
 const getLoyaltyProgram = require("./routes/getloyaltyprogram");
 
 const creditreqModel = require("./db/creditReq");
@@ -30,6 +31,7 @@ app.use("/register", register);
 app.use("/submitcreditreq", creditreq);
 app.use("/createhandback", handback);
 app.use("/getUser", getUser);
+app.use("/resetpts", resetpts);
 app.use("/getloyaltyprogram", getLoyaltyProgram);
 
 app.get("/makeacc", (req, res) => {
