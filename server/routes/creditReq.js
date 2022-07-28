@@ -4,27 +4,45 @@ const creditReq = require("../db/creditReq");
 const User = require("../db/User");
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  const today = new Date();
-  console.log(req.body.email);
-  await User.findOneAndUpdate(
-    { email: req.body.email },
-    {
-      $set: {
-        [`transactions.${parseInt(
-          `${today.getFullYear()}${
-            today.getMonth() + 1
-          }${today.getDate()}${curr}`
-        )}`]: "69420",
-      },
+router.post(
+  "/",
+  (re, rs, nt) => {
+    User.findOne({ email: re.body.email }, (e, o) => {
+      if (o.points < re.body.amount) {
+        rs.status(403).send({ result: "Insufficient points" });
+        rs.locals.f = false;
+        nt();
+      } else {
+        rs.locals.f = true;
+        nt();
+      }
+    });
+  },
+  async (re, rs) => {
+    if (rs.locals.f) {
+      const today = new Date();
+      await User.findOneAndUpdate(
+        { email: re.body.email },
+        {
+          $set: {
+            [`transactions.${parseInt(
+              `${today.getFullYear()}${
+                today.getMonth() + 1
+              }${today.getDate()}${curr}`
+            )}`]: "69420",
+          },
+        }
+      );
+      re.body["refcode"] = parseInt(
+        `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}`
+      );
+      let rt = new creditReq(re.body);
+      let rl = await rt.save();
+      rs.send(rl);
+    } else {
+      console.log("Insufficient points");
     }
-  );
-  req.body["refcode"] = parseInt(
-    `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}`
-  );
-  let request = new creditReq(req.body);
-  let result = await request.save();
-  res.send(result);
-});
+  }
+);
 
 module.exports = router;

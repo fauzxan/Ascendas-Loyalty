@@ -7,31 +7,31 @@ const jwtKey = "loyalty";
 
 router.post(
   "/",
-  (req, res, next) => {
-    User.countDocuments({ email: req.body.email }, (e, c) => {
+  (re, rs, next) => {
+    User.countDocuments({ email: re.body.email }, (e, c) => {
       if (c > 0) {
-        res.status(403).send({ result: "Account with email already exists" });
-        res.locals.c = false;
+        rs.status(403).send({ r: "Account with email already exists" });
+        rs.locals.c = false;
         next();
       } else {
-        res.locals.c = true;
+        rs.locals.c = true;
         next();
       }
     });
   },
-  async (req, res) => {
-    if (res.locals.c) {
+  async (re, rs) => {
+    if (rs.locals.c) {
       let p = Math.floor(Math.random() * (100000 + 1));
-      req.body["points"] = p;
-      let user = new User(req.body);
-      let result = await user.save();
-      result = result.toObject();
-      delete result.password;
-      Jwt.sign({ result }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+      re.body["points"] = p;
+      let u = new User(re.body);
+      let r = await u.save();
+      r = r.toObject();
+      delete r.password;
+      Jwt.sign({ r }, jwtKey, { expiresIn: "2h" }, (err, token) => {
         if (err) {
-          res.status(500).send({ result: "Error, please try again later." });
+          rs.status(500).send({ r: "Error, please try again later." });
         }
-        res.status(200).send({ result, au: token });
+        rs.status(200).send({ r, au: token });
       });
     } else {
       console.log("Attempted duplicate email");
