@@ -1,7 +1,7 @@
 import React, { useContext, useState, Component } from "react";
 import "../styles/navbar2.css";
 import { useNavigate } from "react-router-dom";
-import { caaaa } from "../loginPage/wist";
+import { caaaa, seed } from "../loginPage/wist";
 import Axios from "axios";
 import { userExport } from "../loginPage/loginForm";
 import LoyaltyPopup from "../popup/LoayltyProgramAdd";
@@ -9,7 +9,7 @@ import { Modal } from "antd";
 
 const localStorage = window.localStorage;
 function NavBar() {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
 	const [admin, setAdmin] = useState(false);
 	const [loyaltyPopup, setLoyaltyPopup] = useState(false);
@@ -39,16 +39,16 @@ function NavBar() {
 			});	
 	};
 
-	const logout = () => {
-		localStorage.clear();
-		navigate("/");
-	};
-	return (
-		<div onLoad={validateAdmin}>
-			<head>
-				<meta charset="UTF-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+  return (
+    <div onLoad={validateAdmin}>
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
 
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 				<link
