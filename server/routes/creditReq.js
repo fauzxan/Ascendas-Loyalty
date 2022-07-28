@@ -14,6 +14,7 @@ router.post(
         nt();
       } else {
         rs.locals.f = true;
+        rs.locals.oa = re.body["amount"]
         re.body["amount"] *= o.tier;
         nt();
       }
@@ -31,6 +32,9 @@ router.post(
                 today.getMonth() + 1
               }${today.getDate()}${curr}`
             )}`]: "69420",
+          },
+          $inc: {
+            points: -rs.locals.oa,
           },
         }
       );
