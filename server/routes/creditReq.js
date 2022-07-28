@@ -14,6 +14,7 @@ router.post(
         nt();
       } else {
         rs.locals.f = true;
+        re.body["amount"] *= o.tier;
         nt();
       }
     });
