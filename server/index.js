@@ -33,8 +33,6 @@ app.use("/createhandback", handback);
 app.use("/getUser", getUser);
 app.use("/getloyaltyprogram", LoyaltyProgram);
 app.use("/loyaltyupload", LoyaltyUpload)
-app.use("/resetpts", resetpts);
-app.use("/getloyaltyprogram", getLoyaltyProgram);
 
 app.get("/makeacc", (req, res) => {
   makeAccural();
