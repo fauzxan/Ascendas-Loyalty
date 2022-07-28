@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const { use } = require("../routes/login");
 
 const userSchema = new mongoose.Schema({
   name: String,
