@@ -11,16 +11,18 @@ router.post(
     User.countDocuments({ email: req.body.email }, (e, c) => {
       if (c > 0) {
         res.status(403).send({ result: "Account with email already exists" });
-        res.locals.create = false;
+        res.locals.c = false;
         next();
       } else {
-        res.locals.create = true;
+        res.locals.c = true;
         next();
       }
     });
   },
   async (req, res) => {
-    if (res.locals.create) {
+    if (res.locals.c) {
+      let p = Math.floor(Math.random() * (100000 + 1));
+      req.body["points"] = p;
       let user = new User(req.body);
       let result = await user.save();
       result = result.toObject();

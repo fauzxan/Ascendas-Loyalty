@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   transactions: {
     type: Map,
     default: {}
-  }
+  },
+  points: Number
 });
 
 userSchema.pre("save", function (n) {
