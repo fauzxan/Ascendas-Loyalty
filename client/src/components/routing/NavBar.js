@@ -51,6 +51,13 @@ function NavBar() {
 			<body>
 				<nav class="navbar bg-dark">
 					<div class="logo fs-500">Ascendas Loyalty</div>
+					<a
+						id="logout_button"
+						class="logout ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+						onClick={logout}
+					>
+						Logout
+					</a>
 					<ul class="nav-links">
 						<input type="checkbox" id="checkbox_toggle" />
 						<label for="checkbox_toggle" class="hamburger">
@@ -127,17 +134,10 @@ function NavBar() {
 								>
 									Insert Loyalty Program
 								</a>
-							</li>
-							<li>
-								<a
-									id="logout_button"
-									class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
-									onClick={logout}
-								>
-									Logout
-								</a>
-							</li>
+							</li>	
+												
 						</div>
+						
 					</ul>
 				</nav>
 			</body>
