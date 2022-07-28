@@ -147,6 +147,7 @@ function NavBar() {
 								</a>
 							</li>
 						</div>
+						
 					</ul>
 				</nav>
 				<Modal 

@@ -80,3 +80,54 @@ $radius: 0.2rem;
     transform: scale(1.02);
   }
 }
+
+@media (max-width: 1000px) {
+  .card_rewards {
+    overflow: hidden;
+    box-shadow: 0 2px 20px $clr-gray300;
+    border-radius: $radius;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+    margin-top: 1rem;
+    
+    &__image {
+      height: 10rem;
+      width: 35%;
+      object-fit: contain;
+    }
+
+    &__title {
+      padding: 1rem;
+      position: relative;
+      font-size: 100%;
+    }
+
+    &__description {
+      padding: 0 1rem;
+    }
+
+    &__btn {
+      padding: 1rem;
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-right: 0rem;
+      margin-top: 1.25rem;
+      color: $clr-gray700;
+      border-radius: $radius;
+      transition: 200ms ease-in, color 100ms ease-in;
+      position: absolute;
+      right: 5px;
+      color: $clr-gray700;
+      align-items: left;
+      size: 80%;
+    }
+  
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}

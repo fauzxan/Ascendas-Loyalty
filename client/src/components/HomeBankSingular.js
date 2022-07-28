@@ -12,18 +12,18 @@ function HomeBankSingular(props) {
   return (
     <div className="card_rewards">
       <div>
-        <span className="card_rewards__image">
+        <a className="card_rewards__image">
           <img
             src={props.img}
             className="card_rewards__image"
             alt="company logo"
           />
-        </span>
-        <span>
+        </a>
+        <a>
           <a className="card_rewards__title">{props.title}</a>
-        </span>
+        </a>
         <a className="card_rewards__description">{props.desc}</a>
-        <span className="card_rewards__btn">
+        <a className="card_rewards__btn">
           <Button
             id={button_id}
             onClick={() => navigate("/bank-" + props.id)}
@@ -32,7 +32,7 @@ function HomeBankSingular(props) {
           >
             View Available Rewards
           </Button>
-        </span>
+        </a>
       </div>
     </div>
   );
