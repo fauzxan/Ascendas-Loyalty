@@ -85,7 +85,7 @@ const makeHandback = async () => {
 			//console.log(csvFormat);
 			const readable = Readable.from([csvFormat]);
 
-			return sftp.put(readable, `HANDBACK${fileName}`);
+			return sftp.put(readable, `./handback/HANDBACK${fileName}`);
 		})
 		.then(() => {
 			console.log("done writing!");

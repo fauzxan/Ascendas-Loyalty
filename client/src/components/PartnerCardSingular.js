@@ -40,7 +40,7 @@ const PartnerCardSingular = (props) => {
 		}/${date.getFullYear()}`;
 		let fullname = localStorage.getItem("user");
 		let email = localStorage.getItem("email");
-		let partnercode = "Daddy's bank";
+		let partnercode = "DBS";
 		let memid = values.membership_number;
 		let amt = values.amount;
 		let lpro = props.card.title;

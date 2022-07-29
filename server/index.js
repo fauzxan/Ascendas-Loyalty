@@ -19,7 +19,7 @@ const LoyaltyUpload = require("./routes/loyaltyUpload")
 
 const creditreqModel = require("./db/creditReq");
 const { makeHandback } = require("./Dailies/handback");
-const { makeAccural } = require("./Dailies/accural");
+const { makeAccural } = require("./Dailies/accrual");
 
 //external modules
 app.use(express.json());

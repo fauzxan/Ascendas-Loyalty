@@ -56,8 +56,8 @@ function NavBar() {
         />
       </head>
       <body>
-        <nav className="navbar bg-dark">
-          <div className="logo fs-500">Ascendas Loyalty</div>
+        <nav className="navbar bg-dark w3-red">
+          <div className="logo fs-500">DBS</div>
           <ul className="nav-links">
             <input type="checkbox" id="checkbox_toggle" />
             <label for="checkbox_toggle" className="hamburger">
