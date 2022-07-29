@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const creditReq = new mongoose.Schema({
   memberid: String,
   fullname: String,
+  email: String,
   date: String,
   amount: Number,
   partnercode: String,
