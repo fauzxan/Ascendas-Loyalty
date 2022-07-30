@@ -1,0 +1,47 @@
+require("../db/config");
+const express = require("express");
+const User = require("../db/User");
+const router = express.Router();
+
+router.post("/", async (re, rs)=>{
+    try {
+        json_copy = re.body
+        var userHashMap = [];
+      
+        // Alphonsus
+        for (let i = 0; i < json_copy.length; i++) {
+          if (userHashMap.includes(json_copy[i].email) == false) {
+            // need to debug why this part is not working. It is only supposed to update if the name does not exist in the hash map
+            // console.log(json_copy[i].email);
+            let ussss = await User.findOne({
+              email: json_copy[i].email,
+            }).select("transactions -_id");
+      
+            transactionsprep = ussss.transactions.toJSON();
+      
+            json_copy.map((value, index, arr) => {
+              if (value.email == json_copy[i].email) {
+                const referenceNumbercopy = json_copy[index].referenceNumber;
+                const outcomeCopy = json_copy[index].outcomecode;
+                transactionsprep[referenceNumbercopy] = outcomeCopy;
+              }
+            });
+            console.log(transactionsprep)
+            await User.findOneAndUpdate(
+              { email: `${json_copy[i].email}` },
+              {
+                $set: {
+                  transactions: { ...transactionsprep },
+                },
+              }
+            );
+            userHashMap.push(json_copy[i].email);
+          }
+        }
+        console.log("writing to handback file in mongoDB");
+      } catch (err) {
+        console.log(err);
+      }
+})
+
+module.exports = router;
