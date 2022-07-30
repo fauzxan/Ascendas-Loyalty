@@ -162,9 +162,9 @@ function NavBar() {
           onCancel={() => {
             setLoyaltyPopup(false);
           }}
-          onOk={() =>{ 
-		  setLoyaltyPopup(false)
-		  }}
+          onOk={() => {
+            setLoyaltyPopup(false);
+          }}
         >
           <LoyaltyPopup />
         </Modal>

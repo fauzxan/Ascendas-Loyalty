@@ -6,6 +6,7 @@ const creditReq = new mongoose.Schema({
   email: String,
   date: String,
   amount: Number,
+  email: String,
   partnercode: String,
   loyaltyprogramme: String,
   referenceNumber: Number,

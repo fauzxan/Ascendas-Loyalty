@@ -5,7 +5,7 @@ const loyaltyprogram = new mongoose.Schema({
   programName: String,
   currencyName: String,
   description: String,
-  img: String
+  img: String,
 });
 
 module.exports = mongoose.model("loyaltyprogram", loyaltyprogram);

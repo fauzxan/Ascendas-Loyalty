@@ -14,7 +14,7 @@ const writeTo = async (fname, data) => {
       return sftp.cwd();
     })
     .then((p) => {
-      const w = sftp.createWriteStream(p + fname);
+      const w = sftp.createWriteStream(p + "Accrual/" + fname);
       w.write(data);
       w.end();
       w.on("close", () => {

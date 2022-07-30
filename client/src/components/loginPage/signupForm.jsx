@@ -13,7 +13,7 @@ import { Sform } from "./suform";
 import { Form } from "antd";
 import Axios from "axios";
 import { Ldots } from "./dots";
-import { host } from "../config";
+import { bh } from "../config";
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
@@ -38,7 +38,7 @@ export function SignupForm(props) {
       setLoading(false);
       return;
     }
-    Axios.post(host + "/register", {
+    Axios.post(bh + "/register", {
       name: name,
       email: email,
       password: password,

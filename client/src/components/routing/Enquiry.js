@@ -6,7 +6,7 @@ import Highlighter from "react-highlight-words";
 import TransactionSuccess from "../popup/TransactionSuccess";
 import TransactionFailure from "../popup/TransactionFailure";
 import Axios from "axios";
-import { host } from "../config";
+import { bh } from "../config";
 
 const Enquiry = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -16,7 +16,7 @@ const Enquiry = () => {
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    Axios.get(host + "/getUser", {})
+    Axios.get(bh + "/getUser", {})
       .then((response) => {
         const user = localStorage.getItem("email");
         const result = response.data;

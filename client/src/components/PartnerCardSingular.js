@@ -5,7 +5,7 @@ import { Button, Modal, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
 import Axios from "axios";
-import { host } from "./config";
+import { bh } from "./config";
 import { Spin } from "antd";
 
 const PartnerCardSingular = (props) => {
@@ -44,7 +44,7 @@ const PartnerCardSingular = (props) => {
 		let memid = values.membership_number;
 		let amt = values.amount;
 		let lpro = props.card.title;
-		Axios.post(host + "/submitcreditreq", {
+		Axios.post(bh + "/createtransaction", {
 			memberid: memid,
 			fullname: fullname,
 			amount: amt,
