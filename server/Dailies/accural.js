@@ -9,10 +9,11 @@ const makeAccural = async () => {
     "memberid",
     "fullname",
     "date",
+    "email",
     "amount",
     "partnercode",
     "loyaltyprogramme",
-    "refcode",
+    "referenceNumber",
   ];
   const opts = { fields };
   const all = await creditReq.find({});

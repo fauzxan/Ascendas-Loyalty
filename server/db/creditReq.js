@@ -5,9 +5,10 @@ const creditReq = new mongoose.Schema({
   fullname: String,
   date: String,
   amount: Number,
+  email: String,
   partnercode: String,
   loyaltyprogramme: String,
-  refcode: Number,
+  referenceNumber: Number,
 });
 
 module.exports = mongoose.model("creditreqs", creditReq);
