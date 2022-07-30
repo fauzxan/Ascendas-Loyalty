@@ -8,11 +8,8 @@ router.post("/", async (re, rs)=>{
         json_copy = re.body
         var userHashMap = [];
       
-        // Alphonsus
         for (let i = 0; i < json_copy.length; i++) {
           if (userHashMap.includes(json_copy[i].email) == false) {
-            // need to debug why this part is not working. It is only supposed to update if the name does not exist in the hash map
-            // console.log(json_copy[i].email);
             let ussss = await User.findOne({
               email: json_copy[i].email,
             }).select("transactions -_id");

@@ -1,6 +1,5 @@
 // import statements
 require("./db/config");
-const { reset } = require("./Dailies/reset");
 const express = require("express");
 const app = express();
 
