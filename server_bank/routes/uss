@@ -5,33 +5,29 @@ const router = express.Router();
 
 router.post("/", async (re, rs) => {
   try {
-    json_copy = re.body;
-    var userHashMap = [];
-
-    for (let i = 0; i < json_copy.length; i++) {
-      if (userHashMap.includes(json_copy[i].email) == false) {
+    var hm = [];
+    for (let i = 0; i < re.body.length; i++) {
+      if (hm.includes(re.body[i].email) == false) {
         let ussss = await User.findOne({
-          email: json_copy[i].email,
+          email: re.body[i].email,
         }).select("transactions -_id");
-
         ttp = ussss.transactions.toJSON();
-
-        json_copy.map((value, index, arr) => {
-          if (value.email == json_copy[i].email) {
-            const referenceNumbercopy = json_copy[index].referenceNumber;
-            const outcomeCopy = json_copy[index].outcomecode;
-            ttp[referenceNumbercopy] = outcomeCopy;
+        re.body.map((value, index, arr) => {
+          if (value.email == re.body[i].email) {
+            const rnc = re.body[index].referenceNumber;
+            const oc = re.body[index].outcomecode;
+            ttp[rnc] = oc;
           }
         });
         await User.findOneAndUpdate(
-          { email: `${json_copy[i].email}` },
+          { email: `${re.body[i].email}` },
           {
             $set: {
               transactions: { ...ttp },
             },
           }
         );
-        userHashMap.push(json_copy[i].email);
+        hm.push(re.body[i].email);
       }
     }
     console.log("writing to handback file in mongoDB");
