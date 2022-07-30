@@ -66,7 +66,7 @@ const makeHandback = async () => {
             ************************************************************************
             */
       // INTERMEDIATE SOLUTION: (code below)
-      return sftp.get(fileName, `./destination/HANDBACK`);
+      return sftp.get("Accrual/" + fileName, `./destination/HANDBACK`);
     })
     .then(async () => {
       const ojson = await csvToJson().fromFile("./destination/HANDBACK");
@@ -100,7 +100,7 @@ const makeHandback = async () => {
       fs.writeFile("./destination/HANDBACK", csv, function (err) {
         console.log("Completed");
       });
-      return sftp.put(readable, `HANDBACK${fileName}`);
+      return sftp.put(readable, "Handback/" + `HANDBACK${fileName}`);
     })
     .then(() => {
       console.log("done writing!");
