@@ -39,13 +39,14 @@ router.post(
           },
         }
       );
-      re.body["refcode"] = parseInt(
+      re.body["referenceNumber"] = parseInt(
         `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}${curr}`
       );
       curr += 1;
       Axios.post(host + "/submitcreditreq", re.body)
         .then((result) => {
           console.log("Transaction creation success");
+          rs.status(200).send({ result: "success" })
         })
         .catch((err) => {
           console.log(err);
