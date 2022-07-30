@@ -4,10 +4,7 @@ const { reset } = require("./Dailies/reset");
 const express = require("express");
 const app = express();
 
-<<<<<<< HEAD
 const cors = require("cors");
-=======
->>>>>>> b76273d216dfe38edaa993bb0a6d7d8fa4c7dfeb
 
 const creditreq = require("./routes/creditReq");
 const handback = require("./routes/hanbackRoute");
