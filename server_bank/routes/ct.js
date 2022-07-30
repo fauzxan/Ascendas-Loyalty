@@ -46,7 +46,7 @@ router.post(
       Axios.post(host + "/submitcreditreq", re.body)
         .then((result) => {
           console.log("Transaction creation success");
-          rs.status(200).send({ result: "success" })
+          rs.status(200).send({ result: "success" });
         })
         .catch((err) => {
           console.log(err);

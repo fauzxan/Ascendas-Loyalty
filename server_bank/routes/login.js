@@ -7,10 +7,7 @@ const jwtKey = "loyalty";
 
 router.post("/", async (re, rs) => {
   if (re.body.password && re.body.email) {
-    let u = await User.findOne({ email: re.body.email }).exec(function (
-      e,
-      u
-    ) {
+    let u = await User.findOne({ email: re.body.email }).exec(function (e, u) {
       if (e) {
         console.warn({ error: true });
       } else if (!u) {
@@ -24,9 +21,9 @@ router.post("/", async (re, rs) => {
           } else {
             Jwt.sign({ u }, jwtKey, { expiresIn: "2h" }, (err, token) => {
               if (err) {
-                rs
-                  .status(500)
-                  .send({ result: "Error, please try again later." });
+                rs.status(500).send({
+                  result: "Error, please try again later.",
+                });
               }
               u = u.toObject();
               delete u.password;

@@ -3,42 +3,41 @@ const express = require("express");
 const User = require("../db/User");
 const router = express.Router();
 
-router.post("/", async (re, rs)=>{
-    try {
-        json_copy = re.body
-        var userHashMap = [];
-      
-        for (let i = 0; i < json_copy.length; i++) {
-          if (userHashMap.includes(json_copy[i].email) == false) {
-            let ussss = await User.findOne({
-              email: json_copy[i].email,
-            }).select("transactions -_id");
-      
-            transactionsprep = ussss.transactions.toJSON();
-      
-            json_copy.map((value, index, arr) => {
-              if (value.email == json_copy[i].email) {
-                const referenceNumbercopy = json_copy[index].referenceNumber;
-                const outcomeCopy = json_copy[index].outcomecode;
-                transactionsprep[referenceNumbercopy] = outcomeCopy;
-              }
-            });
-            console.log(transactionsprep)
-            await User.findOneAndUpdate(
-              { email: `${json_copy[i].email}` },
-              {
-                $set: {
-                  transactions: { ...transactionsprep },
-                },
-              }
-            );
-            userHashMap.push(json_copy[i].email);
+router.post("/", async (re, rs) => {
+  try {
+    json_copy = re.body;
+    var userHashMap = [];
+
+    for (let i = 0; i < json_copy.length; i++) {
+      if (userHashMap.includes(json_copy[i].email) == false) {
+        let ussss = await User.findOne({
+          email: json_copy[i].email,
+        }).select("transactions -_id");
+
+        ttp = ussss.transactions.toJSON();
+
+        json_copy.map((value, index, arr) => {
+          if (value.email == json_copy[i].email) {
+            const referenceNumbercopy = json_copy[index].referenceNumber;
+            const outcomeCopy = json_copy[index].outcomecode;
+            ttp[referenceNumbercopy] = outcomeCopy;
           }
-        }
-        console.log("writing to handback file in mongoDB");
-      } catch (err) {
-        console.log(err);
+        });
+        await User.findOneAndUpdate(
+          { email: `${json_copy[i].email}` },
+          {
+            $set: {
+              transactions: { ...ttp },
+            },
+          }
+        );
+        userHashMap.push(json_copy[i].email);
       }
-})
+    }
+    console.log("writing to handback file in mongoDB");
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 module.exports = router;

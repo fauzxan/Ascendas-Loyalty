@@ -1,3 +1,3 @@
-const host = "http://localhost:5000"
+const host = "http://localhost:5000";
 
-module.exports = host
+module.exports = host;
