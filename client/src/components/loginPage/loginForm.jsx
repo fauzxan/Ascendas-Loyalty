@@ -13,7 +13,7 @@ import { Lform } from "./lform";
 import { Form } from "antd";
 import Axios from "axios";
 import { Ldots } from "./dots";
-import { host } from "../config";
+import { bh } from "../config";
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export function LoginForm(props) {
       setLoading(false);
       return;
     }
-    Axios.post(host + "/login", {
+    Axios.post(bh + "/login", {
       email: email,
       password: password,
     })
