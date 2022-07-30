@@ -4,7 +4,10 @@ const { reset } = require("./Dailies/reset");
 const express = require("express");
 const app = express();
 
+<<<<<<< HEAD
 const cors = require("cors");
+=======
+>>>>>>> b76273d216dfe38edaa993bb0a6d7d8fa4c7dfeb
 
 const creditreq = require("./routes/creditReq");
 const handback = require("./routes/hanbackRoute");
@@ -13,7 +16,7 @@ const LoyaltyUpload = require("./routes/loyaltyUpload")
 
 const creditreqModel = require("./db/creditReq");
 const { makeHandback } = require("./Dailies/handback");
-const { makeAccural } = require("./Dailies/accural");
+const { makeAccural } = require("./Dailies/accrual");
 
 app.use(express.json());
 app.use(cors());

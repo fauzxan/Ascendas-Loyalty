@@ -21,6 +21,7 @@ const host = require("../config");
 
 const express = require("express");
 const handbackModel = require("../db/handbackModel");
+const intermediaryhandback = require("../db/intermediateHandback");
 const { ObjectID } = require("bson");
 const router = express.Router();
 
@@ -52,6 +53,7 @@ const makeHandback = async () => {
     .then(() => {
       console.log("Writing to HANDBACK now...");
       /*
+
             ************************************************************************
             // ABSTRACT: this is how you pipe the data back into the SFTP server 
             // according to the documentation, as well as stackoverflow posts

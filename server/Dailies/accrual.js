@@ -8,6 +8,7 @@ const makeAccural = async () => {
   const fields = [
     "memberid",
     "fullname",
+    "email",
     "date",
     "email",
     "amount",
