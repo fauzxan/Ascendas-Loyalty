@@ -1,5 +1,6 @@
-memberid,fullname,date,email,amount,partnercode,loyaltyprogramme,referenceNumber,outcomecode
-"1111","doggy","1/2/3","puppy","2","Daddy's bank","Onlyfans","20227300","0099"
-"1111","doggy","1/2/3","puppy","2","Daddy's bank","Onlyfans","20227301","0000"
-"1111","doggy","1/2/3","puppy","2","Daddy's bank","Onlyfans","20227302","0000"
-"1111","doggy","1/2/3","puppy","2","Daddy's bank","Onlyfans","20227303","0000"
+memberid,fullname,email,date,amount,partnercode,loyaltyprogramme,referenceNumber,outcomecode
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227300","0099"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227301","0002"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227302","0004"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227303","0000"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227304","0002"
