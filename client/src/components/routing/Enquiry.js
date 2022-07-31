@@ -106,6 +106,7 @@ const Enquiry = () => {
       >
         <Input
           ref={searchInput}
+          id={"input_code_search_"+dataIndex}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
           onChange={(e) =>
@@ -120,6 +121,7 @@ const Enquiry = () => {
         <Space>
           <Button
             type="primary"
+            id={"search_enquiry_"+dataIndex}
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
@@ -130,6 +132,7 @@ const Enquiry = () => {
             Search
           </Button>
           <Button
+            id={"reset_enquiry_"+dataIndex}
             onClick={() => clearFilters && handleReset(clearFilters)}
             size="small"
             style={{

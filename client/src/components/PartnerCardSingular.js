@@ -96,7 +96,7 @@ const PartnerCardSingular = (props) => {
 				<p className="card__description">{props.card.description} </p>
 			</div>
 			<button
-				id={"claim_rewards-" + props.card.id + "_button"}
+				id={"claim_rewards_" + props.card.programName}
 				type="primary"
 				onClick={showModal}
 				className="card__btn hover hover__btn"
@@ -125,7 +125,7 @@ const PartnerCardSingular = (props) => {
 				>
 					<Form.Item
 						label="Membership number"
-						name="membership_number"
+						name={"membership_number_"+props.card.programName}
 						rules={[
 							{
 								required: true,
@@ -144,7 +144,7 @@ const PartnerCardSingular = (props) => {
 
 					<Form.Item
 						label="Amount (Min is 1)"
-						name="amount"
+						name={"amount_"+props.card.programName}
 						rules={[
 							{
 								required: true,
@@ -167,7 +167,7 @@ const PartnerCardSingular = (props) => {
 						}}
 					>
 						<Button
-							id={"claim_submit-" + props.card.id + "_button"}
+							id={"claim_submit_" + props.card.programName}
 							type="primary"
 							htmlType="submit"
 						>
