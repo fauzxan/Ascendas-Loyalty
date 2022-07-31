@@ -4,6 +4,7 @@ import { Carousel } from "antd";
 import { Col, Row } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./bank.css";
+import nationalday from "../images/nationalday.jpg";
 
 const contentStyle = {
   height: "200px",
@@ -57,17 +58,33 @@ const HomeList = (props) => {
                   </h3>
                 </div>
               </Carousel>
+              <h3>
+                Here at DBS, we wish Singapore a very happy{" "}
+                <b>
+                  57<sup>th</sup>
+                </b>{" "}
+                birthday!
+              </h3>
+              <h3 className="h3">
+                Enjoy this festive National Day by claiming some of your points
+                at a higher rate!
+              </h3>
+              <h3>
+                Special offers start on <b>1/8/2022</b> and ends on{" "}
+                <b>6/9/2022</b>. Get yours now!
+              </h3>
+              <Button
+                id={button_id}
+                onClick={() => navigate("/bank-" + props.id)}
+                type="danger"
+                className="card_rewards__btn hover"
+              >
+                View Available Rewards
+              </Button>
             </div>
           </Col>
           <Col span={12}>
-            <Button
-              id={button_id}
-              onClick={() => navigate("/bank-" + props.id)}
-              type="danger"
-              className="card_rewards__btn hover"
-            >
-              View Available Rewards
-            </Button>
+            <img src={nationalday} className="image" />
           </Col>
         </Row>
       </div>
