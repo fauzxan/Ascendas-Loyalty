@@ -7,7 +7,7 @@ import NavBar from "./components/routing/NavBar";
 import About from "./components/routing/About";
 import OurCompanies from "./components/routing/OurCompanies";
 import Contact from "./components/routing/Contact";
-import HomeList from "./components/HomeList";
+import HomeList from "./components/bankLanding/HomeList";
 import PartnersCardList from "./components/PartnersCardList";
 import Enquiry from "./components/routing/Enquiry";
 
