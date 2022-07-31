@@ -15,9 +15,8 @@ const contentStyle = {
   background: "#b82828",
 };
 
-const user = localStorage.getItem("user");
-
 const HomeList = (props) => {
+  const user = localStorage.getItem("user");
   const navigate = useNavigate();
   var button_id = "bank-" + props.id;
   return (
