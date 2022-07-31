@@ -11,7 +11,7 @@ const HomeList = (props) => {
       <Button
         id={button_id}
         onClick={() => navigate("/bank-" + props.id)}
-        type="primary"
+        type="danger"
         className="card_rewards__btn hover"
       >
         View Available Rewards
