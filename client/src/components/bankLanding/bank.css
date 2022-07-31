@@ -1,0 +1,19 @@
+.user {
+    margin-bottom: 0;
+}
+
+.backgnd {
+    background: linear-gradient(rgba(105,105,105,1),transparent);
+    width: 2500px;
+    height: 600px;
+}
+
+.carousel {
+    display: block;
+    width: 800px;
+    padding: 40px;
+}
+
+.wrap {
+    white-space: normal;
+}
