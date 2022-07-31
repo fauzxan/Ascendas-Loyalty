@@ -6,6 +6,7 @@ import Axios from "axios";
 import { userExport } from "../loginPage/loginForm";
 import LoyaltyPopup from "../popup/LoayltyProgramAdd";
 import { Modal } from "antd";
+import dbs from "../images/dbs.jpg";
 
 const localStorage = window.localStorage;
 function NavBar() {
@@ -56,14 +57,14 @@ function NavBar() {
         />
       </head>
       <body>
-        <nav className="navbar bg-dark w3-red">
-          <div className="logo fs-500">DBS</div>
+        <nav className="navbar bg-dark w3-black">
           <ul className="nav-links">
             <input type="checkbox" id="checkbox_toggle" />
             <label for="checkbox_toggle" className="hamburger">
               &#9776;
             </label>
             <div className="menu">
+              <img src={dbs} />
               <li>
                 <a
                   id="BoS_button"
