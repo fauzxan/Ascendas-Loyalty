@@ -1,22 +1,23 @@
 import React from "react";
-import HomeBankSingular from "./HomeBankSingular";
-import bankDict from "./bankDict";
+import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 import "./styles/clientRewards.scss";
 
-class HomeList extends React.Component {
-
-  
-
-  render() {
-    return (
-      <div className="wrapper_rewards">
-        {bankDict.map(function (card) {
-          console.log(card);
-          return <HomeBankSingular {...card} />;
-        })}
-      </div>
-    );
-  }
-}
+const HomeList = (props) => {
+  const navigate = useNavigate();
+  var button_id = "bank-" + props.id;
+  return (
+    <>
+      <Button
+        id={button_id}
+        onClick={() => navigate("/bank-" + props.id)}
+        type="primary"
+        className="card_rewards__btn hover"
+      >
+        View Available Rewards
+      </Button>
+    </>
+  );
+};
 
 export default HomeList;
