@@ -7,6 +7,7 @@ import Popup from "./popup/RewardClickPopup";
 import Axios from "axios";
 import { bh } from "./config";
 import { Spin } from "antd";
+import sendOnSubmit from "./email/sendOnSubmit";
 
 const PartnerCardSingular = (props) => {
 	//console.log(props);
@@ -33,7 +34,9 @@ const PartnerCardSingular = (props) => {
 		setIsModalVisible(false);
 	};
 
-	const onFinish = (values) => {
+
+
+	const onFinish =  async (values) => {
 		let date = new Date();
 		let today = `${date.getDate()}/${
 			date.getMonth() + 1
@@ -44,7 +47,7 @@ const PartnerCardSingular = (props) => {
 		let memid = values.membership_number;
 		let amt = values.amount;
 		let lpro = props.card.title;
-		Axios.post(bh + "/createtransaction", {
+		await Axios.post(bh + "/createtransaction", {
 			memberid: memid,
 			fullname: fullname,
 			amount: amt,
@@ -65,7 +68,10 @@ const PartnerCardSingular = (props) => {
 				}
 				console.warn(err);
 			});
+			sendOnSubmit(values)
 	};
+
+
 
 	const onFinishFailed = (errorInfo) => {
 		console.log("Failed:", errorInfo);
