@@ -97,7 +97,7 @@ function NavBar() {
                   className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
                   onClick={() => navigate("/companies")}
                 >
-                  Our Companies
+                  Our Services
                 </a>
               </li>
               <li>
