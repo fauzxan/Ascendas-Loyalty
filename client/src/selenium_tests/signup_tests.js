@@ -33,7 +33,7 @@ async function signups() {
 
     //empty signup form test
     await driver.findElement(By.id("signup_button")).click();
-    await sleep(2000);
+    await sleep(1500);
     await driver.switchTo().alert().then((alert) => alert.dismiss()); 
     await sleep(2000);
 
@@ -43,7 +43,7 @@ async function signups() {
     await driver.findElement(By.id("login_password")).sendKeys("test1");
     await driver.findElement(By.id("login_confirm")).sendKeys("test1");
     await driver.findElement(By.id("signup_button")).click();
-    await sleep(2000);
+    await sleep(1500);
 
     //clear form
     await driver.switchTo().alert().then((alert) => alert.dismiss()); 
@@ -51,7 +51,7 @@ async function signups() {
     await driver.findElement(By.id("login_email")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await driver.findElement(By.id("login_password")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await driver.findElement(By.id("login_confirm")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await sleep(2000);
+    await sleep(1500);
 
     //password mismatch signup test
     await driver.findElement(By.id("login_fullname")).sendKeys("test10");
@@ -59,14 +59,14 @@ async function signups() {
     await driver.findElement(By.id("login_password")).sendKeys("test10");
     await driver.findElement(By.id("login_confirm")).sendKeys("test100");
     await driver.findElement(By.id("signup_button")).click();
-    await sleep(2000);
+    await sleep(1500);
 
     //clear form
     await driver.findElement(By.id("login_fullname")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await driver.findElement(By.id("login_email")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await driver.findElement(By.id("login_password")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await driver.findElement(By.id("login_confirm")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await sleep(2000);
+    await sleep(1500);
 
     //signup test success
     var new_user = makeRandom(8);
@@ -75,7 +75,7 @@ async function signups() {
     await driver.findElement(By.id("login_password")).sendKeys(new_user);
     await driver.findElement(By.id("login_confirm")).sendKeys(new_user);
     await driver.findElement(By.id("signup_button")).click();
-    await sleep(2000);
+    await sleep(1000);
 
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);

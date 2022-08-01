@@ -42,66 +42,80 @@ async function claimpoints_randominput() {
     //incorrect length with 1st card
     await driver.findElement(By.id("claim_rewards_Sands Group")).click();
     await sleep(1000);
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(makeRandom(5, false));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(makeRandom(5));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(5, false));
+    await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(3));
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
     await console.log("done with incorrect length test");
 
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await sleep(1000);
 
     //amount 0 test
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(makeRandom(9, true));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys("0");
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.id("basic_amount")).sendKeys("0");
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
     await console.log("done with amount 0 test");
 
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await sleep(1000);
 
     //amount negative test
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(makeRandom(9, true));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys("-" + makeRandom(9, false));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.id("basic_amount")).sendKeys("-" + makeRandom(3, false));
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
     await console.log("done with negative amount test");
 
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await sleep(1000);
 
     //empty membership field
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, false));
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
     await console.log("empty membership field test");
 
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await sleep(1000);
 
     //empty amount field
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, true));
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
     await console.log("empty amount field test");
 
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await sleep(1000);
+
+    //exceed number of points 
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(20, false));
+    await driver.findElement(By.id("claim_submit_Sands Group")).click();
+    await sleep(1000);
+
+    await console.log("exceed amount test");
+
+    await driver.switchTo().alert().then((alert) => alert.dismiss());
+    await sleep(1000);
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await sleep(1000);
 
     //with length 9 with one letter with 1st card
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(makeRandom(9, true));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(3, false));
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
     await driver.findElement(By.id("claim_rewards_ok")).click();
@@ -109,13 +123,13 @@ async function claimpoints_randominput() {
 
     await driver.findElement(By.id("claim_rewards_Sands Group")).click();
     await sleep(1000);
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await sleep(1000);
 
     //with length 9 with 1st card
-    await driver.findElement(By.id("basic_membership_number_Sands Group")).sendKeys(makeRandom(9, false));
-    await driver.findElement(By.id("basic_amount_Sands Group")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, false));
+    await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(3, false));
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
     await driver.findElement(By.id("claim_rewards_ok")).click();
@@ -126,8 +140,8 @@ async function claimpoints_randominput() {
     //with length 10 with 2nd card
     await driver.findElement(By.id("claim_rewards_Kris Flyer")).click();
     await sleep(1000);
-    await driver.findElement(By.id("basic_membersip_number_Kris Flyer")).sendKeys(makeRandom(10, false));
-    await driver.findElement(By.id("basic_amount_Kris Flyer")).sendKeys(makeRandom(10, false));
+    await driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(10, false));
+    await driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(3, false));
     await driver.findElement(By.id("claim_submit_Kris Flyer")).click();
     await sleep(1000);
     await driver.findElement(By.id("claim_rewards_ok")).click();
@@ -138,8 +152,8 @@ async function claimpoints_randominput() {
     //with length 12 with 3rd card
     await driver.findElement(By.id("claim_rewards_Star Alliance")).click();
     await sleep(1000);
-    await driver.findElement(By.id("basic_membership_number_Star Alliance")).sendKeys(makeRandom(12, false));
-    await driver.findElement(By.id("basic_amount_Star Alliance")).sendKeys(makeRandom(12, false));
+    await driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(12, false));
+    await driver.findElement(By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(3, false));
     await driver.findElement(By.id("claim_submit_Star Alliance")).click();
     await sleep(1000);
     await driver.findElement(By.id("claim_rewards_ok")).click();
@@ -148,11 +162,11 @@ async function claimpoints_randominput() {
     await console.log("done with length 12 test");
 
     //with length 16 with 1st card
-    await driver.findElement(By.id("claim_rewards_Grab Loyalty")).click();
+    await driver.findElement(By.id("claim_rewards_Sands Group")).click();
     await sleep(1000);
-    await driver.findElement(By.id("basic_membership_number_Grab Loyalty")).sendKeys(makeRandom(16, false));
-    await driver.findElement(By.id("basic_amount_Grab Loyalty")).sendKeys(makeRandom(16, false));
-    await driver.findElement(By.id("claim_submit_Grab Loyalty")).click();
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(16, false));
+    await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(3, false));
+    await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
     await console.log("done with length 16 test");
