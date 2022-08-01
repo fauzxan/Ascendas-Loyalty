@@ -19,20 +19,9 @@ async function homepage_test() {
     await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
     await sleep(1500);
 
-    await driver.findElement(By.id("bank-1")).click();
-    await sleep(1500);
-    await driver.findElement(By.id("BoS_button")).click();
-    await sleep(1500);
-    await driver.findElement(By.id("bank-2")).click();
-    await sleep(1500);
-    await driver.findElement(By.id("BoS_button")).click();
-    await sleep(1500);
-    await driver.findElement(By.id("bank-3")).click();
-    await sleep(1500);
-    await driver.findElement(By.id("BoS_button")).click();
-    await sleep(1500);
-
     //running through the navbar
+    await driver.findElement(By.id("BoS_button")).click();
+    await sleep(1500);
     await driver.findElement(By.id("about_button")).click();
     await sleep(1500);
     await driver.findElement(By.id("contact_button")).click();
@@ -41,11 +30,23 @@ async function homepage_test() {
     await sleep(1500);
     await driver.findElement(By.id("enquire_button")).click();
     await sleep(1500);
+    await driver.findElement(By.id("resetpts")).click();
+    await sleep(1500);
+    await driver.switchTo().alert().then((alert) => alert.dismiss()); 
+    await sleep(2000);
     await driver.findElement(By.id("BoS_button")).click();
     await sleep(1500);
+
+    // view available rewards button
+    await driver.findElement(By.id("bank-1")).click();
+    await sleep(1500);
+    await driver.findElement(By.id("BoS_button")).click();
+    await sleep(1500);
+
+    // logout
     await driver.findElement(By.id("logout_button")).click();
     await sleep(1500);
-    
+
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);
         assert.strictEqual("http://localhost:3000/Ascendas-Loyalty#/", textValue);

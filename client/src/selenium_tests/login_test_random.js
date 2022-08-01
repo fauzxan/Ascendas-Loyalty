@@ -30,18 +30,18 @@ async function login_test_random(times) {
       await driver.findElement(By.id("login_email")).sendKeys(makeRandom(9) + '@test.com');
       await driver.findElement(By.id("login_password")).sendKeys(makeRandom(9), Key.RETURN);
 
-      await sleep(3000);
+      await sleep(2000);
       await driver.switchTo().alert().then((alert) => alert.dismiss()); 
 
-      await sleep(3000);
+      await sleep(2000);
       await driver.findElement(By.id("login_email")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
       await driver.findElement(By.id("login_password")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-      await sleep(3000);
+      await sleep(2000);
     }
     
     await driver.findElement(By.id("login_email")).sendKeys("test1@test.com");
     await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
-    await sleep(3000);
+    await sleep(2000);
     
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);

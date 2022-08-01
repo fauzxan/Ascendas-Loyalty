@@ -10,6 +10,7 @@ const makeAccural = async () => {
     "fullname",
     "email",
     "date",
+    "email",
     "amount",
     "partnercode",
     "loyaltyprogramme",
@@ -20,18 +21,17 @@ const makeAccural = async () => {
   const today = new Date();
   try {
     const csv = parse(all, opts); // parses the data in mongodb as csv
-    fileName = `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}.csv`
+    fileName = `${today.getFullYear()}${
+      today.getMonth() + 1
+    }${today.getDate()}.csv`;
     console.log("accrual file name: ", fileName);
-    console.log("Writing to accrual file...")
-    writeTo(
-      fileName,
-      csv
-    );
-    console.log("Accrual written!")
+    console.log("Writing to accrual file...");
+    writeTo(fileName, csv);
+    console.log("Accrual written!");
   } catch (err) {
     console.error(err);
   }
-  await creditReq.deleteMany({})
+  await creditReq.deleteMany({});
 };
 
 module.exports = { makeAccural, fileName };

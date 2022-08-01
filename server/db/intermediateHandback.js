@@ -14,19 +14,22 @@ So, what does this solve?
 ********************************************
 */
 
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const intermediarySchema = new mongoose.Schema({
-    // "memberid","fullname","date","amount","partnercode","loyaltyprogramme","refcode"
-    memberid: String,
-    fullname:String,
-    date: String,
-    amount: Number,
-    partnercode: String,
-    loyaltyprogramme: String,
-    referencecode: Number
+  // "memberid","fullname","date","amount","partnercode","loyaltyprogramme","refcode"
+  memberid: String,
+  fullname: String,
+  date: String,
+  amount: Number,
+  partnercode: String,
+  loyaltyprogramme: String,
+  referencecode: Number,
 });
 
-const intermediaryModel = mongoose.model("intermediaryhandback", intermediarySchema);
+const intermediaryModel = mongoose.model(
+  "intermediaryhandback",
+  intermediarySchema
+);
 
 module.exports = intermediaryModel;

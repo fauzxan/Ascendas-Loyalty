@@ -1,26 +1,12 @@
-"memberid","fullname","email","date","amount","partnercode","loyaltyprogramme","referenceNumber"
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227290
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227291
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227292
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227293
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227294
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227295
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227290
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227291
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227292
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227293
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227294
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227295
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227296
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227290
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227291
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227292
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227293
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227294
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227295
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227296
-"1111","doggy","puppy","1/2/3",2,"Daddy's bank","Onlyfans",20227297
-"5498798213","admin","admin_ascendas@gmail.com","29/7/2022",125,"Daddy's bank",,20227290
-"4564523186","ant","ant@gmail.com","29/7/2022",1254,"DBS",,20227291
-"452654798","ant","ant@gmail.com","29/7/2022",12,"DBS",,20227292
-"4327081032","newacc","newacc@gmail.com","29/7/2022",45,"DBS",,20227293
+memberid,fullname,email,date,amount,partnercode,loyaltyprogramme,referenceNumber,outcomecode
+"123123132","godly","yep@gmail.com","30/7/2022","24","DBS","","20227300","0000"
+"123123132","godly","yep@gmail.com","30/7/2022","24","DBS","","20227301","0001"
+"123123132","godly","yep@gmail.com","30/7/2022","24","DBS","","20227300","0001"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227301","0002"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227300","0000"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227300","0099"
+"1111","doggy","puppy","1/2/3","2","Daddy's bank","Onlyfans","20227300","0003"
+"234234243","godly","yep@gmail.com","30/7/2022","48","DBS","","20227301","0001"
+"234234243","godly","yep@gmail.com","30/7/2022","48","DBS","","20227302","0004"
+"3453454335","godly","yep@gmail.com","30/7/2022","2000","DBS","","20227303","0004"
+"3453454335","godly","yep@gmail.com","30/7/2022","198000","DBS","","20227304","0005"

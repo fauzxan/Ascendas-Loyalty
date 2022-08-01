@@ -15,5 +15,4 @@ router.get("/", (req, res) => {
 
 // post code written in index.js
 
-
 module.exports = router;
