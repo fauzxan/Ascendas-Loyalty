@@ -5,7 +5,6 @@ import { Col, Row } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./bank.css";
 import nationalday from "../images/nationalday.jpg";
-import test from "../images/test.jpg";
 
 const contentStyle = {
   height: "200px",
@@ -84,8 +83,7 @@ const HomeList = (props) => {
             </div>
           </Col>
           <Col span={12}>
-            {/* <img src={nationalday} className="image" /> */}
-            <img src={test} className="image" />
+            <img src={nationalday} className="image" />
           </Col>
         </Row>
       </div>
