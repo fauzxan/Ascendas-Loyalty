@@ -125,7 +125,7 @@ const PartnerCardSingular = (props) => {
 				>
 					<Form.Item
 						label="Membership number"
-						name={"membership_number_"+props.card.programName}
+						name="membership_number"
 						rules={[
 							{
 								required: true,
@@ -144,7 +144,7 @@ const PartnerCardSingular = (props) => {
 
 					<Form.Item
 						label="Amount (Min is 1)"
-						name={"amount_"+props.card.programName}
+						name="amount"
 						rules={[
 							{
 								required: true,
