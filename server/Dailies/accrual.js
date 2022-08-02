@@ -10,7 +10,6 @@ const makeAccural = async () => {
     "fullname",
     "email",
     "date",
-    "email",
     "amount",
     "partnercode",
     "loyaltyprogramme",
