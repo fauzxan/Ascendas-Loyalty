@@ -26,6 +26,7 @@ const intermediarySchema = new mongoose.Schema({
   loyaltyprogramme: String,
   referencecode: Number,
   email: String,
+  outcomecode: String,
 });
 
 const intermediaryModel = mongoose.model(

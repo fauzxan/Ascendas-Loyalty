@@ -73,19 +73,20 @@ const makeHandback = async () => {
 			var json_copy = JSON.parse(JSON.stringify(ojson));
       try{
         await intermediaryhandback.deleteMany({});
-        await intermediaryhandback.insertMany(json_copy);
       }catch(err){
         console.log("error while writing intermediary handback")
       }
 			
 			for (let i = 0; i < ojson.length; i++) {
+				let oc = outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
+				json_copy[i]["outcomecode"] = oc;
+				ojson[i]["outcomecode"] = oc;
+				await intermediaryhandback.insertMany(json_copy[i]);
 				delete json_copy[i]["loyaltyprogramme"];
 				delete json_copy[i]["partnercode"];
 				delete json_copy[i]["memberid"];
 				delete json_copy[i]["fullname"];
-				let oc = outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
-				json_copy[i]["outcomecode"] = oc;
-				ojson[i]["outcomecode"] = oc;
+				
 				json_copy[i]["_id"] = new ObjectID();
 			}
 			const csvFormat = convertToCSV(json_copy);

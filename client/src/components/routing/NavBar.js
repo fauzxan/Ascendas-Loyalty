@@ -40,7 +40,7 @@ function NavBar() {
 			});
 	};
 	const sendEmails = () => {
-		Axios.get("http://localhost:5001/getintermediate").then((result) => {
+		Axios.get("http://localhost:5000/getintermediate").then((result) => {
 			console.log(result.data);
 			const values = result.data;
       sendMultiple(values);
