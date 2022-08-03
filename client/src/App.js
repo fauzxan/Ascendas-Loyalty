@@ -5,8 +5,6 @@ import "./App.css";
 import NavBar from "./components/routing/NavBar";
 
 import About from "./components/routing/About";
-import OurCompanies from "./components/routing/OurCompanies";
-import Contact from "./components/routing/Contact";
 import HomeList from "./components/bankLanding/HomeList";
 import PartnersCardList from "./components/PartnersCardList";
 import Enquiry from "./components/routing/Enquiry";
@@ -26,8 +24,6 @@ function App() {
         <Route element={<Secret />}>
           <Route exact path="/home" element={<HomeList id={1} />} />
           <Route exact path="/about" element={<About />} />
-          <Route exact path="/companies" element={<OurCompanies />} />
-          <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/enquire" element={<Enquiry />} />
           <Route exact path="/bank-1" element={<PartnersCardList />} />
         </Route>
