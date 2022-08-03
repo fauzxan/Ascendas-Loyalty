@@ -51,15 +51,6 @@ function NavBar() {
         console.log("error in retrieving intermediate handback\n", err);
       });
   };
-  const getpoints = () => {
-    Axios.get(bh + "/getUser")
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const logout = () => {
     localStorage.clear();
@@ -157,15 +148,6 @@ function NavBar() {
                   onClick={sendEmails}
                 >
                   Send Daily Emails
-                </a>
-              </li>
-              <li>
-                <a
-                  id="logout_button"
-                  className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
-                  onClick={getpoints}
-                >
-                  Points
                 </a>
               </li>
               <li>
