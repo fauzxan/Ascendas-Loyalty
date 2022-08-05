@@ -7,6 +7,8 @@ import { userExport } from "../loginPage/loginForm";
 import LoyaltyPopup from "../popup/LoayltyProgramAdd";
 import { Modal } from "antd";
 import dbs from "../images/dbs.jpg";
+import sendMultiple from "../email/sendDaily";
+import { host, bh } from "../config";
 
 const localStorage = window.localStorage;
 function NavBar() {
@@ -28,7 +30,7 @@ function NavBar() {
   }
 
   const createhb = async () => {
-    await Axios.get("http://localhost:5000/makehb")
+    await Axios.get(host + "/makehb")
       .then(() => {
         alert(
           "Handback file has been created successfully. Refresh SFTP server to see result"
@@ -36,6 +38,17 @@ function NavBar() {
       })
       .catch((err) => {
         console.warn(err);
+      });
+  };
+  const sendEmails = () => {
+    Axios.get(host + "/getintermediate")
+      .then((result) => {
+        console.log(result.data);
+        const values = result.data;
+        sendMultiple(values);
+      })
+      .catch((err) => {
+        console.log("error in retrieving intermediate handback\n", err);
       });
   };
 
@@ -85,24 +98,6 @@ function NavBar() {
               </li>
               <li>
                 <a
-                  id="contact_button"
-                  className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
-                  onClick={() => navigate("/contact")}
-                >
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a
-                  id="companies_button"
-                  className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
-                  onClick={() => navigate("/companies")}
-                >
-                  Our Companies
-                </a>
-              </li>
-              <li>
-                <a
                   id="enquire_button"
                   className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
                   onClick={() => navigate("/enquire")}
@@ -144,6 +139,15 @@ function NavBar() {
                   onClick={createLoyalty}
                 >
                   Insert Loyalty Program
+                </a>
+              </li>
+              <li style={{ display: admin == true ? "block" : "none" }}>
+                <a
+                  id="validation"
+                  className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+                  onClick={sendEmails}
+                >
+                  Send Daily Emails
                 </a>
               </li>
               <li>

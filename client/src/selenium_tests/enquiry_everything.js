@@ -14,7 +14,7 @@ var test_codes = {"20220000": "success",
                   "20220003": "member account closed", 
                   "20220004": "member acount suspended", 
                   "20220005": "member ineligible for accrual", 
-                  "20220100": "to be done", 
+                  "20220100": "pending", 
                   "20220099": "unable to process, please contact support for more information"};
 var test_codes_length = test_codes.length;
 

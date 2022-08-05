@@ -42,11 +42,11 @@ async function claimpoints_missingmembership() {
     await driver.findElement(By.id("bank-1")).click();
     await sleep(1000);
 
-    await driver.findElement(By.id("claim_rewards-1_button")).click();
+    await driver.findElement(By.id("claim_rewards_Sands Group")).click();
     await sleep(1000);
 
-    await driver.findElement(By.id("basic_amount_1")).sendKeys(makeRandom(9, false));
-    await driver.findElement(By.id("claim_submit-1_button")).click();
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(9, true));
+    await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
     await driver.getCurrentUrl().then(textValue => {

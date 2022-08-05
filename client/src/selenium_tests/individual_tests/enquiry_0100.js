@@ -8,7 +8,7 @@ const sleep = (milliseconds) => {
 
 //correct return
 
-async function enquiry_0005(){
+async function enquiry_0100(){
     let driver = await new Builder().forBrowser("chrome").build();
 
     await driver.get("http://localhost:3000/Ascendas-Loyalty#/");    
@@ -22,7 +22,7 @@ async function enquiry_0005(){
 
     await driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div/div/div/div/table/thead/tr/th[1]/div/span[2]/span")).click();
     await sleep(1500);
-    await driver.findElement(By.id("input_code_search_ReferenceCode")).sendKeys("20220005");
+    await driver.findElement(By.id("input_code_search_ReferenceCode")).sendKeys("20220100");
     await sleep(1500);
     await driver.findElement(By.id("search_enquiry_ReferenceCode")).click();
     await sleep(1500);
@@ -42,7 +42,7 @@ async function enquiry_0005(){
 
 }
 
-enquiry_0005();
+enquiry_0100();
 
 /*20220000
 20220001
