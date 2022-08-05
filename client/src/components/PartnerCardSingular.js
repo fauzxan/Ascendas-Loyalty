@@ -5,7 +5,7 @@ import { Button, Modal, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
 import Popup from "./popup/RewardClickPopup";
 import Axios from "axios";
-import { bh } from "./config";
+import { host, bh } from "./config";
 import { Spin } from "antd";
 import sendOnSubmit from "./email/sendOnSubmit";
 
@@ -17,10 +17,8 @@ const PartnerCardSingular = (props) => {
   const [success, setSuccess] = useState(false);
   const [amt, setAmt] = useState(0);
   const [cc, setCc] = useState("");
-  const [e, setE] = useState("");
+  const [e, setE] = useState(false);
   const [points, setPoints] = useState(0);
-  let claim_submit_id = "claim_submit-" + props.name + "_button";
-  let claim_rewards_id = "claim_rewards-" + props.title + "_button";
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -49,6 +47,26 @@ const PartnerCardSingular = (props) => {
   };
 
   const onFinish = async (values) => {
+    setE(true);
+    var v = false;
+    let lpro = props.card.programName;
+    let memid = values.membership_number;
+    await Axios.post(host + "/validate", {
+      l: lpro,
+      m: memid,
+    })
+      .then((response) => {
+        v = true;
+      })
+      .catch((e) => {
+        if (e.response.status == 403) {
+          alert("Invalid membership ID");
+        }
+      });
+    if (!v) {
+      setE(false);
+      return;
+    }
     let date = new Date();
     let today = `${date.getDate()}/${
       date.getMonth() + 1
@@ -56,9 +74,7 @@ const PartnerCardSingular = (props) => {
     let fullname = localStorage.getItem("user");
     let email = localStorage.getItem("email");
     let partnercode = "DBS";
-    let memid = values.membership_number;
     let amt = values.amount;
-    let lpro = props.card.title;
     await Axios.post(bh + "/createtransaction", {
       memberid: memid,
       fullname: fullname,
@@ -80,6 +96,7 @@ const PartnerCardSingular = (props) => {
         }
         console.warn(err);
       });
+    setE(false);
     sendOnSubmit(values);
   };
 
@@ -147,12 +164,6 @@ const PartnerCardSingular = (props) => {
                 required: true,
                 message: "Please input membership ID",
               },
-              {
-                pattern: new RegExp(
-                  /^(\d{9}|\d{10}|\d{12}|\d{16}|[0-9]{9}[A-Z]{1})$/
-                ),
-                message: "Please input valid membership ID",
-              },
             ]}
           >
             <Input />
@@ -187,6 +198,7 @@ const PartnerCardSingular = (props) => {
             <Button
               id={"claim_submit_" + props.card.programName}
               type="primary"
+              loading={e}
               htmlType="submit"
             >
               Submit
