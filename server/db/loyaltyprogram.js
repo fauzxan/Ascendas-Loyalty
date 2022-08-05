@@ -5,6 +5,7 @@ const loyaltyprogram = new mongoose.Schema({
   programName: String,
   currencyName: String,
   description: String,
+  regex: String,
   img: String,
 });
 
