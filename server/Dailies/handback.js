@@ -47,7 +47,6 @@ const makeHandback = async () => {
         const r = await sftp.get(fd + e.name);
         const t = await csv().fromString(r.toString());
         var jc = JSON.parse(JSON.stringify(t));
-
         for (let i = 0; i < t.length; i++) {
           let oc =
             outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];

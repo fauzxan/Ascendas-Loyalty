@@ -39,7 +39,7 @@ const makeAccural = async () => {
       console.error(err);
     }
   }
-  // await creditReq.deleteMany({});
+  await creditReq.deleteMany({});
 };
 
 module.exports = { makeAccural, fileName };
