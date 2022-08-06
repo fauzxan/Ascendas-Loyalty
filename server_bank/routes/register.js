@@ -23,6 +23,9 @@ router.post(
     if (rs.locals.c) {
       let p = Math.floor(Math.random() * (100000 + 1));
       let t = Math.floor(Math.random() * 5 + 1);
+      if (t == 1) {
+        t = 1.5;
+      }
       re.body["points"] = p;
       re.body["tier"] = t;
       let u = new User(re.body);
