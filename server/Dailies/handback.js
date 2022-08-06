@@ -16,6 +16,7 @@ const csv = require("csvtojson");
 const { Readable } = require("stream");
 const Axios = require("axios");
 const host = require("../config");
+const intermediaryhandback = require("../db/intermediateHandback");
 
 const outcomeCodes = ["0000", "0001", "0002", "0003", "0004", "0005", "0099"];
 const today = new Date();
@@ -43,6 +44,7 @@ const makeHandback = async () => {
     })
     .then(async (ls) => {
       var o = [];
+      await intermediaryhandback.deleteMany({});
       for (const e of ls) {
         const r = await sftp.get(fd + e.name);
         const t = await csv().fromString(r.toString());
@@ -52,6 +54,7 @@ const makeHandback = async () => {
             outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
           jc[i]["outcomecode"] = oc;
           t[i]["outcomecode"] = oc;
+          await intermediaryhandback.insertMany(jc[i]);
           delete jc[i]["loyaltyprogramme"];
           delete jc[i]["partnercode"];
           delete jc[i]["memberid"];
