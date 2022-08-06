@@ -16,21 +16,30 @@ const makeAccural = async () => {
     "referenceNumber",
   ];
   const opts = { fields };
-  const all = await creditReq.find({});
+  const all = await creditReq.aggregate([
+    {
+      $group: { _id: "$loyaltyprogramme", r: { $push: "$$ROOT" } },
+    },
+  ]);
   const today = new Date();
-  try {
-    const csv = parse(all, opts); // parses the data in mongodb as csv
-    fileName = `${today.getFullYear()}${
-      today.getMonth() + 1
-    }${today.getDate()}.csv`;
-    console.log("accrual file name: ", fileName);
-    console.log("Writing to accrual file...");
-    writeTo(fileName, csv);
-    console.log("Accrual written!");
-  } catch (err) {
-    console.error(err);
+  for (const e of all) {
+    try {
+      console.log(e._id);
+      const csv = parse(e.r, opts); // parses the data in mongodb as csv
+      console.log(csv);
+      fileName =
+        e._id.replace(/\s+/g, "-").toLowerCase() +
+        "_" +
+        `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}.csv`;
+      console.log("accrual file name: ", fileName);
+      console.log("Writing to accrual file...");
+      writeTo(fileName, csv);
+      console.log("Accrual written!");
+    } catch (err) {
+      console.error(err);
+    }
   }
-  await creditReq.deleteMany({});
+  // await creditReq.deleteMany({});
 };
 
 module.exports = { makeAccural, fileName };
