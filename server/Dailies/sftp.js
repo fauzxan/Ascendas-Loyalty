@@ -6,15 +6,29 @@ const config = {
   password: "rxh3qpj7man0qwz_CNZ",
 };
 
+const today = new Date();
+
 const writeTo = async (fname, data) => {
   let sftp = new Client();
   sftp
     .connect(config)
     .then(() => {
+      return sftp.mkdir(
+        "/Accrual/" +
+          `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`
+      );
+    })
+    .then(() => {
       return sftp.cwd();
     })
     .then((p) => {
-      const w = sftp.createWriteStream(p + "Accrual/" + fname);
+      const w = sftp.createWriteStream(
+        p +
+          "Accrual/" +
+          `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}` +
+          "/" +
+          fname
+      );
       w.write(data);
       w.end();
       w.on("close", () => {
