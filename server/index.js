@@ -6,7 +6,6 @@ const app = express();
 const cors = require("cors");
 
 const creditreq = require("./routes/creditReq");
-const handback = require("./routes/hanbackRoute");
 const LoyaltyProgram = require("./routes/loyaltyprogram");
 const LoyaltyUpload = require("./routes/loyaltyUpload");
 const intermdiaryFind = require("./routes/getIntermediate");
@@ -20,7 +19,6 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/submitcreditreq", creditreq);
-app.use("/createhandback", handback);
 app.use("/getloyaltyprogram", LoyaltyProgram);
 app.use("/loyaltyupload", LoyaltyUpload);
 app.use("/getintermediate", intermdiaryFind);
