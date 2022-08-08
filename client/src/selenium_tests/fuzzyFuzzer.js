@@ -1,7 +1,7 @@
 module.exports = {
     fuzzyFuzzer: function(length, mode) {
-        const alphabets_capital = "abcdefghijklmnopqrstuvwxyz";
-        const alphabets_lower = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const alphabets_lower = "abcdefghijklmnopqrstuvwxyz";
+        const alphabets_capital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const numbers = "1234567890";
         const characters = "`~!@#$%^&*()_+-={}|[]:;<>?,./\\\\";
         var input_pool_length = 0;

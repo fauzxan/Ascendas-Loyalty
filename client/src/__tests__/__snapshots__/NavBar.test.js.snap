@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot testing snapshot for Home component 1`] = `
+<div
+  onLoad={[Function]}
+>
+  <head>
+    <meta
+      charset="UTF-8"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <link
+      href="https://fonts.googleapis.com"
+      rel="preconnect"
+    />
+    <link
+      crossorigin={true}
+      href="https://fonts.gstatic.com"
+      rel="preconnect"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav
+      className="navbar bg-dark w3-black"
+    >
+      <ul
+        className="nav-links"
+      >
+        <input
+          id="checkbox_toggle"
+          type="checkbox"
+        />
+        <label
+          className="hamburger"
+          for="checkbox_toggle"
+        >
+          ☰
+        </label>
+        <div
+          className="menu"
+        >
+          <img
+            src="dbs.jpg"
+          />
+          <li>
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="BoS_button"
+              onClick={[Function]}
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="about_button"
+              onClick={[Function]}
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="enquire_button"
+              onClick={[Function]}
+            >
+              Enquire Status
+            </a>
+          </li>
+          <li>
+            <a
+              class="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="resetpts"
+              onClick={[Function]}
+            >
+              Spend money
+            </a>
+          </li>
+          <li
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          >
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="create_accrual_button"
+              onClick={[Function]}
+            >
+              Create Accrual File
+            </a>
+          </li>
+          <li
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          >
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="create_handback_button"
+              onClick={[Function]}
+            >
+              Create Handback File
+            </a>
+          </li>
+          <li
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          >
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="validation"
+              onClick={[Function]}
+            >
+              Insert Loyalty Program
+            </a>
+          </li>
+          <li
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          >
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="validation"
+              onClick={[Function]}
+            >
+              Send Daily Emails
+            </a>
+          </li>
+          <li>
+            <a
+              className="ff-sans-cond uppercase text-white letter-spacing-2 fs-300"
+              id="logout_button"
+              onClick={[Function]}
+            >
+              Logout
+            </a>
+          </li>
+        </div>
+      </ul>
+    </nav>
+  </body>
+</div>
+`;

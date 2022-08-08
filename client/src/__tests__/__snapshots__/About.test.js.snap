@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot testing snapshot for Home component 1`] = `
+<div>
+  This is the about page. Content coming up soon
+</div>
+`;

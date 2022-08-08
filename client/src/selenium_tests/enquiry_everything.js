@@ -12,7 +12,7 @@ var test_codes = {"20220000": "success",
                   "20220001": "member not found", 
                   "20220002": "member name mismatch", 
                   "20220003": "member account closed", 
-                  "20220004": "member acount suspended", 
+                  "20220004": "member account suspended", 
                   "20220005": "member ineligible for accrual", 
                   "20220100": "pending", 
                   "20220099": "unable to process, please contact support for more information"};

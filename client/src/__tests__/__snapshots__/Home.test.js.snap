@@ -1,0 +1,516 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot testing snapshot for Home component 1`] = `
+<div
+  className="backgnd"
+>
+  <div>
+    <h2
+      className="greeting"
+    >
+      Welcome Back,
+    </h2>
+    <div
+      className="ant-row"
+      style={Object {}}
+    >
+      <div
+        className="ant-col ant-col-12"
+        style={Object {}}
+      >
+        <h1
+          className="user"
+        />
+        <div
+          className="carousel"
+        >
+          <div
+            className="ant-carousel"
+          >
+            <div
+              className="slick-slider slick-initialized"
+              dir="ltr"
+            >
+              <div
+                className="slick-list"
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={null}
+                onMouseMove={null}
+                onMouseUp={[Function]}
+                onTouchCancel={null}
+                onTouchEnd={[Function]}
+                onTouchMove={null}
+                onTouchStart={[Function]}
+                style={Object {}}
+              >
+                <div
+                  className="slick-track"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseOver={[Function]}
+                  style={
+                    Object {
+                      "WebkitTransform": "translate3d(0px, 0px, 0px)",
+                      "WebkitTransition": "",
+                      "msTransform": "translateX(0px)",
+                      "opacity": 1,
+                      "transform": "translate3d(0px, 0px, 0px)",
+                      "transition": "",
+                    }
+                  }
+                >
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide slick-cloned"
+                    data-index={-1}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          Never disclose your card numbers or OTPs to unverified sources. Bank staff and government officials will never request your card details, OTPs, or Digital Token Approvals through SMS, voice calls, or unofficial websites.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={false}
+                    className="slick-slide slick-active slick-current"
+                    data-index={0}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "outline": "none",
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          Emails and SMSes from DBS will not include clickable links. Always go directly to our website to verify the authenticity of any banking-related requests or offers.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide"
+                    data-index={1}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "outline": "none",
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          DBS will never ask you for your credit or debit card details, CVV, SMS or email OTPs, or Digital Token approvals to verify or unlock your account.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide"
+                    data-index={2}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "outline": "none",
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          Do not call phone numbers, click on URL links, or scan QR codes in unsolicited emails, SMS, or other Messaging Application messages.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide"
+                    data-index={3}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "outline": "none",
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          Never disclose your card numbers or OTPs to unverified sources. Bank staff and government officials will never request your card details, OTPs, or Digital Token Approvals through SMS, voice calls, or unofficial websites.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide slick-cloned"
+                    data-index={4}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          Emails and SMSes from DBS will not include clickable links. Always go directly to our website to verify the authenticity of any banking-related requests or offers.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide slick-cloned"
+                    data-index={5}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          DBS will never ask you for your credit or debit card details, CVV, SMS or email OTPs, or Digital Token approvals to verify or unlock your account.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide slick-cloned"
+                    data-index={6}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          Do not call phone numbers, click on URL links, or scan QR codes in unsolicited emails, SMS, or other Messaging Application messages.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden={true}
+                    className="slick-slide slick-cloned"
+                    data-index={7}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "width": 0,
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div>
+                      <div
+                        style={
+                          Object {
+                            "display": "inline-block",
+                            "width": "100%",
+                          }
+                        }
+                        tabIndex={-1}
+                      >
+                        <h3
+                          style={
+                            Object {
+                              "background": "#b82828",
+                              "color": "#fff",
+                              "height": "200px",
+                              "lineHeight": "50px",
+                              "textAlign": "center",
+                            }
+                          }
+                        >
+                          Never disclose your card numbers or OTPs to unverified sources. Bank staff and government officials will never request your card details, OTPs, or Digital Token Approvals through SMS, voice calls, or unofficial websites.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul
+                className="slick-dots slick-dots-bottom"
+                onMouseEnter={null}
+                onMouseLeave={null}
+                onMouseOver={null}
+                style={
+                  Object {
+                    "display": "block",
+                  }
+                }
+              >
+                <li
+                  className="slick-active"
+                >
+                  <button
+                    onClick={[Function]}
+                  >
+                    1
+                  </button>
+                </li>
+                <li
+                  className=""
+                >
+                  <button
+                    onClick={[Function]}
+                  >
+                    2
+                  </button>
+                </li>
+                <li
+                  className=""
+                >
+                  <button
+                    onClick={[Function]}
+                  >
+                    3
+                  </button>
+                </li>
+                <li
+                  className=""
+                >
+                  <button
+                    onClick={[Function]}
+                  >
+                    4
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h3>
+            Here at DBS, we wish Singapore a very happy
+             
+            <b>
+              57
+              <sup>
+                th
+              </sup>
+            </b>
+             
+            birthday!
+          </h3>
+          <h3
+            className="h3"
+          >
+            Enjoy this festive National Day by claiming some of your points at a higher rate!
+          </h3>
+          <h3>
+            Special offers start on 
+            <b>
+              1/8/2022
+            </b>
+             and ends on
+             
+            <b>
+              6/9/2022
+            </b>
+            . Get yours now!
+          </h3>
+          <button
+            className="ant-btn ant-btn-danger card_rewards__btn hover"
+            disabled={false}
+            id="bank-undefined"
+            onClick={[Function]}
+            type="button"
+          >
+            <span>
+              View Available Rewards
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        className="ant-col ant-col-12"
+        style={Object {}}
+      >
+        <img
+          className="image"
+          src="nationalday.jpg"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
