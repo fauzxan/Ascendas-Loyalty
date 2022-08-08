@@ -12,142 +12,101 @@ require("../db/config");
 
 let Client = require("ssh2-sftp-client");
 let sftp = new Client();
-const fs = require("fs");
-const csvToJson = require("csvtojson");
-const mongodb = require("mongodb");
+const csv = require("csvtojson");
 const { Readable } = require("stream");
 const Axios = require("axios");
 const host = require("../config");
-
-const express = require("express");
-const handbackModel = require("../db/handbackModel");
 const intermediaryhandback = require("../db/intermediateHandback");
-const { ObjectID } = require("bson");
-const router = express.Router();
 
 const outcomeCodes = ["0000", "0001", "0002", "0003", "0004", "0005", "0099"];
-
+const today = new Date();
 const makeHandback = async () => {
-	// this part is required to make a connection to the correct sftp server
-	const config = {
-		host: "66.220.9.51",
-		username: "sutd_2022_c4g7",
-		password: "rxh3qpj7man0qwz_CNZ",
-	};
+  const config = {
+    host: "66.220.9.51",
+    username: "sutd_2022_c4g7",
+    password: "rxh3qpj7man0qwz_CNZ",
+  };
 
-	// For the file name of the day
-	var today = new Date();
-	console.log(today);
-
-	let fileName = `${today.getFullYear()}${
-		today.getMonth() + 1
-	}${today.getDate()}.csv`;
-
-	console.log("filename to be opened: " + fileName);
-
-	await sftp
-		.connect(config)
-		.then(() => {
-			return sftp.list("/");
-		})
-		.then(() => {
-			console.log("Writing to HANDBACK now...");
-			/*
-
-            ************************************************************************
-            // ABSTRACT: this is how you pipe the data back into the SFTP server 
-            // according to the documentation, as well as stackoverflow posts
-            // ERROR ENCOUNTERED: The file written back to SFTP server is 0 bytes wide
-            // TODO: need to explore the 'options' parameter
-            // SOLUTION: (code below)
-            sftp.get(fileName).then((stream)=> {
-                stream.pipe(sftp.createWriteStream(`HANDBACK${fileName}`))
-            })
-            ************************************************************************
-            */
-			// INTERMEDIATE SOLUTION: (code below)
-			return sftp.get("Accrual/" + fileName, `./destination/HANDBACK`);
-		})
-		.then(async () => {
-			const ojson = await csvToJson().fromFile("./destination/HANDBACK");
-			var json_copy = JSON.parse(JSON.stringify(ojson));
-      try{
-        await intermediaryhandback.deleteMany({});
-      }catch(err){
-        console.log("error while writing intermediary handback")
+  let fd =
+    "/Accrual" +
+    "/" +
+    `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}/`;
+  await sftp
+    .connect(config)
+    .then(() => {
+      sftp.mkdir(
+        "/Handback/" +
+          `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}/`
+      );
+    })
+    .then(() => {
+      return sftp.list(fd);
+    })
+    .then(async (ls) => {
+      var o = [];
+      await intermediaryhandback.deleteMany({});
+      for (const e of ls) {
+        const r = await sftp.get(fd + e.name);
+        const t = await csv().fromString(r.toString());
+        var jc = JSON.parse(JSON.stringify(t));
+        for (let i = 0; i < t.length; i++) {
+          let oc =
+            outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
+          jc[i]["outcomecode"] = oc;
+          t[i]["outcomecode"] = oc;
+          await intermediaryhandback.insertMany(jc[i]);
+          delete jc[i]["loyaltyprogramme"];
+          delete jc[i]["partnercode"];
+          delete jc[i]["memberid"];
+          delete jc[i]["fullname"];
+        }
+        const cf = convertToCSV(jc);
+        const readable = Readable.from([cf]);
+        await sftp.put(
+          readable,
+          "/Handback/" +
+            `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}/` +
+            `HANDBACK_${e.name}`
+        );
+        o = o.concat(t);
       }
-			
-			for (let i = 0; i < ojson.length; i++) {
-				let oc = outcomeCodes[Math.floor(Math.random() * outcomeCodes.length)];
-				json_copy[i]["outcomecode"] = oc;
-				ojson[i]["outcomecode"] = oc;
-				await intermediaryhandback.insertMany(json_copy[i]);
-				delete json_copy[i]["loyaltyprogramme"];
-				delete json_copy[i]["partnercode"];
-				delete json_copy[i]["memberid"];
-				delete json_copy[i]["fullname"];
-				
-				json_copy[i]["_id"] = new ObjectID();
-			}
-			const csvFormat = convertToCSV(json_copy);
-			var json = ojson;
-			var fields = Object.keys(json[0]);
-			var replacer = function (key, value) {
-				return value === null ? "" : value;
-			};
-			var csv = json.map(function (row) {
-				return fields
-					.map(function (fieldName) {
-						return JSON.stringify(row[fieldName], replacer);
-					})
-					.join(",");
-			});
-			csv.unshift(fields.join(","));
-			csv = csv.join("\r\n");
-			const readable = Readable.from([csvFormat]);
-			fs.writeFile("./destination/HANDBACK", csv, function (err) {
-				console.log("Completed");
-			});
-			return sftp.put(readable, "Handback/" + `HANDBACK${fileName}`);
-		})
-		.then(() => {
-			console.log("done writing!");
-			sftp.end();
-		})
-		.catch((err) => {
-			console.log("There is an error ", err);
-		});
-	try {
-		// json variable parses the incoming values from the csv file and puts it in object form
-		const json = await csvToJson().fromFile(`./destination/HANDBACK`);
-		Axios.post(host + "/updatestatus", json)
-			.then((result) => {
-				console.log("Update status success");
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	} catch (err) {
-		console.log("Ignore this error", err);
-	}
+      console.log(o);
+      return o;
+    })
+    .then(async (o) => {
+      Axios.post(host + "/updatestatus", o)
+        .then(() => {
+          console.log("Update status success");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .then(() => {
+      console.log("done writing!");
+      sftp.end();
+    })
+    .catch((err) => {
+      console.log("There is an error ", err);
+    });
 };
 
 function convertToCSV(arr) {
-	var arrconv = '"date","amount","referenceNumber","outcomecode","email"\r\n';
-	for (let i = 0; i < arr.length; i++) {
-		arrconv +=
-			arr[i]["date"] +
-			"," +
-			arr[i]["amount"] +
-			"," +
-			arr[i]["referenceNumber"] +
-			"," +
-			arr[i]["outcomecode"] +
-      ","+
-      arr[i]["email"]+
-			"\r\n";
-	}
-	return arrconv;
+  var arrconv = '"date","amount","referenceNumber","outcomecode","email"\r\n';
+  for (let i = 0; i < arr.length; i++) {
+    arrconv +=
+      arr[i]["date"] +
+      "," +
+      arr[i]["amount"] +
+      "," +
+      arr[i]["referenceNumber"] +
+      "," +
+      arr[i]["outcomecode"] +
+      "," +
+      arr[i]["email"] +
+      "\r\n";
+  }
+  return arrconv;
 }
 
 module.exports = { makeHandback };
