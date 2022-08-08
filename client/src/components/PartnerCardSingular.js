@@ -19,6 +19,7 @@ const PartnerCardSingular = (props) => {
   const [cc, setCc] = useState("");
   const [e, setE] = useState(false);
   const [points, setPoints] = useState(0);
+  const [tier, setTier] = useState(0);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -29,8 +30,10 @@ const PartnerCardSingular = (props) => {
         for (let i = 0; i < result.length; i++) {
           if (result[i].email === user) {
             setPoints(result[i].points);
+            setTier(result[i].tier);
           }
         }
+        console.log(tier);
       })
       .catch((err) => {
         console.log(err);
@@ -207,7 +210,7 @@ const PartnerCardSingular = (props) => {
         </Form>
       </Modal>
       {success && (
-        <Popup success={setSuccess} amt={amt} cc={cc} setcc={setCc} />
+        <Popup success={setSuccess} amt={amt * tier} cc={cc} setcc={setCc} />
       )}
     </div>
   );
