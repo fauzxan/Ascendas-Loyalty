@@ -47,6 +47,9 @@ async function claimpoints_randominput() {
     await driver.findElement(By.id("claim_submit_Sands Group")).click();
     await sleep(1000);
 
+    await driver.switchTo().alert().then((alert) => alert.dismiss());
+    await sleep(2000);
+
     await console.log("done with incorrect length test");
 
     await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));

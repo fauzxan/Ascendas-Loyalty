@@ -8,14 +8,14 @@ const sleep = (milliseconds) => {
   }
 
 var test_codes = {"20220000": "success",
-                  "20220098": "success",
                   "20220001": "member not found", 
                   "20220002": "member name mismatch", 
                   "20220003": "member account closed", 
                   "20220004": "member account suspended", 
-                  "20220005": "member ineligible for accrual", 
-                  "20220100": "pending", 
-                  "20220099": "unable to process, please contact support for more information"};
+                  "20220005": "member ineligible for accrual",                   
+                  "20220098": "success", 
+                  "20220099": "unable to process, please contact support for more information",
+                  "20220100": "pending"};
 var test_codes_length = test_codes.length;
 
 var outcome_codes = ["success", "fail", "pending"];
@@ -33,6 +33,17 @@ async function enquiry_everything(){
     await sleep(1000);
     await driver.findElement(By.id("enquire_button")).click();
     await sleep(1500);
+
+    // sort by button
+    // success first
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/table/thead/tr/th[2]/div/span[1]/div")).click();
+    await sleep(1000);
+    // fail first
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/table/thead/tr/th[2]/div/span[1]/div")).click();
+    await sleep(1000);
+    // original
+    await driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/table/thead/tr/th[2]/div/span[1]/div")).click();
+    await sleep(1000);
 
     // search by reference codes
     for (var code in test_codes) {
