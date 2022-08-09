@@ -69,7 +69,7 @@ async function signups() {
     await sleep(1500);
 
     //signup test success
-    var new_user = makeRandom(8);
+    var new_user2 = makeRandom(8);
     await driver.findElement(By.id("login_fullname")).sendKeys(new_user2);
     await driver.findElement(By.id("login_email")).sendKeys(new_user2 + "@test.com");
     await driver.findElement(By.id("login_password")).sendKeys(new_user2);

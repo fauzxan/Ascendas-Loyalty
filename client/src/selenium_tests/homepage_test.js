@@ -24,10 +24,6 @@ async function homepage_test() {
     await sleep(1500);
     await driver.findElement(By.id("about_button")).click();
     await sleep(1500);
-    await driver.findElement(By.id("contact_button")).click();
-    await sleep(1500);
-    await driver.findElement(By.id("companies_button")).click();
-    await sleep(1500);
     await driver.findElement(By.id("enquire_button")).click();
     await sleep(1500);
     await driver.findElement(By.id("resetpts")).click();
