@@ -20,9 +20,16 @@ async function fuzzer_login(times) {
       await driver.findElement(By.id("login_email")).sendKeys(fuzzer.fuzzyFuzzer(fuzz_counter));
       await driver.findElement(By.id("login_password")).sendKeys(fuzzer.fuzzyFuzzer(fuzz_counter), Key.RETURN);
       await sleep(2000);
-      await driver.findElement(By.id("login_email")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-      await driver.findElement(By.id("login_password")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-      await sleep(2000);
+      try {
+        await driver.switchTo().alert().then((alert) => alert.dismiss());
+      } catch {
+        continue;
+      } finally {
+        await sleep(1000);
+        await driver.findElement(By.id("login_email")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+        await driver.findElement(By.id("login_password")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+        await sleep(2000);
+      } 
 
       if (j % 10 == 0) {
         fuzz_counter++;
@@ -37,5 +44,5 @@ async function fuzzer_login(times) {
     await driver.quit();
 }
 
-fuzzer_login(1000);
+fuzzer_login(10000);
 

@@ -58,4 +58,4 @@ async function fuzzer_enquiry(times) {
     await driver.quit();
 }
 
-fuzzer_enquiry(1000);
+fuzzer_enquiry(10000);

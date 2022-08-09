@@ -75,7 +75,7 @@ async function signups() {
     await driver.findElement(By.id("login_password")).sendKeys(new_user2);
     await driver.findElement(By.id("login_confirm")).sendKeys(new_user2);
     await driver.findElement(By.id("signup_button")).click();
-    await sleep(1000);
+    await sleep(1500);
 
     await driver.getCurrentUrl().then(textValue => {
         console.log(textValue);

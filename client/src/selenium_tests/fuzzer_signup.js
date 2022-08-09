@@ -39,4 +39,4 @@ async function fuzzer_signup(times) {
   await driver.quit();
 }
 
-fuzzer_signup(1000);
+fuzzer_signup(10000);

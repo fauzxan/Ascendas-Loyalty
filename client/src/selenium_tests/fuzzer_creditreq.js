@@ -28,9 +28,16 @@ async function fuzzer_creditreq(times) {
         await driver.findElement(By.id("basic_amount")).sendKeys(fuzzer.fuzzyFuzzer(fuzz_counter));
         await driver.findElement(By.id("claim_submit_Sands Group")).click();
         await sleep(1000);
-        await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-        await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
-        await sleep(1000);
+        try {
+          await driver.switchTo().alert().then((alert) => alert.dismiss());
+        } catch {
+          continue;
+        } finally {
+          await sleep(1000);  
+          await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+          await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+          await sleep(1000);
+        }      
 
         if (j % 10 == 0) {
             fuzz_counter++;
@@ -40,4 +47,4 @@ async function fuzzer_creditreq(times) {
     await driver.quit();
 }
 
-fuzzer_creditreq(1000);
+fuzzer_creditreq(10000);

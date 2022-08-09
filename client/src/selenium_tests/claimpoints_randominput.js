@@ -33,8 +33,8 @@ async function claimpoints_randominput() {
     driver.manage().window().maximize();
 
     //login and navigating to partner card page
-    await driver.findElement(By.id("login_email")).sendKeys("test1@test.com");
-    await driver.findElement(By.id("login_password")).sendKeys("test1", Key.RETURN);
+    await driver.findElement(By.id("login_email")).sendKeys("test_enquiry@test.com");
+    await driver.findElement(By.id("login_password")).sendKeys("test", Key.RETURN);
     await sleep(1000);
     await driver.findElement(By.id("bank-1")).click();
     await sleep(1000);
@@ -141,11 +141,11 @@ async function claimpoints_randominput() {
     await console.log("done with length 9 tests");
 
     //with length 10 with 2nd card
-    await driver.findElement(By.id("claim_rewards_Kris Flyer")).click();
+    await driver.findElement(By.id("claim_rewards_Grab")).click();
     await sleep(1000);
     await driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/form/div[1]/div[2]/div/div/input")).sendKeys(makeRandom(10, false));
     await driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div[2]/div/form/div[2]/div[2]/div/div/input")).sendKeys(makeRandom(3, false));
-    await driver.findElement(By.id("claim_submit_Kris Flyer")).click();
+    await driver.findElement(By.id("claim_submit_Grab")).click();
     await sleep(1000);
     await driver.findElement(By.id("claim_rewards_ok")).click();
     await sleep(1000);
@@ -166,6 +166,9 @@ async function claimpoints_randominput() {
 
     //with length 16 with 1st card
     await driver.findElement(By.id("claim_rewards_Sands Group")).click();
+    await sleep(1000);
+    await driver.findElement(By.id("basic_membership_number")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
+    await driver.findElement(By.id("basic_amount")).sendKeys(Key.chord(Key.CONTROL,"a", Key.DELETE));
     await sleep(1000);
     await driver.findElement(By.id("basic_membership_number")).sendKeys(makeRandom(16, false));
     await driver.findElement(By.id("basic_amount")).sendKeys(makeRandom(3, false));
