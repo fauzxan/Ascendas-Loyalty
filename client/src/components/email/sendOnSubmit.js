@@ -11,6 +11,9 @@ async function sendOnSubmit (values){
     }
     await emailjs.send('contact_service', 'contact_form', obj, 'dBjhmcgLenXD47XDp').then(result => {
         console.log("email has been sent")
+        alert(
+            "Emails have been sent! Check your inbox :)"
+        )
     }).catch(err => {
         console.log("error!\n", err)
     })

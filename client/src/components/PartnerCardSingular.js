@@ -10,9 +10,6 @@ import { Spin } from "antd";
 import sendOnSubmit from "./email/sendOnSubmit";
 
 const PartnerCardSingular = (props) => {
-  //console.log(props);
-  // all the cards below are sample cards
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [success, setSuccess] = useState(false);
   const [amt, setAmt] = useState(0);
@@ -62,7 +59,7 @@ const PartnerCardSingular = (props) => {
         v = true;
       })
       .catch((e) => {
-        if (e.response.status == 403) {
+        if (e.response.status === 403) {
           alert("Invalid membership ID");
         }
       });
@@ -94,7 +91,7 @@ const PartnerCardSingular = (props) => {
         setAmt(amt);
       })
       .catch((err) => {
-        if (err.response.status == 403) {
+        if (err.response.status === 403) {
           alert("Insufficient points");
         }
         console.warn(err);

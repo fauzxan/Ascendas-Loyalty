@@ -13,7 +13,6 @@ async function getLoyaltyProgram() {
 	console.log("partnercarddict ");
 	console.log(partnerCardDict);
 }
-// Modify here to render cards
 
 getLoyaltyProgram()
 export default partnerCardDict;

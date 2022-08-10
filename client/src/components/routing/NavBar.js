@@ -1,14 +1,13 @@
-import React, { useContext, useState, Component } from "react";
+import React, { useState } from "react";
 import "../styles/navbar2.css";
 import { useNavigate } from "react-router-dom";
 import { caaaa, seed } from "../loginPage/wist";
 import Axios from "axios";
-import { userExport } from "../loginPage/loginForm";
 import LoyaltyPopup from "../popup/LoayltyProgramAdd";
 import { Modal } from "antd";
 import dbs from "../images/dbs.jpg";
 import sendMultiple from "../email/sendDaily";
-import { host, bh } from "../config";
+import { host } from "../config";
 
 const localStorage = window.localStorage;
 function NavBar() {

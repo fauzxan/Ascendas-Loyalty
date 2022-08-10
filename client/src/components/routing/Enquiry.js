@@ -1,19 +1,13 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
-import { Button, Form, Input, Modal, Space, Table, Tag } from "antd";
+import { Button, Input, Space, Table, Tag } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import TransactionSuccess from "../popup/TransactionSuccess";
-import TransactionFailure from "../popup/TransactionFailure";
 import Axios from "axios";
 import { bh } from "../config";
 
 const Enquiry = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [message, setMessage] = useState("Pending");
   const [transactions, setTransactions] = useState({});
-  const [code, setCode] = useState("");
 
   useEffect(() => {
     Axios.get(bh + "/getUser", {})
@@ -21,15 +15,13 @@ const Enquiry = () => {
         const user = localStorage.getItem("email");
         const result = response.data;
         console.log(result);
-        if (user == "admin_ascendas@gmail.com") {
-          console.log("here");
+        if (user === "admin_ascendas@gmail.com") {
           let output = {};
           for (let i = 0; i < result.length; i++) {
             for (const property in result[i].transactions) {
               output[property] = result[i].transactions[property];
             }
           }
-          // console.log(Object.keys(output).length);
           setTransactions(output);
         } else {
           for (let i = 0; i < result.length; i++) {
@@ -45,15 +37,14 @@ const Enquiry = () => {
       });
   }, []);
 
-  //console.log(transactions);
   const keys = Object.keys(transactions);
   const values = Object.values(transactions);
   const data = [];
   for (let i = 0; i < keys.length; i++) {
     let State = null;
-    if (values[i] == "0000") {
+    if (values[i] === "0000") {
       State = "success";
-    } else if (values[i] == "69420") {
+    } else if (values[i] === "69420") {
       State = "pending";
     } else {
       State = "fail";
@@ -69,17 +60,6 @@ const Enquiry = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setSuccess(false);
-    setIsModalVisible(false);
-    setMessage("Pending");
-    setCode("");
-  };
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -252,36 +232,6 @@ const Enquiry = () => {
         </>
       ),
     },
-    // {
-    //   title: "Reference Code",
-    //   dataIndex: "ReferenceCode",
-    //   key: "ReferenceCode",
-    //   width: "30%",
-    //   render: () => (
-    //     <>
-    //       <Button
-    //         id="enquiry_submit_button"
-    //         type="primary"
-    //         htmlType="submit"
-    //         onClick={showModal}
-    //       >
-    //         Submit
-    //       </Button>
-    //       <Modal
-    //         title="Transaction Outcome"
-    //         visible={isModalVisible}
-    //         onCancel={handleCancel}
-    //         footer={null}
-    //       >
-    //         {success ? (
-    //           <TransactionSuccess code={code} />
-    //         ) : (
-    //           <TransactionFailure message={message} code={code} />
-    //         )}
-    //       </Modal>
-    //     </>
-    //   ),
-    // },
   ];
   return (
     <>
@@ -291,121 +241,6 @@ const Enquiry = () => {
       <Table columns={columns} dataSource={data} pagination={{ pageSize: 8 }} />
     </>
   );
-
-  // const onFinish = (values) => {
-  //   let check = values.reference;
-  //   console.log(transactions);
-  //   setCode(check);
-  //   console.log(check);
-  //   if (check in transactions) {
-  //     switch (transactions[check]) {
-  //       case "0000":
-  //         setSuccess((success) => !success);
-  //         break;
-  //       case "0001":
-  //         setMessage("Member not found");
-  //         break;
-  //       case "0002":
-  //         setMessage("Member name mismatch");
-  //         break;
-  //       case "0003":
-  //         setMessage("Member account closed");
-  //         break;
-  //       case "0004":
-  //         setMessage("Member account suspended");
-  //         break;
-  //       case "0005":
-  //         setMessage("Member ineligible for accrual");
-  //         break;
-  //       case "0099":
-  //         setMessage(
-  //           "Unable to process, please contact support for more information"
-  //         );
-  //         break;
-  //     }
-  //   } else {
-  //     setMessage("You did not make this transaction");
-  //   }
-  //   console.log("Success:", values);
-  // };
-
-  // const onFinishFailed = (errorInfo) => {
-  //   console.log("Failed:", errorInfo);
-  // };
-
-  // const showModal = () => {
-  //   setIsModalVisible(true);
-  // };
-
-  // const handleCancel = () => {
-  //   setSuccess(false);
-  //   setIsModalVisible(false);
-  //   setMessage("Pending");
-  //   setCode("");
-  // };
-
-  // return (
-  //   <div>
-  //     <h1 style={{ display: "flex", justifyContent: "center" }}>
-  //       Enquire your transaction status here
-  //     </h1>
-  //     <Form
-  //       name="basic"
-  //       labelCol={{
-  //         span: 8,
-  //       }}
-  //       wrapperCol={{
-  //         span: 8,
-  //       }}
-  //       initialValues={{
-  //         remember: true,
-  //       }}
-  //       onFinish={onFinish}
-  //       onFinishFailed={onFinishFailed}
-  //       autoComplete="off"
-  //     >
-  //       <Form.Item
-  //         label="Reference"
-  //         name="reference"
-  //         rules={[
-  //           {
-  //             required: true,
-  //             message: "Please input your reference code!",
-  //           },
-  //         ]}
-  //       >
-  //         <Input />
-  //       </Form.Item>
-  //       <Form.Item
-  //         wrapperCol={{
-  //           offset: 8,
-  //           span: 16,
-  //         }}
-  //       >
-  //         <Button
-  //           id="enquiry_submit_button"
-  //           type="primary"
-  //           htmlType="submit"
-  //           onClick={showModal}
-  //         >
-  //           Submit
-  //         </Button>
-  //         <Modal
-  //           title="Transaction Outcome"
-  //           visible={isModalVisible}
-  //           onCancel={handleCancel}
-  //           footer={null}
-  //         >
-  //           {success ? (
-  //             <TransactionSuccess code={code} />
-  //           ) : (
-  //             <TransactionFailure message={message} code={code} />
-  //           )}
-  //         </Modal>
-  //       </Form.Item>
-  //     </Form>
-  //   </div>
-  // );
 };
 
 export default Enquiry;

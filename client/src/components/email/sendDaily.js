@@ -1,7 +1,6 @@
 // this method will be called in the admin navbar
 
 import emailjs from "@emailjs/browser";
-import Axios from "axios";
 
 const sendMultiple = async (values) => {
 	// write a for loop here that goes through all the emails and sends them their status code
@@ -19,6 +18,7 @@ const sendMultiple = async (values) => {
 		};
 		await emailjs.send('contact_service', 'blast', temp_obj, 'dBjhmcgLenXD47XDp').then(result => {
             console.log("email has been sent")
+            alert("Bulk emails have been sent.")
         }).catch(err => {
             console.log("error!\n", err)
         })
