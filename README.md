@@ -18,7 +18,6 @@ cd server
 npm install
 npm start
 ```
-<br>
 to kick start the TransferConnect API <br/>
 In the second tab, enter the following commands:<br>
 
@@ -27,7 +26,6 @@ cd server_bank
 npm install
 npm start
 ```
-<br>
 to start the bank server<br/>
 In the third tab, enter the following commands:<br>
 
@@ -36,5 +34,4 @@ cd client
 npm install
 npm start
 ```
-<br>
 This will open your default browser. <br>
